@@ -162,6 +162,7 @@ footer{
                 }
                 a{
                     text-decoration: none;
+                    color: blue;
                 }
             }
 
