@@ -22,14 +22,14 @@
                 <div class="col-2">
                     <ul>
                         <router-link class="link" :to="{ name: 'home'}" >Home</router-link>
-                        <router-link class="link" :to="{ name: 'reviews'}" >Film Reviews</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Home</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Home</router-link>
+                        <router-link class="link" :to="{ name: 'reviews'}" >Reviews</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >News</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >Blog</router-link>
                     </ul>
                 </div>
             </div>
             <div class="right">
-                <p>Copyright 2021 All Rights Reserved</p>
+                <p>2021 &#169; | All Rights Reserved</p>
             </div>
         </div>   
        
@@ -97,6 +97,7 @@ footer{
                 gap: 16px;
                 list-style: none;
                 display: flex;
+                
             }
             .col-1,
             .col-2{
@@ -110,6 +111,7 @@ footer{
 
                 ul{
                     margin-top:auto;
+                    gap: 50px;
                     li{
                         display: flex;
                         align-items:center;
