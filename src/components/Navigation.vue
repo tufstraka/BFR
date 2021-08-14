@@ -2,26 +2,28 @@
     <header>
         <nav class="container">
             <div class="branding">
-                <router-link class='header' :to="{name:'Home'} " >Biased Film Reviews</router-link>
+                <router-link class='header' :to="{name:'Home'}" >Biased Film Reviews</router-link>
             </div>
             <div class="nav-links">
                 <ul v-show='!mobile'>
-                    <router-links class='link' to='#'>Home</router-links>
-                    <router-links class='link' to='#'>Film Reviews</router-links>
-                    <router-links class='link' to='#'>News</router-links>
-                    <router-links class='link' to='#'>Categories</router-links>
-                    <router-links class='link' to='#'>Create Review</router-links>
-                    <router-links class='link' to='#'>Login/Register</router-links>
+                    <router-link class='link' :to="{name:'Home'}">Home</router-link>
+                    <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
+                    <router-link class='link' to='#'>News</router-link>
+                    <router-link class='link' to='#'>Categories</router-link>
+                    <router-link class='link' to='#'>Create Review</router-link>
+                    <router-link class='link' :to="{name:'Login'}">Login/Register</router-link>
                 </ul>
             </div>
         </nav>
         <menuIcon @click='toggleMobileNav' class='menu-icon' v-show='mobile'/>
         <transition name='mobile-nav'>
             <ul class='mobile-nav' v-show='mobileNav'>
-                <router-links class='link' to='#'>Home</router-links>
-                <router-links class='link' to='#'>Film Reviews</router-links>
-                <router-links class='link' to='#'>Create Review</router-links>
-                <router-links class='link' to='#'>Login/Register</router-links>
+                <router-link class='link' to='#'>Home</router-link>
+                <router-link class='link' to='#'>Film Reviews</router-link>
+                <router-link class='link' to='#'>News</router-link>
+                <router-link class='link' to='#'>Categories</router-link>
+                <router-link class='link' to='#'>Create Review</router-link>
+                <router-link class='link' to='#'>Login/Register</router-link>
             </ul>
         </transition>     
 

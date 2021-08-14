@@ -3,16 +3,37 @@
     <BlogPost :post='welcomeScreen'/>
     <BlogPost :post='post' v-for="(post, index) in sampleBlogPost" :key="index" />
     <div class="blog-card-wrap">
+      
       <div class="container">
-        <h1 text-align='center' >View More Recent Reviews</h1>
+        <vue-particles
+        color="#dedede"
+        :particleOpacity="0.7"
+        :particlesNumber="60"
+        shapeType="triangle"
+        :particleSize="4"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="3"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+        class= 'vue'>      
+      </vue-particles>
+        
+        <h1 text-align='center' >Recent Reviews</h1>
         <div class = 'blog-cards'>
+          
           <BlogCards :post='post' v-for="(post, index) in sampleBlogCards" :key="index" />
         </div>
       </div>
     </div>
     <div class="updates">
       <div class="container">
-        <h2>Never miss a post. Trust Me, you wouldn't want to. Register for your free account today</h2>
+        <h2>Never miss a post. Trust Me, you wouldn't want to. Register for your free account today !</h2>
         <router-link class='router-button' to='#'>Register for BFR  <Arrow class='arrow arrow-light'/> </router-link>
       </div>
     </div>
@@ -20,7 +41,8 @@
 </template>
 
 <script>
-import Arrow from "../assets/Icons/arrow-right-light.svg"
+
+import Arrow from "../assets/Icons/arrow-right-light.svg";
 import BlogPost from '../components/BlogPost.vue';
 import BlogCards from '../components/BlogCard.vue';
 
@@ -47,25 +69,35 @@ export default {
         blogCoverPhoto:"designed-for everyone",
         },
       ],      
-      sampleBlogCards:[
-        {blogTitle:'hdjkhsjfhgkjghf', blogCoverPhoto:'stock-1' , blogDate:'May 23, 2021'},
-        {blogTitle:'hdjkhsjfhgkjghf', blogCoverPhoto:'stock-2' , blogDate:'May 23, 2021'},
-        {blogTitle:'hdjkhsjfhgkjghf', blogCoverPhoto:'stock-3' , blogDate:'May 23, 2021'},
-        {blogTitle:'hdjkhsjfhgkjghf', blogCoverPhoto:'stock-4' , blogDate:'May 23, 2021'},
-      ]
+ 
     };
   },
+  computed: {
+    sampleBlogCards(){
+      return this.$store.state.sampleBlogCards
+    }
+  },
+  
 };   
   
 </script>
 
 <style lang='scss' scoped>
+.vue{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
 
 .blog-card-wrap{
+  background-color: #303030;
   h1{
     font-weight: 300;
     font-size: 21px;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
+    color: white;
     
   }
 }
@@ -75,6 +107,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+   
     @media(min-width: 800px){
       padding: 125px 25px;
       flex-direction: row;

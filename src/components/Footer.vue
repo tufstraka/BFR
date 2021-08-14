@@ -29,7 +29,8 @@
                 </div>
             </div>
             <div class="right">
-                <p>2021 &#169; | All Rights Reserved</p>
+                <p>2021 &#169; | All Rights Reserved</p> <br>
+                <p>Made with ❤️ by <a href='#'>Kadima</a></p> 
             </div>
         </div>   
        
@@ -158,6 +159,9 @@ footer{
                     margin-top: auto;
                     color: #fff
                      
+                }
+                a{
+                    text-decoration: none;
                 }
             }
 

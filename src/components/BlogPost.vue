@@ -107,7 +107,7 @@ export default {
     }
 }
     .blog-photo{
-        //order: 1;
+        order: 1;
         flex: 3;
         box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6) ;
         img{
@@ -119,10 +119,10 @@ export default {
     }
     &:nth-child(even){
         .blog-content{
-            order: 1;
+            order: 2;
         }
         .blog-photo{
-            order: 2;
+            order: 1;
         }
     }
 }
