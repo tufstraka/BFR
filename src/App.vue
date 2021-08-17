@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import Navigation from './components/Navigation.vue';
 import Footer from "./components/Footer.vue";
 export default {
@@ -21,6 +23,7 @@ export default {
   },
   created() {
     this.checkRoute();
+    console.log(firebase.auth().currentUser);
   },
   mounted() {},
   methods: {
@@ -172,6 +175,11 @@ button,
     margin-top: 0;
     margin-left: auto;
   } 
+}
+.error{
+  text-align: center;
+  font-size: 12px;
+  color: red;
 }
 
 

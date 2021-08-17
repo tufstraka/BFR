@@ -55,7 +55,7 @@ export default {
         title:"welcome",
         blogPost:"Weekly biased film reviews from anonymous professional official(unofficial) critiques",
         welcomeScreen: true,
-        photo:"reel"
+        photo:"gal"
       },
       sampleBlogPost:[
         {

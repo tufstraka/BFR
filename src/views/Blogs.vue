@@ -14,7 +14,7 @@
 <script>
 import BlogCards from '../components/BlogCard.vue';
 export default {
-    name:'blogs',
+    name:'Blogs',
     components: {BlogCards},
     computed: {
     sampleBlogCards(){

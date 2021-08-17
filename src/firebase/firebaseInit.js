@@ -1,3 +1,6 @@
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 var firebaseConfig = {
     apiKey: "AIzaSyCiPTBlpY-7wNm7rMwnF7xlpfy790eeQfk",
     authDomain: "biasedfilmreviews-c40dd.firebaseapp.com",
@@ -8,5 +11,9 @@ var firebaseConfig = {
     measurementId: "G-LNDJFEETW7"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  const firebaseApp = firebase.initializeApp(firebaseConfig);
+  const timestamp = firebase.firestore.FieldValue.serverTimestamp;
+  //firebase.analytics();
+
+  export { timestamp };
+  export default firebaseApp.firestore();
