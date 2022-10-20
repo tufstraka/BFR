@@ -22,16 +22,21 @@ export default {
     };
   },
   created() {
+    
     this.checkRoute();
     console.log(firebase.auth().currentUser);
   },
   mounted() {},
   methods: {
     checkRoute(){
-      if (this.$route.name === "Login" || this.$route.name === "Register" || this.$route.name === "ForgotPassword"){
+      if (
+        this.$route.name === "Login" || 
+        this.$route.name === "Register" || 
+        this.$route.name === "ForgotPassword"
+     ) {
         this.navigation = true;
         return;
-      } else
+       } else
       {
         this.navigation = false;
       }
