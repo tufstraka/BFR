@@ -22,7 +22,9 @@ export default {
     };
   },
   created() {
+    firebase.auth().onAuthStateChanged((user) => {
     
+    })
     this.checkRoute();
     console.log(firebase.auth().currentUser);
   },
