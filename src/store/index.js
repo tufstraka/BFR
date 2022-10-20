@@ -29,7 +29,11 @@ export default new Vuex.Store({
       state.editPost = payload;
     },
     
-    setProfileInfo(state, payload) {
+    updateUser(state, payload){
+      state.user = payload; 
+    },
+    
+    setProfileInfo(state, doc) {
       state.profileId = doc.id;
       state.profileEmail = doc.data().email;
       state.profileFirstName = doc.data().firstName;
