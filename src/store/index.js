@@ -57,5 +57,6 @@ export default new Vuex.Store({
       commit("setProfileInitials");
   },
   modules: {
-  }
+    
+  },
 })
