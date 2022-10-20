@@ -14,24 +14,31 @@ import 'firebase/auth';
 import Navigation from './components/Navigation.vue';
 import Footer from "./components/Footer.vue";
 export default {
+
   name: "app",
   components: {Navigation , Footer},
+  
   data() {
     return {
       navigation: null,
     };
   },
+  
   created() {
+  
     firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
       
       if(user) {
         this.$store.dispatch("getCurrentUser");
-    }
+    },
+    
     this.checkRoute();
     console.log(firebase.auth().currentUser);
   },
+  
   mounted() {},
+  
   methods: {
     checkRoute(){
       if (
