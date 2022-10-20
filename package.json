@@ -34,5 +34,4 @@
     "vue-particles": "^1.0.9",
     "vue-template-compiler": "^2.6.11"
   },
-  "snyk": true
 }
