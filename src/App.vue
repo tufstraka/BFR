@@ -27,7 +27,7 @@ export default {
       
       if(user) {
         this.$store.dispatch("getCurrentUser");
-    })
+    }
     this.checkRoute();
     console.log(firebase.auth().currentUser);
   },
