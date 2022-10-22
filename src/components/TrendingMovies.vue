@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul v-for="post in posts" v-bind:key="post.id">
-      <li>{{ post.title }}</li>
-      <p>{{ post.body }}</p>
+    <ul v-for="movie in movies" v-bind:key="movie.id">
+      <li>{{ movie.title }}</li>
+      <p>{{ movie.body }}</p>
     </ul>
   </div>
 </template>
@@ -11,15 +11,17 @@
 export default {
   data() {
     return {
-      posts: [],
+      movies: [],
     };
   },
 
   methods: {
     async getData() {
       try {
-        let response = await fetch("http://jsonplaceholder.typicode.com/posts");
-        this.posts = await response.json();;
+      
+      // TO DO: Implement API request to TMDB
+        let response = await fetch("??");
+        this.movies = await response.json();;
       } catch (error) {
         console.log(error);
       }
