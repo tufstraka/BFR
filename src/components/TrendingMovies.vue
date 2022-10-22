@@ -1,27 +1,71 @@
 <template>
-  <div>
-    <ul v-for="movie in movies" v-bind:key="movie.id">
-      <li>{{ movie.title }}</li>
-      <p>{{ movie.body }}</p>
-    </ul>
+
+  <div class='caption'>
+  
+    <h2>Trending movies </h2> 
+      
   </div>
+  
+  <div class = "row">
+    
+    <div v-for="movie in movies_pics" v-bind:key="movie.id" class="card-container">
+      <div class="card">
+           <img :src="movie.pic"/>
+      <!--<p>{{ post.overview }}</p>-->
+          <div class="content">
+            <h2>{{movie.title || movie.name }}</h2>
+            <span class="rating">Rating &#11088 &#11088:</span><span> {{ movie.vote_average }}</span>
+            <p>{{movie.release_date }}</p>
+          </div> 
+        
+      </div>  
+      
+    </div>
+  </div>
+
+
+
+ 
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      movies: [],
+      movies_pics: [],
     };
   },
 
   methods: {
     async getData() {
       try {
-      
-      // TO DO: Implement API request to TMDB
-        let response = await fetch("??");
-        this.movies = await response.json();;
+        const response = await axios.get(
+          "https://api.themoviedb.org/3/trending/all/week?api_key=3968a7344aff40a0b95a4eac0cef53bb&language=en-US"
+        );
+        
+        let newMovies = []
+        let newMoviesPics = []
+        newMovies = response.data.results;
+        let baseurl = "https://image.tmdb.org/t/p/original"
+
+        for (let i = 0; i < newMovies.length; i++){
+        
+          const pic = {
+            Photoid: i, 
+            pic: baseurl + newMovies[i].poster_path };
+          
+          const MoviesPics = {
+            ...pic,
+            ...newMovies[i]
+          }
+          newMoviesPics.push(MoviesPics)
+        };
+        
+        console.log(newMoviesPics);
+        this.movies_pics = newMoviesPics;
+        
       } catch (error) {
         console.log(error);
       }
@@ -32,7 +76,61 @@ export default {
     this.getData();
   },
 };
+
 </script>
 
-<style lang='scss' scoped>
-</style>
+
+<style scoped>
+.row {
+  display: flex;
+}
+
+.caption {
+  margin-left: 40px;
+  margin-bottom: 12px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  gap: 20px;
+  background: #dbdbdb;
+  border-radius: 12px;
+  transition: transform 350ms;
+  margin-left: 30px;
+  color: black;
+  border-radius: 10px;
+  
+}
+.card:hover{
+    transform: scale(1.12);
+  }
+  
+.card img {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  border-radius: 10px;
+  min-height: calc(150px * 1.5);
+  height: calc(150px * 1.5);
+  overflow: hidden;
+}  
+
+.content {
+  width: 100%;
+  padding: 26px 10px 12px 10px;
+  padding-bottom: 12px;
+  position: relative;
+  white-space: normal;
+
+}
+
+.content h2 {
+     font-size: 1em;
+     font-weight: 700;
+     color: #000;
+}
+.content span, p {
+  font-size: 0.8em;
+}  
+
+</style>  
