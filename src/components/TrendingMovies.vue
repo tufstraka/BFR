@@ -1,5 +1,7 @@
 <template>
 
+<div>
+
   <div class='caption'>
   
     <h2>Trending movies </h2> 
@@ -9,22 +11,23 @@
   <div class = "row">
     
     <div v-for="movie in movies_pics" v-bind:key="movie.id" class="card-container">
+    
       <div class="card">
            <img :src="movie.pic"/>
       <!--<p>{{ post.overview }}</p>-->
           <div class="content">
             <h2>{{movie.title || movie.name }}</h2>
-            <span class="rating">Rating &#11088 &#11088:</span><span> {{ movie.vote_average }}</span>
+            <span class="rating">Rating &#11088; &#11088;:</span><span> {{ movie.vote_average }}</span>
             <p>{{movie.release_date }}</p>
-          </div> 
-        
-      </div>  
+          </div>  
+      </div>
       
     </div>
-  </div>
+    
+ </div>
 
 
-
+</div>
  
 </template>
 
@@ -62,7 +65,7 @@ export default {
             ...newMovies[i]
           }
           newMoviesPics.push(MoviesPics)
-        };
+        }
         
         this.movies_pics = newMoviesPics;
         
