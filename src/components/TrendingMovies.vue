@@ -86,6 +86,8 @@ export default {
 <style scoped>
 .row {
   display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 
 .caption {
