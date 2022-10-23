@@ -13,6 +13,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import Navigation from './components/Navigation.vue';
 import Footer from "./components/Footer.vue";
+
 export default {
 
   name: "app",
@@ -24,7 +25,7 @@ export default {
     };
   },
   
-  created() {
+created() {
   
     firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
@@ -36,10 +37,11 @@ export default {
     this.checkRoute();
     console.log(firebase.auth().currentUser);
   },
+  },
   
-  mounted() {},
+mounted() {},
   
-  methods: {
+methods: {
     checkRoute(){
       if (
         this.$route.name === "Login" || 
