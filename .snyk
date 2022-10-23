@@ -1,0 +1,13 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.25.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:extend:20180424':
+    - quill-image-resize-module > quill > extend:
+        patched: '2022-10-23T14:02:44.015Z'
+    - quill-image-resize-module > quill > quill-delta > extend:
+        patched: '2022-10-23T14:02:44.015Z'
+  SNYK-JS-LODASH-567746:
+    - quill-image-resize-module > lodash:
+        patched: '2022-10-23T14:02:44.015Z'
