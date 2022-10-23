@@ -94,6 +94,7 @@ export default {
    }
 
 .caption {
+  margin-top: 12px;
   margin-left: 40px;
   margin-bottom: 12px;
 }
@@ -111,7 +112,7 @@ export default {
   
 }
 .card:hover{
-    transform: scale(1.12);
+    transform: scale(1.07);
   }
   
 .card img {
