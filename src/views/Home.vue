@@ -25,6 +25,9 @@
       </vue-particles>
         
         <h1 text-align='center' >Recent Reviews</h1>
+        <div>
+        <TrendingMovies />
+        </div>
         <div class = 'blog-cards'>
           
           <BlogCards :post='post' v-for="(post, index) in sampleBlogCards" :key="index" />
@@ -45,6 +48,8 @@
 import Arrow from "../assets/Icons/arrow-right-light.svg";
 import BlogPost from '../components/BlogPost.vue';
 import BlogCards from '../components/BlogCard.vue';
+import TrendingMovies from './components/TrendingMovies.vue';
+
 
 export default {
   name: "Home",
