@@ -2,7 +2,6 @@
   <div class="app-wrapper">
     <div class="app">
       <Navigation v-if='!navigation'/>
-      <TrendingMovies />
       <router-view />
       <Footer v-if='!navigation'/>
     </div>
@@ -12,7 +11,6 @@
 <script>
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import TrendingMovies from './components/TrendingMovies.vue';
 import Navigation from './components/Navigation.vue';
 import Footer from "./components/Footer.vue";
 
