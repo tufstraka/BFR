@@ -102,7 +102,7 @@ export default {
   flex-direction: column;
   width: 150px;
   gap: 20px;
-  background: #dbdbdb;
+  background: #fff;
   border-radius: 12px;
   transition: transform 350ms;
   margin-left: 30px;
