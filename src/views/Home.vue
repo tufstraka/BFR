@@ -1,7 +1,12 @@
 <template>
   <div class="home">
+  
     <BlogPost :post='welcomeScreen'/>
     <BlogPost :post='post' v-for="(post, index) in sampleBlogPost" :key="index" />
+    
+    <div>
+        <TrendingMovies />
+    </div>
     <div class="blog-card-wrap">
       
       <div class="container">
@@ -25,9 +30,7 @@
       </vue-particles>
         
         <h1 text-align='center' >Recent Reviews</h1>
-        <div>
-        <TrendingMovies />
-        </div>
+        
         <div class = 'blog-cards'>
           
           <BlogCards :post='post' v-for="(post, index) in sampleBlogCards" :key="index" />
