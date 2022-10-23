@@ -53,7 +53,7 @@ import TrendingMovies from '../components/TrendingMovies.vue';
 
 export default {
   name: "Home",
-  components: { BlogPost , BlogCards , Arrow },
+  components: { BlogPost , BlogCards , Arrow , TrendingMovies },
   data(){
     return {
       welcomeScreen:{
