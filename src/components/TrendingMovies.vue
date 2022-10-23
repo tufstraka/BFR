@@ -1,6 +1,6 @@
 <template>
 
-<div>
+<div class='everything'>
 
   <div class='caption'>
   
@@ -88,7 +88,7 @@ export default {
   display: flex;
 }
 
-.card-container {
+.everything{
     overflow-y: hidden;
     overflow-x: scroll;
    }
