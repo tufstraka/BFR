@@ -63,7 +63,6 @@ export default {
           newMoviesPics.push(MoviesPics)
         };
         
-        console.log(newMoviesPics);
         this.movies_pics = newMoviesPics;
         
       } catch (error) {
