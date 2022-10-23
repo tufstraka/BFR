@@ -86,9 +86,12 @@ export default {
 <style scoped>
 .row {
   display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
 }
+
+.card-container {
+    overflow-y: hidden;
+    overflow-x: scroll;
+   }
 
 .caption {
   margin-left: 40px;
