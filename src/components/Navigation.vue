@@ -77,7 +77,7 @@ header{
 }
 .link{
     font-weight: 500;
-    font-size: 10px;
+    font-size: 13px;
     padding: 0 8px;
     transition: 0.3s color ease;
 }
