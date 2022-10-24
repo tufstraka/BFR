@@ -38,7 +38,7 @@ export default {
 .blog-wrapper{
     display:flex;
     flex-direction: column;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6) ;
+    /*box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6) ;*/
     @media(min-width: 700px){
         min-height: 650px;
         max-height: 650px;
@@ -60,7 +60,7 @@ export default {
 
     div{
         max-width:375px;
-        padding: 72px 24px;
+        padding: 30px 24px;
         @media(min-width: 700px){
             font-size: 40px;
         }
