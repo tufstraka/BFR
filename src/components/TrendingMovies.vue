@@ -100,7 +100,7 @@ export default {
   background-color: #2596be;
   color: black;
   border-radius: 9px;
-  max-width: 150px;
+  max-width: 155px;
 }
 
 .caption h2 {
