@@ -106,7 +106,7 @@ export default {
 .caption h2 {
     margin-left: 3px;
     font-size: 16px;
-    padding: 20px;
+    padding: 12px;
   }
 
 .card {
