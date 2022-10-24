@@ -97,7 +97,17 @@ export default {
   margin-top: 12px;
   margin-left: 40px;
   margin-bottom: 12px;
+  background-color: #2596be;
+  color: black;
+  border-radius: 9px;
+  max-width: 130px;
 }
+
+.caption h2 {
+    margin-left: 3px;
+    font-size: 16px;
+  }
+
 .card {
   display: flex;
   flex-direction: column;
