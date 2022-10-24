@@ -66,7 +66,7 @@ export default {
           }
           newMoviesPics.push(MoviesPics)
         }
-        console.log(newMoviesPics);
+        
         this.movies_pics = newMoviesPics;
         
       } catch (error) {
@@ -100,7 +100,7 @@ export default {
   background-color: #2596be;
   color: black;
   border-radius: 9px;
-  max-width: 130px;
+  max-width: 140px;
 }
 
 .caption h2 {
