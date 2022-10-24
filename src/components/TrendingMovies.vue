@@ -100,13 +100,13 @@ export default {
   background-color: #2596be;
   color: black;
   border-radius: 9px;
-  max-width: 140px;
+  max-width: 150px;
 }
 
 .caption h2 {
     margin-left: 3px;
     font-size: 16px;
-    padding: 12px;
+    padding: 10px;
   }
 
 .card {
