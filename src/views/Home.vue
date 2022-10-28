@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div>
+    <!--<div>
     <ArticleGrid />
     </div>
-    <!--<BlogPost :post='welcomeScreen'/>-->
+    <BlogPost :post='welcomeScreen'/>-->
     <div>
         <TrendingMovies />
     </div>
