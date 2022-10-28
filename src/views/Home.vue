@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-  
+    <div>
     <ArticleGrid />
+    </div>
     <!--<BlogPost :post='welcomeScreen'/>-->
     <div>
         <TrendingMovies />
