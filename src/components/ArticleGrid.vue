@@ -1,28 +1,79 @@
-<template>
+<template >
+<div  class="container">
 
-<div class="container">
-
-  <div class="grid1">
-    grid1
+    <div class="grid1">
+    <img :src='movies_pics[0].pic'/>
   </div>
-  
   <div class="grid2">
-    grid2
+    <img :src='movies_pics[1].pic'/>
   </div>
-  
   <div class="grid3">
-    grid3
+    <img :src='movies_pics[2].pic'/>
   </div>
-  
   <div class="grid4">
-    grid4
+    <img :src='movies_pics[3].pic'/>
   </div>
+  <div class="grid5">
+    <img :src='movies_pics[4].pic'/>
+  </div>
+    
   
-</div>
-
+  
+  
+</div>  
 </template>
 
 <script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      movies_pics: [],
+    };
+  },
+
+  methods: {
+    async getData() {
+      try {
+        const response = await axios.get(
+          "https://api.themoviedb.org/3/trending/all/week?api_key=3968a7344aff40a0b95a4eac0cef53bb&language=en-US"
+        );
+        let newMovies = []
+        let newMoviesPics = []
+        let articlePics = [];
+        newMovies = response.data.results;
+        let baseurl = "https://image.tmdb.org/t/p/original"
+
+        for (let i = 0; i < newMovies.length; i++){
+          const pic = {
+            Photoid: i, 
+            pic: baseurl +                newMovies[i].poster_path };
+          
+          const MoviesPics = {
+            ...pic,
+            ...newMovies[i]
+          }
+          newMoviesPics.push(MoviesPics)
+        };
+
+        for (let i = 0; i < 5; i++)
+          {
+            articlePics.push(newMoviesPics[i])
+          }
+        console.log(articlePics)
+        this.movies_pics = articlePics;
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+
+  created() {
+    this.getData();
+  },
+};  
 
 </script>
 
@@ -31,36 +82,32 @@
 .container{
   display: grid;
   grid-template-columns: 30% 40% 30%;
-  grid-template-rows: 40% 40% 20%;
-  height: 400px;
+  grid-template-rows: 50% 50%;
+  height: 800px;
 }
 .grid1 {
-  border: 3px solid blue;
   margin: 5px;
-  padding: 60px;
-  background-color: purple;
 }
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
 .grid2 {
-  border: 2px dotted white;
-  background-color:#77767b;
-  grid-row: 2 / 4;  
-  padding: 60px;
+  grid-row: 2 / 3;
   margin: 5px;
 }
 
 .grid3{
-  border: 2px solid red;
-  background-color:lightseagreen;
   grid-row: 1 / 4;
-  padding: 60px;
   margin: 5px;
 }
 
 .grid4{
-  border: 2px solid azure;
-  background-color:#e66100;
-  padding: 60px;
-  grid-row: 1 / 4;
+  margin: 5px;
+}
+.grid5{
+  grid-row: 2 / 3;
   margin: 5px;
 }
 
@@ -70,5 +117,4 @@
     flex-direction: column;
   }
 }
-
 </style>
