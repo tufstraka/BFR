@@ -58,7 +58,7 @@ import ArticleGrid from '../components/ArticleGrid.vue';
 
 export default {
   name: "Home",
-  components: { BlogPost , BlogCards , Arrow , TrendingMovies },
+  components: { BlogPost , BlogCards , Arrow , TrendingMovies, ArticleGrid },
   data(){
     return {
       welcomeScreen:{
