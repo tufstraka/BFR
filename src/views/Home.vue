@@ -1,7 +1,8 @@
 <template>
   <div class="home">
   
-    <BlogPost :post='welcomeScreen'/>
+  
+    <!--<BlogPost :post='welcomeScreen'/>-->
     <div>
         <TrendingMovies />
     </div>
