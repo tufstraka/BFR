@@ -37,7 +37,7 @@ export default {
     async getData() {
       try {
         const response = await axios.get(
-          "https://api.themoviedb.org/3/trending/all/week?api_key=3968a7344aff40a0b95a4eac0cef53bb&language=en-US"
+          "https://api.themoviedb.org/3/tv/popular?api_key=3968a7344aff40a0b95a4eac0cef53bb&language=en-US"
         );
         let newMovies = []
         let newMoviesPics = []
