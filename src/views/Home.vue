@@ -55,11 +55,11 @@ import Arrow from "../assets/Icons/arrow-right-light.svg";
 import BlogPost from '../components/BlogPost.vue';
 import BlogCards from '../components/BlogCard.vue';
 import TrendingMovies from '../components/TrendingMovies.vue';
-import ArticleGrid from '../components/ArticleGrid.vue';
+/*import ArticleGrid from '../components/ArticleGrid.vue';*/
 
 export default {
   name: "Home",
-  components: { BlogPost , BlogCards , Arrow , TrendingMovies, ArticleGrid },
+  components: { BlogPost , BlogCards , Arrow , TrendingMovies },
   data(){
     return {
       welcomeScreen:{
