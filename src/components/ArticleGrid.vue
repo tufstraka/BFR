@@ -83,7 +83,7 @@ export default {
   display: grid;
   grid-template-columns: 30% 40% 30%;
   grid-template-rows: 50% 50%;
-  height: 800px;
+  height: 100vh;
 }
 .grid1 {
   margin: 5px;
