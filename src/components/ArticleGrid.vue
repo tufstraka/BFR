@@ -100,7 +100,7 @@ img {
 }
 
 .grid3{
-  grid-row: 1 / 4;
+  grid-row: 1 / 3;
   margin: 5px;
 }
 
