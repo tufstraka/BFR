@@ -55,13 +55,13 @@ export default {
             ...newMovies[i]
           }
           newMoviesPics.push(MoviesPics)
-        };
+        }
 
         for (let i = 0; i < 5; i++)
           {
             articlePics.push(newMoviesPics[i])
           }
-        console.log(articlePics)
+        
         this.movies_pics = articlePics;
         
       } catch (error) {
