@@ -71,12 +71,7 @@ export default {
         title:"lorem ipsum",
         blogHTML:"This is a filler blog post",
         blogCoverPhoto:"beautiful-stories",
-        },
-        {
-        title:"lorem ipsum",
-        blogHTML:"This is a filler blog post",
-        blogCoverPhoto:"designed-for everyone",
-        },
+        }
       ],      
  
     };
