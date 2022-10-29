@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <!--<div>
-    <ArticleGrid />
-    </div>
-    <BlogPost :post='welcomeScreen'/>-->
+    <BlogPost v-if="!user" :post='welcomeScreen'/>
     <div>
         <TrendingMovies />
     </div>
@@ -41,7 +38,7 @@
       </div>
     </div>
 
-    <div class="updates">
+    <div v-if="!user" class="updates">
       <div class="container">
         <h2>Never miss a post. Trust Me, you wouldn't want to. Register for your free account today !</h2>
         <router-link class='router-button' to='#'>Register for BFR  <Arrow class='arrow arrow-light'/> </router-link>
@@ -86,8 +83,12 @@ export default {
   },
   computed: {
     sampleBlogCards(){
-      return this.$store.state.sampleBlogCards
-    }
+      return this.$store.state.sampleBlogCards;
+    },
+
+    user() {
+      return this.$store.state.user;
+    },
   },
   
 };   
