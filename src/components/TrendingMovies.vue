@@ -95,7 +95,7 @@ export default {
 
 .caption {
   margin-top: 12px;
-  margin-left: 40px;
+  margin-left: 22px;
   margin-bottom: 12px;
   background-color: #2596be;
   color: black;
