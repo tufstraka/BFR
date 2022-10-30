@@ -61,8 +61,8 @@ export default {
   data(){
     return {
       welcomeScreen:{
-        title:"welcome",
-        blogPost:"Weekly biased film reviews from anonymous professional official(unofficial) critiques",
+        title:"Niaje &#128075;",
+        blogPost:"Did you watch a movie / Tv show and feel like you want to rant or just express your opinion? You are at the right place.",
         welcomeScreen: true,
         photo:"gal"
       },
