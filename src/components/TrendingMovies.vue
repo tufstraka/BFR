@@ -95,7 +95,7 @@ export default {
 
 .caption {
   margin-top: 12px;
-  margin-left: 22px;
+  margin-left: 40px;
   margin-bottom: 12px;
   background-color: #2596be;
   color: black;
@@ -151,6 +151,12 @@ export default {
 }
 .content span, p {
   font-size: 0.8em;
-}  
+}
+
+@media only screen and (max-width: 600px){
+  .caption{
+    margin-left: 22px;
+  }
+}
 
 </style>  
