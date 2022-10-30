@@ -68,33 +68,33 @@ export default {
     computed: {
         firstName: {
             get: function() {
-                return this.$store.state.profileFirstName;
+                return $store.state.profileFirstName;
             },
             set: function(payload) {
-                this.$store.commit("changeFirstName", payload)
+                $store.commit("changeFirstName", payload)
             },
         },
 
         lastName: {
             get: function() {
-                return this.$store.state.profileLastName;
+                return $store.state.profileLastName;
             },
             set: function(payload) {
-                this.$store.commit("changeLastName", payload)
+                $store.commit("changeLastName", payload)
             },
         },
 
         username: {
             get: function() {
-                return this.$store.state.profileUsername;
+                return $store.state.profileUsername;
             },
             set: function(payload) {
-                this.$store.commit("changeUsername", payload)
+                $store.commit("changeUsername", payload)
             },
         },
 
         email() {
-            return this.$store.state.profileEmail
+            return $store.state.profileEmail
         }
     }
 };
