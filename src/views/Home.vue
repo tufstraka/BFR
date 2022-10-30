@@ -61,7 +61,7 @@ export default {
   data(){
     return {
       welcomeScreen:{
-        title:"Niaje &#128075;",
+        title:"Niaje",
         blogPost:"Did you watch a movie / Tv show and feel like you want to rant or just express your opinion? You are at the right place.",
         welcomeScreen: true,
         photo:"gal"
