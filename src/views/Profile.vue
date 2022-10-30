@@ -14,19 +14,19 @@
 
             <div class="input">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" v-modal="firstName">
+                <input type="text" id="firstName" v-model="firstName">
             </div>
             <div class="input">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" v-modal="lastName">
+                <input type="text" id="lastName" v-model="lastName">
             </div>
             <div class="input">
                 <label for="username">Username:</label>
-                <input type="text" id="username" v-modal="username">
+                <input type="text" id="username" v-model="username">
             </div>
             <div class="input">
                 <label for="email">Email:</label>
-                <input disabled type="text" id="email" v-modal="email">
+                <input disabled type="text" id="email" v-model="email">
             </div>
             <button @click="updateProfile">Save Changes</button>
         </div>
@@ -68,33 +68,33 @@ export default {
     computed: {
         firstName: {
             get: function() {
-                return $store.state.profileFirstName;
+                return this.$store.state.profileFirstName;
             },
             set: function(payload) {
-                $store.commit("changeFirstName", payload)
+                this.$store.commit("changeFirstName", payload)
             },
         },
 
         lastName: {
             get: function() {
-                return $store.state.profileLastName;
+                return this.$store.state.profileLastName;
             },
             set: function(payload) {
-                $store.commit("changeLastName", payload)
+                this.$store.commit("changeLastName", payload)
             },
         },
 
         username: {
             get: function() {
-                return $store.state.profileUsername;
+                return this.$store.state.profileUsername;
             },
             set: function(payload) {
-                $store.commit("changeUsername", payload)
+                this.$store.commit("changeUsername", payload)
             },
         },
 
         email() {
-            return $store.state.profileEmail
+            return this.$store.state.profileEmail
         }
     }
 };
