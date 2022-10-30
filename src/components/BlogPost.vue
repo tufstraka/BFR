@@ -2,7 +2,7 @@
   <div class ='blog-wrapper' :class="{'no-user' : !user}">
       <div class="blog-content">
           <div>
-              <h2 v-if="post.welcomeScreen"> {{post.title}}</h2>
+              <h2 v-if="post.welcomeScreen"> {{post.title}} &#128075;</h2>
               <h2 v-else>{{post.title}}</h2>
               <p v-if='post.welcomeScreen'>{{post.blogPost}} </p>
               <p v-else class='content-preview'>{{post.blogHTML}}</p>
