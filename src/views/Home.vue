@@ -64,7 +64,7 @@ export default {
         title:"Niaje",
         blogPost:"Did you watch a movie / Tv show and feel like you want to rant or just express your opinion? You are at the right place.",
         welcomeScreen: true,
-        photo:"movie"
+        photo:"movie1"
       },
       sampleBlogPost:[
         {

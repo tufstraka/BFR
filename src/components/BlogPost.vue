@@ -16,7 +16,7 @@
          
       </div>
        <div class="blog-photo">
-            <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.svg`)" alt="welcome screen photo">
+            <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.eps`)" alt="welcome screen photo">
             <img v-else :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)" alt="blog photo">
         </div>
   </div>
