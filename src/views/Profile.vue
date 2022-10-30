@@ -67,28 +67,28 @@ export default {
 
     computed: {
         firstName: {
-            get() {
+            get: function() {
                 return this.$store.state.profileFirstName;
             },
-            set(payload) {
+            set: function(payload) {
                 this.$store.commit("changeFirstName", payload)
             },
         },
 
         lastName: {
-            get() {
+            get: function() {
                 return this.$store.state.profileLastName;
             },
-            set(payload) {
+            set: function(payload) {
                 this.$store.commit("changeLastName", payload)
             },
         },
 
         username: {
-            get() {
+            get: function() {
                 return this.$store.state.profileUsername;
             },
-            set(payload) {
+            set: function(payload) {
                 this.$store.commit("changeUsername", payload)
             },
         },
