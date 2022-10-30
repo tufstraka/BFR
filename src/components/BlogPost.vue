@@ -16,7 +16,7 @@
          
       </div>
        <div class="blog-photo">
-            <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.jpg`)" alt="welcome screen photo">
+            <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.svg`)" alt="welcome screen photo">
             <img v-else :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)" alt="blog photo">
         </div>
   </div>
@@ -28,7 +28,7 @@ import Arrow from '../assets/Icons/arrow-right-light.svg'
 export default {
     name: "blogPost",
     props:["post"],
-    components:{ Arrow},
+    components:{ Arrow },
     computed: {
         user() {
             return this.$store.state.user;
