@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="right">
-                <p>2021 &#169; | All Rights Reserved</p> <br>
+               <p><span id="date"></span> &#169; | All Rights Reserved</p> <br>
                 <p>Made with ❤️ by <a href='#'>Kadima</a></p> 
             </div>
         </div>   
@@ -43,6 +43,12 @@
     import twitter from '../assets/Icons/twitter-brands.svg';
     import instagram from '../assets/Icons/instagram-brands.svg';
     import linkedin from '../assets/Icons/linkedin-brands.svg';
+
+    const date = document.getElementById("date");
+    const today = new Date()
+    const year = today.getFullYear();
+    date.innerHTML = year;
+
     export default{
         name:'footer-vue',
         components:{
