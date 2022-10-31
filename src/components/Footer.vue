@@ -1,9 +1,6 @@
 <script setup>
 
-    const date = document.getElementById("date");
-    const today = new Date()
-    const year = today.getFullYear();
-    date.innerHTML = year;
+
     
 </script>
 
@@ -38,7 +35,7 @@
                 </div>
             </div>
             <div class="right">
-               <p><span id="date"></span> &#169; | All Rights Reserved</p> <br>
+               <p><span id="date">{{ this.addDate }}</span> &#169; | All Rights Reserved</p> <br>
                 <p>Made with ❤️ by <a href='#'>Kadima</a></p> 
             </div>
         </div>   
@@ -60,7 +57,17 @@
             twitter,
             instagram,
             linkedin
-        }
+        },
+
+        methods: {
+            addDate(){
+
+            const today = new Date()
+            const year = today.getFullYear();
+            return year;
+
+            },
+        },
     }
 </script>
 
