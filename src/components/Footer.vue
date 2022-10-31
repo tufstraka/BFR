@@ -62,7 +62,7 @@
         methods: {
             addDate(){
 
-            const today = new Date()
+            const today = new Date();
             const year = today.getFullYear();
             return year;
 
