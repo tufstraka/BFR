@@ -30,9 +30,11 @@ export default {
     },
     methods:{
         async addAdmin(){
-            
-        }
-    }
+            const addAdmin = await firebase.functions().httpsCallable("addAdminRole");
+            const result = await addAdmin({email: this.adminEmail})
+            this.functionMsg = result.data.message;
+        },
+    },
 };
 </script>
 
