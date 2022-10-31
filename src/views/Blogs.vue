@@ -54,10 +54,10 @@ export default {
  
     }
 }
-       input[type="checkbox"]{
+
+input[type="checkbox"]{
     position: relative;
     border: none;
-    -webkit-appearance: none;
     background: #fff;
     outline: none;
     width: 80px;
@@ -69,7 +69,6 @@ export default {
 input[type="checkbox"]:before{
     content:'';
     position: absolute;
-    -webkit-appearance: none;
     background: #fff;
     outline: none;
     width: 30px;

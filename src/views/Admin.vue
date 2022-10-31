@@ -17,8 +17,8 @@
 </template>
 
 <script>
-/*import firebase from "firebase/app";
-import "firebase/functions";*/
+import firebase from "firebase/app";
+import "firebase/functions";
 
 export default {
     name: "Admin",
@@ -28,6 +28,11 @@ export default {
             functionMsg: null,
         }
     },
+    methods:{
+        async addAdmin(){
+            
+        }
+    }
 };
 </script>
 
