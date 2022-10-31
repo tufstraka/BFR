@@ -1,9 +1,3 @@
-<script setup>
-
-
-    
-</script>
-
 <template>
     <footer>
         <div class="container">
