@@ -10,7 +10,7 @@
                     <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
                     <router-link class='link' to='#'>News</router-link>
                     <router-link class='link' to='#'>Categories</router-link>
-                    <router-link class='link' to='#'>Create Review</router-link>
+                    <router-link v-if="admin" class='link' to='#'>Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Login/Register</router-link>
                 </ul>
                 <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
@@ -31,7 +31,7 @@
                                     <p>Profile</p>
                                 </router-link>
                             </div>
-                            <div class="option">
+                            <div v-if="admin" class="option">
                                 <router-link class="option" :to="{name:'Admin'}">
                                     <adminIcon class="icon"/>
                                     <p>Admin</p>
@@ -54,7 +54,7 @@
                 <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
                 <router-link class='link' to='#'>News</router-link>
                 <router-link class='link' to='#'>Categories</router-link>
-                <router-link class='link' to='#'>Create Review</router-link>
+                <router-link v-if="admin" class='link' to='#'>Create Review</router-link>
                 <router-link v-if="!user" class='link' :to="{name:'Login'}">Login/Register</router-link>
             </ul>
         </transition>     
@@ -119,8 +119,12 @@
     },
     computed: {
         user() {
-            return this.$store.state.user
-        }
+            return this.$store.state.user;
+        },
+
+        admin() {
+            return this.$store.state.profileAdmin;
+        },
     }
     };
     
