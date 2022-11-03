@@ -61,6 +61,14 @@ const routes = [
     }
   },
   {
+    path: "/create-post",
+    name: "CreatePost",
+    component: CreatePost,
+    meta:{
+      title:'Create Post'
+    }
+  },
+  {
     path: "/Admin",
     name: "Admin",
     component: Admin,
