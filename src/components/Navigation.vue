@@ -10,7 +10,7 @@
                     <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
                     <router-link class='link' to='#'>News</router-link>
                     <router-link class='link' to='#'>Categories</router-link>
-                    <router-link v-if="admin" class='link' to='#'>Create Review</router-link>
+                    <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Login/Register</router-link>
                 </ul>
                 <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
@@ -54,7 +54,7 @@
                 <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
                 <router-link class='link' to='#'>News</router-link>
                 <router-link class='link' to='#'>Categories</router-link>
-                <router-link v-if="admin" class='link' to='#'>Create Review</router-link>
+                <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                 <router-link v-if="!user" class='link' :to="{name:'Login'}">Login/Register</router-link>
             </ul>
         </transition>     
