@@ -31,6 +31,14 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    newBlogPost(state, payload) {
+      state.blogHTML = payload;
+    },
+
+    updateBlogTitle(state, payload) {
+      state.blogTitle = payload;
+    },
+    
     toggleEditPost(state, payload) {
       state.editPost = payload;
     },
@@ -89,7 +97,7 @@ export default new Vuex.Store({
       });
       commit("setProfileInitials");
     },
-  },
+  },  
   modules: {
     
   }
