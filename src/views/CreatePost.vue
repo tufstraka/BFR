@@ -43,7 +43,32 @@ data(){
         },
     };
 },
+computed: {
+    profileId (){
+        return this.$store.state.profileId;
+    },
 
+    blogCoverPhotoName(){
+        return this.$store.state.blogPhotoName;
+    },
+
+    blogTitle: {
+        get() {
+            return this.$store.state.blogTitle
+        },
+        set(payload) {
+            this.$store.commit("updateBlogTitle", payload )
+        },
+    },
+    blogHTML: {
+        get() {
+            return this.$store.state.blogHTML
+        },
+        set(payload) {
+            this.$store.commit("newBlogPost", payload )
+        },
+    }
+}
 };
 </script>
 
