@@ -31,6 +31,14 @@ export default new Vuex.Store({
 
   },
   mutations: {
+    createFileURL(state, payload) {
+      state.blogPhotoFileURL = payload
+    },
+
+    fileNameChange(state, payload){
+      state.blogPhotoName = payload;
+    },
+
     newBlogPost(state, payload) {
       state.blogHTML = payload;
     },
