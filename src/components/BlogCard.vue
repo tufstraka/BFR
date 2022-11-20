@@ -41,6 +41,7 @@ export default {
 .blog-card{
   position: relative;
   cursor: pointer;
+  height: 400px;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
