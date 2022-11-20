@@ -116,7 +116,7 @@ methods: {
                             date: timestamp,
                         });
 
-                        this.loading = fals4;
+                        this.loading = false;
                         this.$router.push({ name:"ViewBlog" });
                     }
                 );
