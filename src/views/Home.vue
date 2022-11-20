@@ -4,7 +4,7 @@
     <div>
         <TrendingMovies />
     </div>
-    <BlogPost :post='post' v-for="(post, index) in sampleBlogPost" :key="index" />
+    <BlogPost :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
     
     
     <div class="blog-card-wrap">
@@ -33,7 +33,7 @@
         
         <div class = 'blog-cards'>
           
-          <BlogCards :post='post' v-for="(post, index) in sampleBlogCards" :key="index" />
+          <BlogCards :post='post' v-for="(post, index) in blogPostsCards" :key="index" />
         </div>
       </div>
     </div>
@@ -66,20 +66,19 @@ export default {
         welcomeScreen: true,
         photo:"movie1"
       },
-      sampleBlogPost:[
-        {
-        title:"lorem ipsum",
-        blogHTML:"This is a filler blog post",
-        blogCoverPhoto:"beautiful-stories",
-        }
-      ],      
+      
  
     };
   },
-  computed: {
-    sampleBlogCards(){
-      return this.$store.state.sampleBlogCards;
+  computed: { 
+    blogPostsCards(){
+      return this.$store.getters.blogPostsCards;
     },
+
+    blogPostsFeed(){
+      return this.$store.getters.blogPostsFeed;
+    },
+
 
     user() {
       return this.$store.state.user;
