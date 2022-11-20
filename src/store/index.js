@@ -32,6 +32,15 @@ export default new Vuex.Store({
     profileInitials: null
 
   },
+  getters: {
+    blogPostsFeed(state) {
+      return state.blogPosts.slice(0,1);
+    },
+
+    blogPostsCards(state) {
+      return state.blogPosts.slice(0,4);
+    }
+  },
   mutations: {
     createFileURL(state, payload) {
       state.blogPhotoFileURL = payload

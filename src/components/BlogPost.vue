@@ -3,9 +3,9 @@
       <div class="blog-content">
           <div>
               <h2 v-if="post.welcomeScreen"> {{post.title}} &#128075;</h2>
-              <h2 v-else>{{post.title}}</h2>
+              <h2 v-else>{{post.blogTitle}}</h2>
               <p v-if='post.welcomeScreen'>{{post.blogPost}} </p>
-              <p v-else class='content-preview'>{{post.blogHTML}}</p>
+              <p v-else class='content-preview' v-html="post.blogHTML"></p>
               <router-link class='link' v-if='post.welcomeScreen' to='#'>
                 Login/Register  <Arrow class='arrow arrow-light'/>
               </router-link>
@@ -17,7 +17,7 @@
       </div>
        <div class="blog-photo">
             <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.jpg`)" alt="welcome screen photo">
-            <img v-else :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)" alt="blog photo">
+            <img v-else :src="post.blogCoverPhoto" alt="blog photo" />
         </div>
   </div>
 </template>
