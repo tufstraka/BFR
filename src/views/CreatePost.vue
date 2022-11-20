@@ -18,7 +18,7 @@
             <vue-editor :editorOptions="editorSettings" v-model="blogHTML" useCustomImageHandler @image-added="imageHandler"/>
         </div>
         <div class="blog-actions">
-            <button>Publish blog</button>
+            <button @click="uploadBlog">Publish blog</button>
             <router-link class="router-button" :to="{name: 'BlogPreview'}">Post Preview</router-link>
         </div>
     </div>
@@ -28,8 +28,10 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/storage";
+import db from "../firebase/firebaseInit"
 import BlogCoverPreview from "../components/BlogCoverPreview";
 import Quill from "quill";
+
 window.Quill = Quill;
 
 const ImageResize = require("quill-image-resize-module").default;
@@ -79,7 +81,53 @@ methods: {
             Editor.insertEmbed(cursorLocation, "image", downloadURL);
             resetUploader();
         })
-    }
+    },
+
+    uploadBlog() {
+        if(this.blogTitle.length !== 0 && this.blogHTML.length !== 0) {
+            if (this.file){
+                const storageRef = firebase.storage().ref();
+                const docRef = storageRef.child(`documents/BlogCoverPhotos/${this.$store.state.blogPhotoName}`);
+                docRef.put(this.file).on(
+                    "state_changed",
+                    (snapshot) => {
+                        console.log(snapshot);
+                    },
+                    (err) => {
+                        console.log(err);
+                    }, async () => {
+                        const downloadURL = await docRef.getDownloadURL();
+                        const timestamp = await Date.now();
+                        const dataBase = db.collection("blogPosts").doc();
+
+                        await dataBase.set({
+                            blogID: dataBase.id,
+                            blogHTML: this.blogHTML,
+                            blogCoverPhoto: downloadURL,
+                            blogCoverPhotoName: this.blogCoverPhotoName,
+                            blogTitle: this.blogTitle,
+                            profileId: this.profileId,
+                            date: timestamp,
+                        });
+
+                    }
+                );
+                return;
+            }
+            this.error = true;
+            this.errorMsg = "Please ensure you uploaded a cover photo!";
+            setTimeout(() => {
+                this.error = false;
+            }, 5000);
+            return;
+        }
+        this.error = true;
+        this.errorMsg = "Please ensure Blog Title and/or Blog post has been filled!";
+        setTimeout(() => {
+            this.error = false;
+        }, 5000);
+        return;
+    },
 },
 
 computed: {
