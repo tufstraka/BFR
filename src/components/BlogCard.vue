@@ -97,7 +97,7 @@ export default {
     border-radius: 8px 8px;
     width: 100%;
     min-height: 250px;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .info{
