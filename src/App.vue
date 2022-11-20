@@ -35,7 +35,7 @@ created() {
                }
      })
     this.checkRoute();
-    console.log(firebase.auth().currentUser);
+    this.$store.dispatch("getPost")
   },
   
 mounted() {},

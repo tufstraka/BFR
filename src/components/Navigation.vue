@@ -31,7 +31,7 @@
                                     <p>Profile</p>
                                 </router-link>
                             </div>
-                            <div v-if="admin" class="option">
+                            <div class="option">
                                 <router-link class="option" :to="{name:'Admin'}">
                                     <adminIcon class="icon"/>
                                     <p>Admin</p>
