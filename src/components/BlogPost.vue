@@ -9,7 +9,7 @@
               <router-link class='link' v-if='post.welcomeScreen' to='#'>
                 Login/Register  <Arrow class='arrow arrow-light'/>
               </router-link>
-              <router-link class='link ' v-else to='#'>
+              <router-link class='link ' v-else :to="{name: 'viewBlog', params: {blogid: this.post.blogID}}">
                 View the Post  <Arrow class='arrow'/>
               </router-link>
           </div>
