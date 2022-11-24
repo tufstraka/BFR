@@ -34,9 +34,9 @@ export default {
   methods: {
     deletePost() {
       this.$store.dispatch("deletePost", this.post.blogID)
-    }
+    },
   },
-  
+
   computed:{
     editPost(){
       return this.$store.state.editPost; 
