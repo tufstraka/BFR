@@ -61,7 +61,7 @@ export default new Vuex.Store({
     },
 
     filterBlogPost(state, payload) {
-      state.blogPosts = state.Posts.filter((post) => post.blogID !== payload);
+      state.blogPosts = state.blogPosts.filter((post) => post.blogID !== payload);
     },
 
     setProfileAdmin(state, payload){
