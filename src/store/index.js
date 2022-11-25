@@ -64,8 +64,15 @@ export default new Vuex.Store({
       state.blogPosts = state.blogPosts.filter((post) => post.blogID !== payload);
     },
 
-    setProfileAdmin(state, payload){
+    setProfileAdmin(state, payload) {
       state.profileAdmin = payload;
+    },
+
+    setBlogState(state, payload) {
+      state.blogTitle = payload.blogTitle;
+      state.blogHTML = payload.blogHTML;
+      state.blogPhotoFileURL = payload.blogCoverPhoto;
+      state.blogPhotoName = payload.blogCoverPhotoName;
     },
     
     updateUser(state, payload){
@@ -79,7 +86,7 @@ export default new Vuex.Store({
       state.profileLastName = doc.data().lastName;
       state.profileUsername = doc.data().userName;
     },
-    
+
     setProfileInitials(state) {
       state.profileInitials = 
         state.profileFirstName.match(/(\b\S)?/g).join("") +
@@ -120,6 +127,7 @@ export default new Vuex.Store({
             blogCoverPhoto: doc.data().blogCoverPhoto,
             blogTitle: doc.data().blogTitle,
             blogDate: doc.data().date,
+            blogCoverPhotoName: doc.data().blogCoverPhotoName,
           };
           state.blogPosts.push(data);
         }
@@ -131,6 +139,11 @@ export default new Vuex.Store({
       const getPost = await db.collection ("blogPosts").doc(payload);
       await getPost.delete();
       commit("filterBlogPost", payload);
+    },
+
+    async updatePost({commit, dispatch}, payload) {
+      commit("filterBlogPost", payload);
+      await dispatch("getPost")
     },
 
     async updateUserSettings({ commit, state}) {
