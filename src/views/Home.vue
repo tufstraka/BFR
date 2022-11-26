@@ -62,7 +62,7 @@ export default {
     return {
       welcomeScreen:{
         title:"Niaje",
-        blogPost:"Do you like watching movies and Tv shows?. Do you always feel like you want to rant or just express your opinions? Welcome to BFR.",
+        blogPost:"Do you like watching movies and Tv shows? Do you always feel like you want to rant or just express your opinions? Welcome to BFR.",
         welcomeScreen: true,
         photo:"movie1"
       },
