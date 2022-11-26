@@ -138,8 +138,8 @@ header{
     z-index: 99;
 }
 .link{
-    font-weight: 500;
-    font-size: 13px;
+    font-weight: 300;
+    font-size: 16px;
     padding: 0 8px;
     transition: 0.3s color ease;
 }
