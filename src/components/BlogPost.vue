@@ -7,7 +7,7 @@
               <p v-if='post.welcomeScreen'>{{post.blogPost}} </p>
               <p v-else class='content-preview' v-html="post.blogHTML"></p>
               <router-link class='link' v-if='post.welcomeScreen' to='#'>
-                write for us <Arrow class='arrow'/>
+                Get Started <Arrow class='arrow'/>
               </router-link>
               <router-link class='link ' v-else :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
                 View the Post <Arrow class='arrow'/>
