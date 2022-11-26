@@ -12,7 +12,7 @@
               <router-link class='link ' v-else :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
                 View the Post  <Arrow class='arrow'/>
               </router-link>
-       /workspace/BiasedFilmReviews/src/assets/blogPhotos   </div>
+            </div>
          
       </div>
        <div class="blog-photo">
