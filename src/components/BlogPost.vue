@@ -12,11 +12,11 @@
               <router-link class='link ' v-else :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
                 View the Post  <Arrow class='arrow'/>
               </router-link>
-          </div>
+       /workspace/BiasedFilmReviews/src/assets/blogPhotos   </div>
          
       </div>
        <div class="blog-photo">
-            <img v-if='post.welcomeScreen' :src="require(`../assets/blogPhotos/${post.photo}.svg`)" alt="welcome screen photo">
+            <HomeSvg v-if='post.welcomeScreen' />
             <img v-else :src="post.blogCoverPhoto" alt="blog photo" />
         </div>
   </div>
@@ -24,11 +24,12 @@
 
 <script>
 import Arrow from '../assets/Icons/arrow-right-light.svg'
+import HomeSvg from './HomeSvg.vue';
 
 export default {
     name: "blogPost",
     props:["post"],
-    components:{ Arrow },
+    components:{ Arrow, HomeSvg },
     computed: {
         user() {
             return this.$store.state.user;
