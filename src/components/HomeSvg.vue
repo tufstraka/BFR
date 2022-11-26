@@ -12,5 +12,7 @@ export default {
 </script>
 
 <style scoped>
-
+.my-svg-component {
+    margin: 10px;
+}
 </style>
