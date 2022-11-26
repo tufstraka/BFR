@@ -7,10 +7,10 @@
               <p v-if='post.welcomeScreen'>{{post.blogPost}} </p>
               <p v-else class='content-preview' v-html="post.blogHTML"></p>
               <router-link class='link' v-if='post.welcomeScreen' to='#'>
-                Login/Register  <Arrow class='arrow arrow-light'/>
+                write for us <Arrow class='arrow'/>
               </router-link>
               <router-link class='link ' v-else :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
-                View the Post  <Arrow class='arrow'/>
+                View the Post <Arrow class='arrow'/>
               </router-link>
             </div>
          
@@ -101,6 +101,8 @@ export default {
             padding-bottom:4px;
             border-bottom: 1px solid transparent;
             transition: .5s ease-in all;
+            font-size: large;
+            font-weight: bold;
             &:hover{
                 border-bottom-color: #303030;
             } 
