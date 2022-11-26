@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .my-svg-component {
-    margin: 10px;
+    margin-top: 50px;
+    height: 500px;
 }
 </style>
