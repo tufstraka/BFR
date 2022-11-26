@@ -64,12 +64,12 @@ methods: {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Barlow Semi Condensed", sans-serif;
+  font-family: "Nerko One", sans-serif;
 }
 
 
