@@ -15,5 +15,11 @@ export default {
 .my-svg-component {
     margin-top: 50px;
     height: 500px;
+
+    @media screen and (max-width: 479px) {
+        margin: 5px;
+        height: 500px;
+        width: 100vw;
+    }
 }
 </style>
