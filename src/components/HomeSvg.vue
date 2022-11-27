@@ -19,7 +19,7 @@ export default {
     @media screen and (max-width: 479px) {
         margin: 5px;
         height: 495px;
-        width: 100vw;
+        width: 98vw;
     }
 }
 </style>
