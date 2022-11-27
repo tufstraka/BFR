@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .my-svg-component {
     margin-top: 50px;
     height: 500px;
