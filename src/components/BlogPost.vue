@@ -125,7 +125,7 @@ export default {
             object-fit: cover;
         }
     }
-    &:nth-child(odd){
+    &:nth-child(even){
         .blog-content{
             order: 2;
         }
