@@ -40,7 +40,7 @@
 
     <div v-if="!user" class="updates">
       <div class="container">
-        <h2>Never miss a post. Trust Me, you wouldn't want to. Register for your free account today !</h2>
+        <h2>Register for your free account today !</h2>
         <router-link class='router-button' to='#'>Register for BFR  <Arrow class='arrow arrow-light'/> </router-link>
       </div>
     </div>
