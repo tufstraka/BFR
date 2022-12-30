@@ -84,6 +84,22 @@ export default {
 
 
 <style scoped>
+body::-webkit-scrollbar{
+    width: 1.26rem;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+body::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(233, 48, 48);
+  }  
 .row {
   display: flex;
 }
