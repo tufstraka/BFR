@@ -70,6 +70,7 @@ methods: {
   padding: 0;
   box-sizing: border-box;
   font-family: "Nerko One", sans-serif;
+  background-color: #dedede !important
 }
 
 
