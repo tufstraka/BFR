@@ -91,7 +91,7 @@ export default {
 
 <style lang='scss' scoped>
 .home {
-background: linear-gradient(to right, #111111, #333333);
+background: linear-gradient(to bottom left, #111111, #333333);
 }
 .vue{
   position: absolute;
@@ -102,7 +102,7 @@ background: linear-gradient(to right, #111111, #333333);
 }
 
 .blog-card-wrap{
-  background-color: #303030;
+  background: linear-gradient(to bottom left, #111111, #333333);
   h1{
     font-weight: 300;
     font-size: 21px;
