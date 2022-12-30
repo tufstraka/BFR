@@ -97,9 +97,7 @@ body::-webkit-scrollbar-track {
     background-color: transparent;
   }
   
-body::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(233, 48, 48);
-  }  
+body
 .row {
   display: flex;
 }
