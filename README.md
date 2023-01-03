@@ -1,4 +1,4 @@
-## BiasedFilmReviews
+## BiasedFilmReview
 
 ### Tech Stack
 - Vue Js
