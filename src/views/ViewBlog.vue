@@ -28,6 +28,7 @@ async mounted(){
 
 <style lang="scss">
 .blogpic{
+    width: 50vw !important;
     height:50vh;
 }
 .post-view {
