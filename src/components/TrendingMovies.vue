@@ -128,7 +128,7 @@ body
   flex-direction: column;
   width: 150px;
   gap: 20px;
-  background: #fff;
+  background: beige;
   border-radius: 12px;
   transition: transform 350ms;
   margin-left: 30px;

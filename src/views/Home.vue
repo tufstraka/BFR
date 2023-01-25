@@ -91,7 +91,7 @@ export default {
 
 <style lang='scss' scoped>
 .home {
-background: linear-gradient(to bottom left, #111111, #333333);
+background: beige;
 }
 .vue{
   position: absolute;
