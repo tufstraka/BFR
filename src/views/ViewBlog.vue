@@ -28,10 +28,7 @@ async mounted(){
 
 <style lang="scss">
 .blogpic{
-    display: flex;
-    justify-content: center;
-    width: 50vw;
-    height:40vh;
+    height:50vh;
 }
 .post-view {
     font-weight: 400;
