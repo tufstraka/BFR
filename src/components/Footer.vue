@@ -73,7 +73,7 @@ footer{
     .container{
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 12px;
         @media(min-width: 800px){
             flex-direction: row;
             
@@ -83,7 +83,7 @@ footer{
             flex: 1;
         }
         .left{
-            gap: 32px;
+            gap: 12px;
             color: #fff;
             display: flex;
             flex-direction: column;
