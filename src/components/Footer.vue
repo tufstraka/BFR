@@ -136,6 +136,8 @@ footer{
                 }
             }
             .col-2{
+                display: flex;
+                justify-content: center;
                 ul{
                 height: 100%;
                 justify-content: center;
