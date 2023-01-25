@@ -93,11 +93,15 @@ body::-webkit-scrollbar-thumb {
     border: 6px solid transparent;
     background-clip: content-box;
   }
+
 body::-webkit-scrollbar-track {
     background-color: transparent;
   }
   
-body
+body::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(233, 48, 48);
+  }  
+
 .row {
   display: flex;
 }
