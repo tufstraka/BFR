@@ -1,6 +1,7 @@
 <template>
     <footer>
         <div class="container">
+            <div class="left">
                 <div class="col-1">
                     <router-link class="header" :to="{name:'home'} ">Biased Film Reviews</router-link>
                     <ul>
@@ -26,7 +27,8 @@
                         <router-link class="link" :to="{ name: 'home'}" >Blog</router-link>
                     </ul>
                 </div>
-            <div class="col-3">
+            </div>
+            <div class="right">
                <p><span id="date">{{ this.addDate() }}</span> &#169; | All Rights Reserved</p> <br>
                 <p>Made with ❤️ by <a href='#'>Kadima</a></p> 
             </div>
