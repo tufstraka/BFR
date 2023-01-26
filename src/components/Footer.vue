@@ -63,13 +63,118 @@
     }
 </script>
 
-<style  scoped>
-.container{
-    display: flex
-}
-.col-1, col-2, col-3{
-    display: flex;
-    flex-direction: column;
+<style lang="scss" scoped>
+footer{
+    margin-top: auto;
+    padding: 100px 25px;
+    background-color: #303030;
+    .container{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        @media(min-width: 800px){
+            flex-direction: row;
+            
+        }
+        > div{
+            display: flex;
+            flex: 1;
+        }
+        .left{
+            gap: 12px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            
+            align-items: center;
+            @media(min-width: 800px){
+                flex-direction: row;
+                align-items: initial;
+                
+            }
+            .header{
+                
+                font-size: 24px;
+                color: #fff;
+                text-decoration: none;
+                font-weight: 600;
+                &:hover{
+                    transition: all 2s ease;
+                    color: red;
+                }
+            }
+            ul{
+                gap: 16px;
+                list-style: none;
+                display: flex;
+                
+            }
+            .col-1,
+            .col-2{
+                gap: 22px;
+                display: flex;
+                flex: 1;
+            }
+            .col-1{
+                
+                flex-direction: column;
+                ul{
+                    margin-top:auto;
+                    gap: 50px;
+                    li{
+                        display: flex;
+                        align-items:center;
+                        .svg-icon{
+                            width: 20px;                        
+                            height:auto;                            
+                            color: #fff
+                        }
+                    }
+                }
+            }
+            .col-2{
+                display: flex;
+                justify-content: center;
+                ul{
+                height: 100%;
+                justify-content: center;
+                flex-direction: row;
+                flex-wrap: wrap;
+                @media(min-width:800px){
+                   // flex-direction: column
+                }
+                .link{
+                    font-size: 16px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    color: #fff;
+                }
+                }
+            }
+           
+        }
+    }
+     .right{
+                gap: 2px;
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 65px;
+                
+                @media(min-width:800px){
+                    //align-items: flex-end;
+                    gap:0;
+                }
+                p{
+                    margin-top: auto;
+                    color: #fff
+                     
+                }
+                a{
+                    text-decoration: none;
+                    color: blue;
+                }
+            }
 }
 </style>
 
