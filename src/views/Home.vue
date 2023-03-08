@@ -45,8 +45,6 @@
 </template>
 
 <script>
-
-import Arrow from "../assets/Icons/arrow-right-light.svg";
 import BlogPost from '../components/BlogPost.vue';
 import BlogCards from '../components/BlogCard.vue';
 import TrendingMovies from '../components/TrendingMovies.vue';
@@ -54,7 +52,7 @@ import TrendingMovies from '../components/TrendingMovies.vue';
 
 export default {
   name: "Home",
-  components: { BlogPost , BlogCards , Arrow , TrendingMovies },
+  components: { BlogPost , BlogCards , TrendingMovies },
   data(){
     return {
       welcomeScreen:{
