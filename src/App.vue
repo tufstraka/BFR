@@ -9,10 +9,13 @@
 </template>
 
 <script>
+import dotenv from 'dotenv'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import Navigation from './components/Navigation.vue';
 import Footer from "./components/Footer.vue";
+
+dotenv.config()
 
 export default {
 
