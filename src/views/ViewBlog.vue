@@ -3,7 +3,9 @@
     <div class="container quillWrapper">
         <h2>{{ this.currentBlog[0].blogTitle}}</h2>
         <h4>Posted on: {{new Date(this.currentBlog[0].blogDate).toLocaleString("en-us", { dateStyle: "long"})}}</h4>
-        <img class="blogpic" :src="this.currentBlog[0].blogCoverPhoto" alt="" />
+        <div class="picwrapper">
+          <img class="blogpic" :src="this.currentBlog[0].blogCoverPhoto" alt="" />
+        </div>  
         <div class="post-content ql-editor" v-html="this.currentBlog[0].blogHTML"></div>
     </div>
   </div>
@@ -27,10 +29,16 @@ async mounted(){
 </script>
 
 <style lang="scss">
-.blogpic{
-    width: 50vw !important;
-    height:50vh;
+.picwrapper{
+    width: 600px;
+    height: 600px;
+    object-fit: contain;
+    
+    .blogpic{
+    object-fit: contain
+    }
 }
+
 .post-view {
     font-weight: 400;
     font-size: 14px;
