@@ -30,9 +30,9 @@ async mounted(){
 
 <style lang="scss">
 .picwrapper{
-    width: 600px;
+    width: 500px;
     height: 600px;
-    object-fit: contain;
+    margin: 12px;
     
     .blogpic{
     object-fit: contain
