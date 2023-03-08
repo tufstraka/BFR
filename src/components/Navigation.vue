@@ -7,9 +7,9 @@
             <div class="nav-links">
                 <ul v-show='!mobile'>
                     <router-link class='link' :to="{name:'Home'}">Home</router-link>
-                    <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
-                    <router-link class='link' to='#'>News</router-link>
-                    <router-link class='link' to='#'>Categories</router-link>
+                    <router-link v-if="user" class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
+                    <router-link v-if="user" class='link' to='#'>News</router-link>
+                    <router-link v-if="user" class='link' to='#'>Categories</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
                 </ul>
