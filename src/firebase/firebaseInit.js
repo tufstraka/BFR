@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 var firebaseConfig = {
-    apiKey: "AIzaSyCiPTBlpY-7wNm7rMwnF7xlpfy790eeQfk",
+    apiKey: `${process.env.VUE_APP_FIREBASE_API_KEY}`,
     authDomain: "biasedfilmreviews-c40dd.firebaseapp.com",
     projectId: "biasedfilmreviews-c40dd",
     storageBucket: "biasedfilmreviews-c40dd.appspot.com",

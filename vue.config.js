@@ -1,5 +1,6 @@
 const dotenv = require('dotenv').config();
 process.env.VUE_APP_TMDB_API_KEY = dotenv.parsed.VUE_APP_TMDB_API_KEY;
+process.env.VUE_APP_FIREBASE_API_KEY = dotenv.parsed.VUE_APP_FIREBASE_API_KEY
 
 module.exports = {
   chainWebpack: (config) => {
