@@ -4,8 +4,10 @@
     <div v-if="user">
         <TrendingMovies />
     </div>
-    <BlogPost v-if="user" :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
     
+    <div v-if="user">
+      <BlogPost :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
+    </div>
     
     <div  v-if="user" class="blog-card-wrap">
       
