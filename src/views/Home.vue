@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <BlogPost v-if="!user" :post='welcomeScreen'/>
-    <div>
+    <div v-if="user">
         <TrendingMovies />
     </div>
-    <BlogPost :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
+    <BlogPost v-if="user" :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
     
     
-    <div class="blog-card-wrap">
+    <div  v-if="user" class="blog-card-wrap">
       
       <div class="container">
         <vue-particles
@@ -38,12 +38,7 @@
       </div>
     </div>
 
-    <div v-if="!user" class="updates">
-      <div class="container">
-        <h2>Register for your free account today !</h2>
-        <router-link class='router-button' to='#'>Register for BFR  <Arrow class='arrow arrow-light'/> </router-link>
-      </div>
-    </div>
+
   </div>
 </template>
 
