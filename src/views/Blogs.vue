@@ -1,7 +1,7 @@
 <template>
   <div class='blog-card-wrap'>
       <div class="blog-cards container">
-          <div v-if="profileAdmin" class="toggle-edit">
+          <div v-if="admin" class="toggle-edit">
               <span>Toggle Editing Post</span> <br>
               <input type="checkbox" v-model='editPost'>
               
@@ -17,9 +17,15 @@ export default {
     name:'Blogs',
     components: {BlogCards},
     computed: {
+ 
+    admin() {
+            return this.$store.state.profileAdmin;
+        },
+    
     blogPosts(){
       return this.$store.state.blogPosts;
     },
+    
     editPost:{
         get(){
             return this.$store.state.editPost
