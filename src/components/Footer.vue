@@ -29,8 +29,7 @@
                 </div>
             </div>
             <div class="right">
-               <p><span id="date">{{ this.addDate() }}</span> &#169; | All Rights Reserved</p> <br>
-                <p>Made with ❤️ by <a href='#'>Kadima</a></p> 
+               <p><span id="date">{{ this.addDate() }}</span> &#169; | All Rights Reserved</p> <br> 
             </div>
         </div>   
        
