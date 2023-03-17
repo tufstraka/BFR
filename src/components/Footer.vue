@@ -25,8 +25,8 @@
                         <router-link class="link" :to="{ name: 'reviews'}" >Reviews</router-link>
                         <router-link class="link" :to="{ name: 'home'}" >News</router-link>
                         <router-link class="link" :to="{ name: 'home'}" >Blog</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Stuff</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Stuff</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >Privacy policy</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >Cookie policy</router-link>
                     </ul>
                 </div>
             </div>
