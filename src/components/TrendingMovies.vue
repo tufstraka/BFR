@@ -1,44 +1,30 @@
 <template>
-
-<div class='everything'>
-
-  <div class='caption'>
-  
-    <h2>Trending movies </h2> 
-      
-  </div>
-  
-  <div class = "row">
-    
-    <div v-for="movie in movies_pics" v-bind:key="movie.id" class="card-container">
-    
-      <div class="card">
-           <img :src="movie.pic"/>
-      <!--<p>{{ post.overview }}</p>-->
-          <div class="content">
-            <h2>{{movie.title || movie.name }}</h2>
-            <span class="rating">Rating &#11088; &#11088;:</span><span> {{ movie.vote_average }}</span>
-            <p>{{movie.release_date }}</p>
-          </div>  
-      </div>
-      
+  <div class="trending-movies">
+    <div class="caption">
+      <h2>Trending Movies</h2>
     </div>
-    
- </div>
 
-
-</div>
- 
+    <div class="movie-cards">
+      <div v-for="movie in movies" :key="movie.id" class="card" @click="redirectToMovieDetails(movie.id)">
+        <img :src="getMoviePosterUrl(movie.poster_path)" alt="Movie Poster" />
+        <div class="content">
+          <h2>{{ movie.title || movie.name }}</h2>
+          <span class="rating">Rating &#11088;:</span><span>{{ movie.vote_average }}</span>
+          <p>{{ movie.release_date }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-  name:'TrendingMovies',
+  name: 'TrendingMovies',
   data() {
     return {
-      movies_pics: [],
+      movies: [],
     };
   },
 
@@ -48,30 +34,25 @@ export default {
         const response = await axios.get(
           `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=en-US`
         );
-        
-        let newMovies = []
-        let newMoviesPics = []
-        newMovies = response.data.results;
-        let baseurl = "https://image.tmdb.org/t/p/original"
 
-        for (let i = 0; i < newMovies.length; i++){
-        
-          const pic = {
-            Photoid: i, 
-            pic: baseurl + newMovies[i].poster_path };
-          
-          const MoviesPics = {
-            ...pic,
-            ...newMovies[i]
-          }
-          newMoviesPics.push(MoviesPics)
-        }
-        
-        this.movies_pics = newMoviesPics;
-        
+        this.movies = response.data.results.map(movie => ({
+          id: movie.id,
+          title: movie.title || movie.name,
+          vote_average: movie.vote_average,
+          release_date: movie.release_date,
+          poster_path: movie.poster_path,
+        }));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
+    },
+
+    getMoviePosterUrl(posterPath) {
+      return `https://image.tmdb.org/t/p/original${posterPath}`;
+    },
+
+    redirectToMovieDetails(movieId) {
+      //TO DO: Implement the logic to redirect to the movie details page
     },
   },
 
@@ -79,42 +60,15 @@ export default {
     this.getData();
   },
 };
-
 </script>
 
-
 <style scoped>
-body::-webkit-scrollbar{
-    width: 1.26rem;
+.trending-movies {
+  overflow-x: scroll;
 }
-body::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
-  }
-
-body::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  
-body::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(233, 48, 48);
-  }  
-
-.row {
-  display: flex;
-}
-
-.everything{
-    overflow-y: hidden;
-    overflow-x: scroll;
-   }
 
 .caption {
-  margin-top: 12px;
-  margin-left: 40px;
-  margin-bottom: 12px;
+  margin: 12px 40px;
   background-color: #2596be;
   color: black;
   border-radius: 9px;
@@ -122,10 +76,17 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .caption h2 {
-    margin-left: 3px;
-    font-size: 16px;
-    padding: 10px;
-  }
+  margin-left: 3px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.movie-cards {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  overflow-x: auto;
+}
 
 .card {
   display: flex;
@@ -135,46 +96,41 @@ body::-webkit-scrollbar-thumb:hover {
   background: beige;
   border-radius: 12px;
   transition: transform 350ms;
-  margin-left: 30px;
   color: black;
-  border-radius: 10px;
-  
 }
-.card:hover{
-    transform: scale(1.07);
-  }
-  
+
+.card:hover {
+  transform: scale(1.07);
+}
+
 .card img {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   width: 100%;
   border-radius: 10px;
   min-height: calc(150px * 1.5);
   height: calc(150px * 1.5);
   overflow: hidden;
-}  
+}
 
 .content {
   width: 100%;
   padding: 26px 10px 12px 10px;
-  padding-bottom: 12px;
-  position: relative;
   white-space: normal;
-
 }
 
 .content h2 {
-     font-size: 1em;
-     font-weight: 700;
-     color: #000;
+  font-size: 1em;
+  font-weight: 700;
+  color: #000;
 }
+
 .content span, p {
   font-size: 0.8em;
 }
 
-@media only screen and (max-width: 600px){
-  .caption{
+@media only screen and (max-width: 600px) {
+  .caption {
     margin-left: 22px;
   }
 }
+</style>
 
-</style>  
