@@ -32,6 +32,8 @@ jobs:
       # ========================================================
       - name: Install Dependencies and Build
         run: |
+          sudo apt-get install python2
+          npm install node-sass@latest
           npm install
           npm run build
 
