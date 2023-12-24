@@ -10,7 +10,7 @@
 # The provenance file can be verified using https://github.com/slsa-framework/slsa-verifier.
 # For more information about SLSA and how it improves the supply-chain, visit slsa.dev.
 
-name: SLSA generic generator
+name: BFR SLSA Generator
 on:
   workflow_dispatch:
   release:
@@ -27,21 +27,19 @@ jobs:
 
       # ========================================================
       #
-      # Step 1: Build your artifacts.
+      # Step 1: Build Vue.js app.
       #
       # ========================================================
-      - name: Build artifacts
+      - name: Install Dependencies and Build
         run: |
-            # These are some amazing artifacts.
-            echo "artifact1" > artifact1
-            echo "artifact2" > artifact2
+          npm install
+          npm run build
 
       # ========================================================
       #
       # Step 2: Add a step to generate the provenance subjects
       #         as shown below. Update the sha256 sum arguments
-      #         to include all binaries that you generate
-      #         provenance for.
+      #         to include all necessary artifacts.
       #
       # ========================================================
       - name: Generate subject for provenance
@@ -50,7 +48,7 @@ jobs:
           set -euo pipefail
 
           # List the artifacts the provenance will refer to.
-          files=$(ls artifact*)
+          files=$(ls dist/*)  # Assuming Vue.js build artifacts are in the 'dist' folder
           # Generate the subjects (base64 encoded).
           echo "hashes=$(sha256sum $files | base64 -w0)" >> "${GITHUB_OUTPUT}"
 
@@ -64,3 +62,4 @@ jobs:
     with:
       base64-subjects: "${{ needs.build.outputs.digests }}"
       upload-assets: true # Optional: Upload to a new release
+
