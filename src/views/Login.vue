@@ -115,7 +115,7 @@ form{
         background-color: #f2f7f6;
         padding: 4px 4px 4px 30px;
         height: 50px;
-        border-radius: 4px
+        border-radius: 4px;
         &:focus{
           outline: none;
         }  
