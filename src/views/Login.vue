@@ -109,13 +109,13 @@ form{
       justify-content: center;
       align-items: center;
       margin-bottom: 8px;
-      border-radius: 4px;
       input{
         width: 100%;
         border: none;
         background-color: #f2f7f6;
         padding: 4px 4px 4px 30px;
         height: 50px;
+        border-radius: 38px;
         &:focus{
           outline: none;
         }  
