@@ -50,8 +50,8 @@
         <menuIcon @click='toggleMobileNav' class='menu-icon' v-show='mobile'/>
         <transition name='mobile-nav'>
             <ul class='mobile-nav' v-show='mobileNav'>
-                <router-link class='link' :to="{name:'Home'}">Home</router-link>
-                <router-link class='link' :to="{name:'Blogs'}">Film Reviews</router-link>
+                <router-link class='link' to='#'>Home</router-link>
+                <router-link class='link' to='#'>Film Reviews</router-link>
                 <router-link class='link' to='#'>News</router-link>
                 <router-link class='link' to='#'>Categories</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
