@@ -25,7 +25,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .post-view {
   font-family: 'Helvetica Neue', Arial, sans-serif;
   padding: 16px;
