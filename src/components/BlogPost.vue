@@ -9,7 +9,7 @@
               <!--<router-link class='link' v-if='post.welcomeScreen' :to="{name: 'Register'}">
                 Get Started <Arrow class='arrow'/>
               </router-link> -->
-              <router-link class='link' :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
+              <router-link v-if="user" class='link' :to="{name: 'ViewBlog', params: {blogid: this.post.blogID}}">
                 View the Post <Arrow class='arrow'/>
               </router-link>
             </div>
