@@ -32,6 +32,7 @@ import 'firebase/auth';
 
 export default {
   name: "Login",
+  components: { email , password},
   data() {
     return {
       email: '',
