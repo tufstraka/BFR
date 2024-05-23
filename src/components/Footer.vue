@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__left">
-        <router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>
+        <!--<router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>-->
         <ul class="footer__social-links">
           <li>
             <a href="#"><youTube class="svg-icon" /></a>
