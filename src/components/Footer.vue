@@ -21,10 +21,10 @@
                 </div>
                 <div class="col-2">
                     <ul>
-                        <router-link class="link" :to="{ name: 'home'}" >Home</router-link>
-                        <router-link class="link" :to="{ name: 'reviews'}" >Reviews</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >Film</router-link>
+                        <router-link class="link" :to="{ name: 'reviews'}" >Books</router-link>
                         <router-link class="link" :to="{ name: 'home'}" >News</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Blog</router-link>
+                        <router-link class="link" :to="{ name: 'home'}" >Games</router-link>
                     </ul>
                 </div>
             </div>
