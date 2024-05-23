@@ -1,187 +1,131 @@
 <template>
-    <footer>
-        <div class="container">
-            <div class="left">
-                <div class="col-1">
-                    <router-link class="header" :to="{name:'home'} ">Biased Film Review</router-link>
-                    <ul>
-                        <li>
-                            <a href="#"><youTube class="svg-icon"/></a>
-                        </li>
-                        <li>
-                            <a href="#"><twitter class="svg-icon"/></a>
-                        </li>
-                        <li>
-                            <a href="#"><instagram class="svg-icon"/></a>
-                        </li>
-                        <li>
-                            <a href="#"><linkedin class="svg-icon"/></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-2">
-                    <ul>
-                        <router-link class="link" :to="{ name: 'reviews'}" >Movies</router-link>
-                        <router-link class="link" :to="{ name: 'reviews'}" >Books</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >News</router-link>
-                        <router-link class="link" :to="{ name: 'home'}" >Games</router-link>
-                        <router-link class="link" :to="{ name: 'reviews'}" >TV Shows</router-link>
-                    </ul>
-                </div>
-            </div>
-            <div class="right">
-               <p><span id="date">{{ this.addDate() }}</span> &#169; | All Rights Reserved</p> <br>
-            </div>
-        </div>   
-       
-    </footer>
-     
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__left">
+        <router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>
+        <ul class="footer__social-links">
+          <li>
+            <a href="#"><youTube class="svg-icon" /></a>
+          </li>
+          <li>
+            <a href="#"><twitter class="svg-icon" /></a>
+          </li>
+          <li>
+            <a href="#"><instagram class="svg-icon" /></a>
+          </li>
+          <li>
+            <a href="#"><linkedin class="svg-icon" /></a>
+          </li>
+        </ul>
+      </div>
+      <nav class="footer__nav">
+        <ul>
+          <li><router-link :to="{ name: 'reviews' }">Movies</router-link></li>
+          <li><router-link :to="{ name: 'reviews' }">Books</router-link></li>
+          <li><router-link :to="{ name: 'home' }">News</router-link></li>
+          <li><router-link :to="{ name: 'home' }">Games</router-link></li>
+          <li><router-link :to="{ name: 'reviews' }">TV Shows</router-link></li>
+        </ul>
+      </nav>
+      <div class="footer__right">
+        <p>&copy; {{ currentYear }} | All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <script>
-    import youTube from '../assets/Icons/youtube-brands.svg';
-    import twitter from '../assets/Icons/twitter-brands.svg';
-    import instagram from '../assets/Icons/instagram-brands.svg';
-    import linkedin from '../assets/Icons/linkedin-brands.svg';
+import youTube from '../assets/Icons/youtube-brands.svg';
+import twitter from '../assets/Icons/twitter-brands.svg';
+import instagram from '../assets/Icons/instagram-brands.svg';
+import linkedin from '../assets/Icons/linkedin-brands.svg';
 
-    export default{
-        name:'footer-vue',
-        components:{
-            youTube,
-            twitter,
-            instagram,
-            linkedin
-        },
-
-        methods: {
-            addDate(){
-
-            const today = new Date();
-            const year = today.getFullYear();
-            return year;
-
-            },
-        },
-    }
+export default {
+  name: 'footer-vue',
+  components: {
+    youTube,
+    twitter,
+    instagram,
+    linkedin,
+  },
+  computed: {
+    currentYear() {
+      return new Date().getFullYear();
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-footer{
-    margin-top: auto;
-    padding: 100px 25px;
-    background-color: #303030;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
+.footer {
+  background-color: #303030;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+  padding: 40px 0;
 
-    .container{
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        @media(min-width: 800px){
-            flex-direction: row;
-            
-        }
-        > div{
-            display: flex;
-            flex: 1;
-        }
-        .left{
-            gap: 12px;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            
-            align-items: center;
-            @media(min-width: 800px){
-                flex-direction: row;
-                align-items: initial;
-                
-            }
-            .header{
-                
-                font-size: 24px;
-                color: #fff;
-                text-decoration: none;
-                font-weight: 600;
-                &:hover{
-                    transition: all 2s ease;
-                    color: red;
-                }
-            }
-            ul{
-                gap: 16px;
-                list-style: none;
-                display: flex;
-                
-            }
-            .col-1,
-            .col-2{
-                gap: 22px;
-                display: flex;
-                flex: 1;
-            }
-            .col-1{
-                
-                flex-direction: column;
-                ul{
-                    margin-top:auto;
-                    gap: 50px;
-                    li{
-                        display: flex;
-                        align-items:center;
-                        .svg-icon{
-                            width: 20px;                        
-                            height:auto;                            
-                            color: #fff
-                        }
-                    }
-                }
-            }
-            .col-2{
-                display: flex;
-                justify-content: center;
-                ul{
-                height: 100%;
-                justify-content: center;
-                flex-direction: row;
-                flex-wrap: wrap;
-                @media(min-width:800px){
-                   // flex-direction: column
-                }
-                .link{
-                    font-size: 16px;
-                    font-weight: 500;
-                    text-decoration: none;
-                    color: #fff;
-                }
-                }
-            }
-           
-        }
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: red;
+      transition: color 0.2s ease;
     }
-     .right{
-                gap: 2px;
-                align-items: center;
-                flex-direction: column;
-                text-align: center;
-                margin-bottom: 65px;
-                
-                @media(min-width:800px){
-                    //align-items: flex-end;
-                    gap:0;
-                }
-                p{
-                    margin-top: auto;
-                    color: #fff
-                     
-                }
-                a{
-                    text-decoration: none;
-                    color: blue;
-                }
-            }
+  }
+
+  &__social-links {
+    display: flex;
+    gap: 16px;
+    list-style: none;
+
+    .svg-icon {
+      width: 20px;
+      height: auto;
+      color: #fff;
+    }
+  }
+
+  &__nav {
+    ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+
+      a {
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #fff;
+
+        &:hover {
+          color: red;
+          transition: color 0.2s ease;
+        }
+      }
+    }
+  }
+
+  &__right {
+    p {
+      color: #fff;
+    }
+  }
 }
 </style>
-
-
-
-
