@@ -9,11 +9,11 @@
       <div class="inputs">
         <div class="input">
           <input type="text" placeholder='Email' v-model='email' />
-          <img src="@/assets/Icons/envelope-regular.svg" class='icon' alt="Email Icon"/>
+          <email class='icon'/>
         </div>
         <div class="input">
           <input type="password" placeholder='Password' v-model='password' />
-          <img src="@/assets/Icons/lock-alt-solid.svg" class='icon' alt="Password Icon"/>
+          <password class='icon'/>          
         </div>
         <div v-show='error' class="error">{{ this.errorMsg }}</div>
       </div>
@@ -26,6 +26,8 @@
 
 <script>
 import firebase from 'firebase/app';
+import email from '../assets/Icons/envelope-regular.svg';
+import password from '../assets/Icons/lock-alt-solid.svg';
 import 'firebase/auth';
 
 export default {
@@ -145,11 +147,11 @@ form {
     background-color: #3498db;
     color: #fff;
     border: none;
-    padding: 10px 20px;
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-
+    margin-top: 14px;
+  
     &:hover {
       background-color: #2980b9;
     }
