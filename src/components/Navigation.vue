@@ -61,7 +61,7 @@
                 <br/>
                 <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
                 <router-link v-if="user" class='link' :to="{name:'Admin'}">Admin</router-link>
-                <li @click="signOut" v-if="user" class='link' >Sign Out</li>
+                <div @click="signOut" v-if="user" class='link' >Sign Out</div>
                 <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
             </ul>
         </transition>     
