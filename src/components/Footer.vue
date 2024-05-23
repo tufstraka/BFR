@@ -1,32 +1,34 @@
 <template>
   <footer class="footer">
     <div class="footer__container">
-      <div class="footer__left">
-        <!--<router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>-->
-        <ul class="footer__social-links">
-          <li>
-            <a href="#"><youTube class="svg-icon" /></a>
-          </li>
-          <li>
-            <a href="#"><twitter class="svg-icon" /></a>
-          </li>
-          <li>
-            <a href="#"><instagram class="svg-icon" /></a>
-          </li>
-          <li>
-            <a href="#"><linkedin class="svg-icon" /></a>
-          </li>
-        </ul>
+      <div class="footer__content">
+        <div class="footer__left">
+          <!--<router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>-->
+          <ul class="footer__social-links">
+            <li>
+              <a href="#"><youTube class="svg-icon" /></a>
+            </li>
+            <li>
+              <a href="#"><twitter class="svg-icon" /></a>
+            </li>
+            <li>
+              <a href="#"><instagram class="svg-icon" /></a>
+            </li>
+            <li>
+              <a href="#"><linkedin class="svg-icon" /></a>
+            </li>
+          </ul>
+        </div>
+        <nav class="footer__nav">
+          <ul>
+            <li><router-link :to="{ name: 'reviews' }">Movies</router-link></li>
+            <li><router-link :to="{ name: 'reviews' }">Books</router-link></li>
+            <li><router-link :to="{ name: 'home' }">News</router-link></li>
+            <li><router-link :to="{ name: 'home' }">Games</router-link></li>
+            <li><router-link :to="{ name: 'reviews' }">TV Shows</router-link></li>
+          </ul>
+        </nav>
       </div>
-      <nav class="footer__nav">
-        <ul>
-          <li><router-link :to="{ name: 'reviews' }">Movies</router-link></li>
-          <li><router-link :to="{ name: 'reviews' }">Books</router-link></li>
-          <li><router-link :to="{ name: 'home' }">News</router-link></li>
-          <li><router-link :to="{ name: 'home' }">Games</router-link></li>
-          <li><router-link :to="{ name: 'reviews' }">TV Shows</router-link></li>
-        </ul>
-      </nav>
       <div class="footer__right">
         <p>&copy; {{ currentYear }} | All Rights Reserved</p>
       </div>
@@ -66,16 +68,34 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
     gap: 20px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &__left {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
   }
 
   &__logo {
@@ -105,8 +125,14 @@ export default {
   &__nav {
     ul {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
       list-style: none;
+
+      @media (min-width: 768px) {
+        flex-wrap: nowrap;
+      }
 
       a {
         font-size: 16px;
@@ -123,6 +149,8 @@ export default {
   }
 
   &__right {
+    text-align: center;
+
     p {
       color: #fff;
     }
