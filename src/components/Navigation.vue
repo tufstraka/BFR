@@ -314,7 +314,7 @@ nav{
 
 @media (max-width: 770px) {
   .profile {
-    display: none;
+    display: none !important;
   }
 }
 
