@@ -2,9 +2,9 @@
   <div class="home">
     <BlogPost v-if="!user" :post="welcomeScreen" />
     
-    <div v-if="user">
+    <div>
       <TrendingMovies />
-      <BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index" />
+      <!--<BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index" />-->
       
       <div class="blog-card-wrap">
         <h1 style="text-align:center;">Recent Reviews</h1>
