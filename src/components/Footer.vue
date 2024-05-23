@@ -3,7 +3,7 @@
         <div class="container">
             <div class="left">
                 <div class="col-1">
-                    <router-link class="header" :to="{name:'home'} ">Biased Film Reviews</router-link>
+                    <router-link class="header" :to="{name:'home'} ">Biased Film Review</router-link>
                     <ul>
                         <li>
                             <a href="#"><youTube class="svg-icon"/></a>
