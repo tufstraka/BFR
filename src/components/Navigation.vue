@@ -6,10 +6,11 @@
             </div>
             <div class="nav-links">
                 <ul v-show='!mobile'>
-                    <router-link class='link' :to="{name:'Home'}">Home</router-link>
-                    <!--<router-link v-if="user" class='link' :to="{name:'Blogs'}">Film Reviews</router-link>-->
+                    <router-link class='link' :to="{name:'Blogs'}">Movies</router-link>
+                    <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
+                    <router-link class='link' to='#'>Books</router-link>
+                    <router-link class='link' to='#'>Games</router-link>
                     <router-link v-if="user" class='link' to='#'>News</router-link>
-                    <router-link v-if="user" class='link' to='#'>Categories</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
                 </ul>
@@ -47,14 +48,21 @@
             </div>
         </nav>
 
-        <menuIcon @click='toggleMobileNav' class='menu-icon' v-show='mobile'/>
+        <menuIcon @click='toggleMobileNav' class='menu-icon' v-if="!mobileNav" v-show='mobile'/>
+        <closeIcon @click='toggleMobileNav' class='menu-icon' v-if="mobileNav" v-show='mobile'/>
         <transition name='mobile-nav'>
             <ul class='mobile-nav' v-show='mobileNav'>
-                <router-link class='link' to='#'>Home</router-link>
                 <!--<router-link class='link' to='#'>Film Reviews</router-link>-->
+                <router-link class='link' :to="{name:'Blogs'}">Movies</router-link>
+                <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
                 <router-link class='link' to='#'>News</router-link>
-                <router-link class='link' to='#'>Categories</router-link>
+                <router-link class='link' to='#'>Books</router-link>
+                <router-link class='link' to='#'>Games</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
+                <br/>
+                <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
+                <router-link v-if="user" class='link' :to="{name:'Admin'}">Admin</router-link>
+                <div @click="signOut" v-if="user" class='link' >Sign Out</div>
                 <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
             </ul>
         </transition>     
@@ -64,6 +72,7 @@
 
 <script>
     import menuIcon from '../assets/Icons/bars-regular.svg';
+    import closeIcon from '../assets/Icons/close.svg'
     import userIcon from '../assets/Icons/user-alt-light.svg';
     import adminIcon from '../assets/Icons/user-crown-light.svg';
     import signOutIcon from '../assets/Icons/sign-out-alt-regular.svg';
@@ -73,6 +82,7 @@
     export default{
         name:'Navigation',
         components:{
+           closeIcon,
            menuIcon,
            userIcon,
            adminIcon,
@@ -86,37 +96,37 @@
             windowWidth: null, 
         };
     },
-    created(){
-        window.addEventListener('resize', this.checkScreen);
-        this.checkScreen();
+    created() {
+    window.addEventListener('resize', this.checkScreen);
+    this.checkScreen();
+    this.$router.beforeEach((to, from, next) => {
+      if (this.mobileNav) {
+        this.mobileNav = false;
+      }
+      next();
+    });
+  },
+  methods: {
+    checkScreen() {
+      this.windowWidth = window.innerWidth;
+      this.mobile = this.windowWidth <= 770;
+      if (!this.mobile) {
+        this.mobileNav = false;
+      }
     },
-    methods:{
-        checkScreen(){
-            this.windowWidth = window.innerWidth;
-            if(this.windowWidth <= 770){
-                this.mobile = true;
-                return
-            }
-            this.mobile = false;
-            this.mobileNav = false;
-            return
-        },
-        toggleMobileNav(){
-            this.mobileNav = !this.mobileNav;
-        },
-        toggleProfileMenu(e){
-
-            if (e.target === this.$refs.profile) {
-
-                this.profileMenu = !this.profileMenu;
-            }
-            
-        },
-        signOut(){
-            firebase.auth().signOut();
-            window.location.reload();
-        }
+    toggleMobileNav() {
+      this.mobileNav = !this.mobileNav;
     },
+    toggleProfileMenu(e) {
+      if (e.target === this.$refs.profile) {
+        this.profileMenu = !this.profileMenu;
+      }
+    },
+    signOut() {
+      firebase.auth().signOut();
+      window.location.reload();
+    }
+  },
     computed: {
         user() {
             return this.$store.state.user;
@@ -134,7 +144,7 @@
 header{
     background-color: #fff;
     padding: 0 25px;
-    /*box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6)*/
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
     z-index: 99;
 }
 .link{
@@ -303,4 +313,12 @@ nav{
     transform: translateX(-250px);
 }
 
+@media (max-width: 770px) {
+  .profile {
+    display: none !important;
+  }
+}
+
 </style>
+  
+  

@@ -1,38 +1,15 @@
 <template>
   <div class="home">
-    <BlogPost v-if="!user" :post='welcomeScreen'/>
+    <BlogPost v-if="!user" :post="welcomeScreen" />
     
-    <div v-if="user">
+    <div>
       <TrendingMovies />
-    </div>
-    
-    <div v-if="user">
-      <BlogPost :post='post' v-for="(post, index) in blogPostsFeed" :key="index" />
-    </div>
-    
-    <div v-if="user" class="blog-card-wrap">
-      <div class="container">
-        <vue-particles
-          color="#dedede"
-          :particleOpacity="0.7"
-          :particlesNumber="60"
-          shapeType="triangle"
-          :particleSize="4"
-          linesColor="#dedede"
-          :linesWidth="1"
-          :lineLinked="true"
-          :lineOpacity="0.4"
-          :linesDistance="150"
-          :moveSpeed="3"
-          :hoverEffect="true"
-          hoverMode="grab"
-          :clickEffect="true"
-          clickMode="push"
-          class='vue'
-        />      
-        <h1 class="title">Recent Reviews</h1>
-        <div class='blog-cards'>
-          <BlogCards :post='post' v-for="(post, index) in blogPostsCards" :key="index" />
+      <!--<BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index" />-->
+      
+      <div class="blog-card-wrap">
+        <h1 style="text-align:center;">Recent Reviews</h1>
+        <div class="blog-cards">
+          <BlogCards :post="post" v-for="(post, index) in blogPostsCards" :key="index" />
         </div>
       </div>
     </div>
@@ -54,10 +31,10 @@ export default {
         blogPost: "Do you like watching movies and TV shows? Do you always feel like you want to rant or just express your opinions? Welcome to BFR.",
         welcomeScreen: true,
         photo: "movie1"
-      },
+      }
     };
   },
-  computed: { 
+  computed: {
     blogPostsCards() {
       return this.$store.getters.blogPostsCards;
     },
@@ -66,18 +43,14 @@ export default {
     },
     user() {
       return this.$store.state.user;
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .home {
-  background: #f4f4f4;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: beige;
 }
 
 .vue {
@@ -89,37 +62,13 @@ export default {
 }
 
 .blog-card-wrap {
-  background: #fff;
-  padding: 40px 20px;
-  margin-top: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom left, #111111, #333333);
   
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .title {
-    font-weight: 600;
-    font-size: 2rem;
-    margin-bottom: 24px;
-    color: #333;
-    text-align: center;
-  }
-
-  .blog-cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    
-    @media (min-width: 768px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (min-width: 1200px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  h1 {
+    font-weight: 300;
+    font-size: 21px;
+    margin-bottom: 12px;
+    color: white;
   }
 }
 
@@ -129,7 +78,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-   
     @media (min-width: 800px) {
       padding: 125px 25px;
       flex-direction: row;
@@ -160,4 +108,3 @@ export default {
   }
 }
 </style>
-
