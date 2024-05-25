@@ -121,7 +121,7 @@
           color: #fff;
   
           &:hover {
-            color: red;
+            color: #64b4c5;
             transition: color 0.2s ease;
           }
         }

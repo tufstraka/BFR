@@ -2,7 +2,10 @@
     <header>
         <nav class="container">
             <div class="branding">
-                <router-link class='header' :to="{name:'Home'}" >Biased Film Review</router-link>
+                <router-link class='header' :to="{name:'Home'}">
+                    <img src="@/assets/BiasedFilmReviewLogo.png" alt="BFR Logo" class="logo" />
+                    <p class="logo-text">Biased Film Review</p>
+                </router-link>                
             </div>
             <div class="nav-links">
                 <ul v-show='!mobile'>
@@ -86,7 +89,7 @@
            menuIcon,
            userIcon,
            adminIcon,
-           signOutIcon
+           signOutIcon,
         },
         data() {
         return{
@@ -141,9 +144,28 @@
 </script>
 
 <style lang='scss' scoped>
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.branding{
+    height: 50px;
+}
+
+.logo-text {
+    font-family: "Rubik Doodle Shadow", sans-serif;
+    font-weight: 400;
+    font-style: normal; 
+    color: black; 
+    margin-left: 2px; 
+}
 header{
     background-color: #fff;
-    padding: 0 25px;
+    padding: 5px;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
     z-index: 500;
 }
@@ -155,6 +177,11 @@ header{
 }
 .link:hover{
     color:red
+}
+.logo {
+    max-width: 80px; 
+    height: auto; 
+    width: 100%;
 }
 nav{
     display:flex;
@@ -272,7 +299,7 @@ nav{
 .menu-icon{
     cursor: pointer;
     position: absolute;
-    top:20px;
+    top:32px;
     right:30px;
     height:25px;
     width:auto;
