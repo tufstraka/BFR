@@ -48,7 +48,8 @@
             </div>
         </nav>
 
-        <menuIcon @click='toggleMobileNav' class='menu-icon' v-show='mobile'/>
+        <menuIcon @click='toggleMobileNav' class='menu-icon' v-if="!mobileNav" v-show='mobile'/>
+        <closeIcon @click='toggleMobileNav' class='menu-icon' v-if="mobileNav" v-show='mobile'/>
         <transition name='mobile-nav'>
             <ul class='mobile-nav' v-show='mobileNav'>
                 <!--<router-link class='link' to='#'>Film Reviews</router-link>-->
@@ -71,6 +72,7 @@
 
 <script>
     import menuIcon from '../assets/Icons/bars-regular.svg';
+    import closeIcon from '../assets/Icons/close.svg'
     import userIcon from '../assets/Icons/user-alt-light.svg';
     import adminIcon from '../assets/Icons/user-crown-light.svg';
     import signOutIcon from '../assets/Icons/sign-out-alt-regular.svg';
@@ -80,6 +82,7 @@
     export default{
         name:'Navigation',
         components:{
+           closeIcon,
            menuIcon,
            userIcon,
            adminIcon,
@@ -93,37 +96,37 @@
             windowWidth: null, 
         };
     },
-    created(){
-        window.addEventListener('resize', this.checkScreen);
-        this.checkScreen();
+    created() {
+    window.addEventListener('resize', this.checkScreen);
+    this.checkScreen();
+    this.$router.beforeEach((to, from, next) => {
+      if (this.mobileNav) {
+        this.mobileNav = false;
+      }
+      next();
+    });
+  },
+  methods: {
+    checkScreen() {
+      this.windowWidth = window.innerWidth;
+      this.mobile = this.windowWidth <= 770;
+      if (!this.mobile) {
+        this.mobileNav = false;
+      }
     },
-    methods:{
-        checkScreen(){
-            this.windowWidth = window.innerWidth;
-            if(this.windowWidth <= 770){
-                this.mobile = true;
-                return
-            }
-            this.mobile = false;
-            this.mobileNav = false;
-            return
-        },
-        toggleMobileNav(){
-            this.mobileNav = !this.mobileNav;
-        },
-        toggleProfileMenu(e){
-
-            if (e.target === this.$refs.profile) {
-
-                this.profileMenu = !this.profileMenu;
-            }
-            
-        },
-        signOut(){
-            firebase.auth().signOut();
-            window.location.reload();
-        }
+    toggleMobileNav() {
+      this.mobileNav = !this.mobileNav;
     },
+    toggleProfileMenu(e) {
+      if (e.target === this.$refs.profile) {
+        this.profileMenu = !this.profileMenu;
+      }
+    },
+    signOut() {
+      firebase.auth().signOut();
+      window.location.reload();
+    }
+  },
     computed: {
         user() {
             return this.$store.state.user;
