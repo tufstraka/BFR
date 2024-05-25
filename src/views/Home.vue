@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  background: beige;
+  background: #d4dfc9;
 }
 
 .vue {
@@ -62,13 +62,13 @@ export default {
 }
 
 .blog-card-wrap {
-  background: linear-gradient(to bottom left, #111111, #333333);
+  //background: linear-gradient(to bottom left, #625643, #eae3b8);
   
   h1 {
-    font-weight: 300;
+    font-weight: 800;
     font-size: 21px;
     margin-bottom: 12px;
-    color: white;
+    color: black;
   }
 }
 
@@ -78,7 +78,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     @media (min-width: 800px) {
       padding: 125px 25px;
       flex-direction: row;
