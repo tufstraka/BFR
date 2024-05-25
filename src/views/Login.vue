@@ -1,10 +1,10 @@
 <template>
   <div class='form-wrap'>
     <form action=" " class="login">
-      <p class="login-register">
+      <!--<p class="login-register">
         Don't have an account? 
-        <router-link class="router-link" :to="{ name:'Register'} ">Register</router-link>
-      </p>
+        <router-link class="router-link" :to="{ name:'Register'}">Register</router-link>
+      </p>-->
       <h2>Login to BFR</h2>
       <div class="inputs">
         <div class="input">
@@ -12,133 +12,151 @@
           <email class='icon'/>
         </div>
         <div class="input">
-          <input type="text" placeholder='Password' v-model='password'>
+          <input type="password" placeholder='Password' v-model='password' />
           <password class='icon'/>          
         </div>
-        <div v-show='error' class="error">{{this.errorMsg}}</div>
+        <div v-show='error' class="error">{{ this.errorMsg }}</div>
       </div>
-      <router-link class='forgot-password' :to='{name: "ForgotPassword"}'>Forgot your password?</router-link>
-      <button @click.prevent='signin'>Sign in</button>      
-    </form>    
+      <router-link class='forgot-password' :to='{ name: "ForgotPassword" }'>Forgot your password?</router-link>
+      <button @click.prevent='signin'>Sign in</button>
+    </form>
   </div>
-      
-  
 </template>
+
 
 <script>
 import firebase from 'firebase/app';
-import 'firebase/auth';
 import email from '../assets/Icons/envelope-regular.svg';
 import password from '../assets/Icons/lock-alt-solid.svg';
+import 'firebase/auth';
+
 export default {
   name: "Login",
   components: { email , password},
-  data(){
-    return{
+  data() {
+    return {
       email: '',
       password: '',
-      error: null,
+      error: false,
       errorMsg: ''
     }
   },
   methods: {
-    signin(){
-      firebase.auth().signInWithEmailAndPassword(this.email , this.password)
-      .then(() =>{
-        this.$router.push({name:'Home'});
-        this.error = false;
-        this.errorMsg = '';
-        
-      })
-      .catch( (err) =>{
-        this.error = true;
-        this.errorMsg = err.message;
-      })
-      
+    signin() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push({ name: 'Home' });
+          this.error = false;
+          this.errorMsg = '';
+        })
+        .catch((err) => {
+          this.error = true;
+          this.errorMsg = err.message;
+        });
     }
-  } 
+  }
 }
 </script>
-
 <style lang='scss'>
-.form-wrap{
-  overflow: hidden;
-  display:flex;
-  height: 100vh;
-  justify-content: center;
-  align-self: center;
-  margin: 0 auto;
-  width: 90%;
-  @media(min-width: 900px){
-    width: 100%;
-  }
-}
-.login-register{
-  margin-bottom: 32px;
-  
-  .router-link{
-    color: #000;
-  }
-}
-form{
-  padding: 0 10px;
-  position: relative;
+.form-wrap {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  @media(min-width: 900px){
-    padding: 0 50px;
+  height: 100vh;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+form {
+  background: #fff;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
   }
-  h2{
-    text-align: center;
-    font-size: 32px;
-    color:#303030;
-    margin-bottom: 40px;
-    @media(min-width: 900px){
-    font-size:40px;
+
+  .login-register {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+
+    .router-link {
+      color: #3498db;
+      text-decoration: none;
+    }
   }
-  }
-  .inputs{
+
+  .inputs {
     width: 100%;
-    max-width: 350px;
-    .input{
+
+    .input {
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 8px;
-      input{
+      margin-bottom: 20px;
+
+      input {
         width: 100%;
-        border: none;
+        padding: 10px 10px 10px 40px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
         background-color: #f2f7f6;
-        padding: 4px 4px 4px 30px;
-        height: 50px;
-        border-radius: 38px;
-        &:focus{
+
+        &:focus {
           outline: none;
-        }  
+          border-color: #3498db;
+        }
       }
-      .icon{
-        width: 12px;
+
+      .icon {
         position: absolute;
-        left: 6px;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
       }
     }
   }
-  .forgot-password{
+
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .forgot-password {
+    font-size: 14px;
+    color: #3498db;
+    margin-bottom: 20px;
     text-decoration: none;
-    color: #000;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 16px 0 32px;
-    border-bottom: 1px solid transparent;
-    transition: 0.5s ease all;
 
     &:hover {
-      border-color: #303030;
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 14px;
+  
+    &:hover {
+      background-color: #2980b9;
     }
   }
 }
 </style>
+
