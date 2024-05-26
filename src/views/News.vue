@@ -93,10 +93,17 @@ export default {
 }
 
 .news-feed {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  padding: 15px;
+}
+
+@media (max-width: 768px) {
+  .news-feed {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .article {
@@ -105,13 +112,6 @@ export default {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
-  width: calc(25% - 20px); /* 4 columns with 20px gap */
-}
-
-@media (max-width: 768px) {
-  .article {
-    width: 100%; /* Full width on mobile */
-  }
 }
 
 .article:hover {
