@@ -4,7 +4,7 @@
       <div class="spinner"></div>
       <p>Loading...</p>
     </div>
-    <div v-else>
+    <div v-else class="feed">
       <div v-for="(article, index) in filteredArticles" :key="index" class="article">
         <img :src="article.urlToImage" alt="Article Image" class="article-image" />
         <div class="article-details">
