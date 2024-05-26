@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     async fetchData() {
-      this.loading = true; // Set loading to true when fetching data
+      this.loading = true; 
       try {
         const response = await axios.get('https://newsapi-7zks.onrender.com/newss');
         this.articles = response.data.articles;
@@ -57,8 +57,8 @@ export default {
   computed: {
     filteredArticles() {
       return this.articles
-        .filter(article => article.urlToImage) // Filter out articles without an image
-        .slice(0, 10); // Limit to 10 articles
+        .filter(article => article.urlToImage) 
+        .slice(0, 15); 
     }
   }
 };
