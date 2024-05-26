@@ -159,6 +159,7 @@ body::-webkit-scrollbar-thumb:hover {
   padding-bottom: 12px;
   position: relative;
   white-space: normal;
+  background-color: #d4dfc9; 
 
 }
 
