@@ -61,7 +61,7 @@ export default {
   min-height: 420px;
   transition: .5s ease all;
   &:hover{
-    transform: rotateZ(1.3deg) scale(1.06);
+    transform: scale(1.06);
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6) ;
   }
 
