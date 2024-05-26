@@ -132,7 +132,7 @@ body::-webkit-scrollbar-thumb:hover {
   flex-direction: column;
   width: 150px;
   gap: 20px;
-  background: beige;
+  background: #d4dfc9;
   border-radius: 12px;
   transition: transform 350ms;
   margin-left: 30px;
