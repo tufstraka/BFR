@@ -10,7 +10,8 @@ import Admin from "../views/Admin.vue";
 import CreatePost from "../views/CreatePost.vue";
 import BlogPreview from "../views/BlogPreview.vue";
 import ViewBlog from "../views/ViewBlog.vue";
-import EditPost from "../views/EditPost.vue"
+import EditPost from "../views/EditPost.vue";
+import News from "../views/News.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -41,6 +42,14 @@ const routes = [
     component: Login,
     meta: {
       title: 'Login'
+    }
+  },
+  {
+    path: "/News",
+    name: "News",
+    component: News,
+    meta: {
+      title: 'News'
     }
   },
   {
