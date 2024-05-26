@@ -13,7 +13,7 @@
                     <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
                     <router-link class='link' to='#'>Books</router-link>
                     <router-link class='link' to='#'>Games</router-link>
-                    <router-link v-if="user" class='link' :to="{name:'News'}">News</router-link>
+                    <router-link class='link' :to="{name:'News'}">News</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
                 </ul>
