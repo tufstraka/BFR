@@ -65,7 +65,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add loading styles */
 .loading {
   display: flex;
   align-items: center;
@@ -135,8 +134,7 @@ export default {
   color: #555555;
 }
 
-.article-author,
-.article-published {
+.article-author, .article-published {
   font-size: 0.875rem;
   color: #888888;
   margin-bottom: 5px;
