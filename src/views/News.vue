@@ -58,7 +58,7 @@ export default {
     filteredArticles() {
       return this.articles
         .filter(article => article.urlToImage) 
-        .slice(0, 15); 
+        .slice(0, 10); 
     }
   }
 };
