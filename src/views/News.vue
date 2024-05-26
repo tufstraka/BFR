@@ -1,10 +1,10 @@
 <template>
-  <div class="news-feed">
+  <div>
     <div v-if="loading" class="loading">
       <div class="spinner"></div>
       <p>Loading...</p>
     </div>
-    <div v-else class="feed">
+    <div v-else class="news-feed">
       <div v-for="(article, index) in filteredArticles" :key="index" class="article">
         <img :src="article.urlToImage" alt="Article Image" class="article-image" />
         <div class="article-details">
