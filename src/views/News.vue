@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       articles: [],
-      loading: false // Add loading state
+      loading: false 
     };
   },
   mounted() {
@@ -41,7 +41,7 @@ export default {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        this.loading = false; // Set loading to false after fetching data
+        this.loading = false; 
       }
     },
     formatDate(dateString) {
