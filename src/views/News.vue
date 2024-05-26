@@ -94,16 +94,9 @@ export default {
 
 .news-feed {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
-  padding: 15px;
-}
-
-@media (max-width: 768px) {
-  .news-feed {
-    display: flex;
-    flex-direction: column;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .article {
