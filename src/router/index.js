@@ -10,7 +10,7 @@ import Admin from "../views/Admin.vue";
 import CreatePost from "../views/CreatePost.vue";
 import BlogPreview from "../views/BlogPreview.vue";
 import ViewBlog from "../views/ViewBlog.vue";
-import EditPost from "../views/EditPost.vue";
+import EditPost from "../views/EditPost.vue"
 import News from "../views/News.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -29,7 +29,7 @@ const routes = [
     }
   },
   {
-    path: "/Film-Reviews",
+    path: "/film-reviews",
     name: "Blogs",
     component: Blog,
     meta: {
@@ -37,7 +37,7 @@ const routes = [
     }
   },
   {
-    path: "/Login",
+    path: "/login",
     name: "Login",
     component: Login,
     meta: {
@@ -45,7 +45,7 @@ const routes = [
     }
   },
   {
-    path: "/News",
+    path: "/news",
     name: "News",
     component: News,
     meta: {
@@ -53,7 +53,7 @@ const routes = [
     }
   },
   {
-    path: "/Register",
+    path: "/register",
     name: "Register",
     component: Register,
     meta: {
@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: "/Forgot-Password ",
+    path: "/forgot-password ",
     name: "ForgotPassword",
     component: ForgotPassword,
     meta: {
@@ -69,7 +69,7 @@ const routes = [
     }
   },
   {
-    path: "/Profile",
+    path: "/profile",
     name: "Profile",
     component: Profile,
     meta: {
@@ -112,7 +112,7 @@ const routes = [
     }
   },
   {
-    path: "/Admin",
+    path: "/admin",
     name: "Admin",
     component: Admin,
     meta: {
