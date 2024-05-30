@@ -43,8 +43,7 @@ export default {
 <style lang='scss' scoped>
 .blog-cards {
     position: relative;
-    z-index: 1;
-  
+
     .toggle-edit {
         display: flex;
         align-items: center;
@@ -62,9 +61,7 @@ export default {
     position: relative;
     display: inline-block;
     width: 80px;
-    /* Adjust the width */
     height: 40px;
-    /* Adjust the height */
 }
 
 .switch input {
@@ -76,38 +73,28 @@ export default {
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 2px;
-    /* Adjusted for better alignment */
-    left: 2px;
-    /* Adjusted for better alignment */
-    bottom: 2px;
-    /* Adjusted for better alignment */
-    right: 2px;
-    /* Adjusted for better alignment */
+    top: 1px;
+    left: 1px;
+    bottom: 1px;
+    right: 1px;
     background-color: #ccc;
     transition: 0.4s;
-    border-radius: 20px;
-    /* Adjust the border-radius */
+    border-radius: 18px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
     height: 36px;
-    /* Adjust the height of the knob */
     width: 36px;
-    /* Adjust the width of the knob */
     bottom: 2px;
-    /* Adjust the position of the knob */
     background-color: white;
     transition: 0.4s;
     border-radius: 50%;
-    /* Make the knob circular */
 }
 
 input:checked+.slider:before {
-    transform: translateX(38px);
-    /* Adjust the movement distance */
+    transform: translateX(25px);
 }
 
 input:checked+.slider {
