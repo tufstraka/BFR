@@ -1,0 +1,30 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - vercel_build
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key.pem
+          chmod 600 private_key.pem
+
+      - name: Pull changes and restart Nginx
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          EC2_HOST: 54.242.186.202
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ec2-user@$EC2_HOST << 'EOF'
+            cd /var/www/bfr
+            git pull origin vercel-build
+            sudo systemctl restart nginx
+          EOF
