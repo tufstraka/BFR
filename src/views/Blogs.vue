@@ -1,97 +1,111 @@
 <template>
-  <div class='blog-card-wrap'>
-      <div class="blog-cards container">
-          <div v-if="admin" class="toggle-edit">
-              <span>Toggle Editing Post</span> <br>
-              <input type="checkbox" v-model='editPost'>
-              
-          </div>
-          <BlogCards :post='post' v-for="(post, index) in blogPosts" :key="index" />
-      </div>
-  </div>
+    <div class='blog-card-wrap'>
+        <div class="blog-cards container">
+            <div v-if="admin" class="toggle-edit">
+                <span>Toggle Editing Post</span> <br>
+                <label class="switch">
+                    <input type="checkbox" v-model='editPost'>
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <BlogCards :post='post' v-for="(post, index) in blogPosts" :key="index" />
+        </div>
+    </div>
 </template>
 
 <script>
 import BlogCards from '../components/BlogCard.vue';
 export default {
-    name:'Blogs',
-    components: {BlogCards},
+    name: 'Blogs',
+    components: { BlogCards },
     computed: {
- 
-    admin() {
+        admin() {
             return this.$store.state.profileAdmin;
         },
-    
-    blogPosts(){
-      return this.$store.state.blogPosts;
-    },
-    
-    editPost:{
-        get(){
-            return this.$store.state.editPost
+        blogPosts() {
+            return this.$store.state.blogPosts;
         },
-        set(payload){
-            this.$store.commit('toggleEditPost' , payload)
+        editPost: {
+            get() {
+                return this.$store.state.editPost;
+            },
+            set(payload) {
+                this.$store.commit('toggleEditPost', payload);
+            },
         },
     },
-  },
-  beforeDestroy(){
-      this.$store.commit("toggleEditPost" , false)
-  } 
-
+    beforeDestroy() {
+        this.$store.commit("toggleEditPost", false);
+    }
 }
 </script>
 
 <style lang='scss' scoped>
-
-.blog-cards{
+.blog-cards {
     position: relative;
-    .toggle-edit{
+
+    .toggle-edit {
         display: flex;
         align-items: center;
         position: absolute;
         top: -70px;
-        right:0;
+        right: 0;
 
-        span{
+        span {
             margin-right: 16px;
         }
-
- 
     }
 }
 
-input[type="checkbox"]{
+.switch {
     position: relative;
-    border: none;
-    background: #fff;
-    outline: none;
+    display: inline-block;
     width: 80px;
-    height: 24px;
-    border-radius: 20px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
+    height: 40px;
 }
 
-input[type="checkbox"]:before{
-    content:'';
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
     position: absolute;
-    background: #fff;
-    outline: none;
-    width: 30px;
-    height: 16px;
+    cursor: pointer;
+    top: 1px;
+    left: 1px;
+    bottom: 1px;
+    right: 1px;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 18px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 36px;
+    width: 36px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider:before {
+    transform: translateX(25px);
+}
+
+input:checked+.slider {
+    background-color: #4caf50;
+}
+
+.slider.round {
     border-radius: 20px;
-    top:3px;
-    left: 3px;
-    transform: scale(1.1);
-    transition: 750ms ease all;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
 }
 
-input:checked[type="checkbox"]:before{
-    background: #fff;
-    left: 47px;
-    background-color:red;
+.slider.round:before {
+    border-radius: 50%;
 }
-
-
 </style>

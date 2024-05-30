@@ -146,198 +146,208 @@
 <style lang='scss' scoped>
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.branding{
-    height: 50px;
+.branding {
+  height: 50px;
 }
 
 .logo-text {
-    font-family: "Rubik Doodle Shadow", sans-serif;
-    font-weight: 400;
-    font-style: normal; 
-    color: black; 
-    margin-left: 2px; 
+  font-family: "Rubik Doodle Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: black;
+  margin-left: 2px;
 }
-header{
-    background-color: #fff;
-    padding: 5px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
-    z-index: 500;
-}
-.link{
-    font-weight: 300;
-    font-size: 16px;
-    padding: 0 8px;
-    transition: 0.3s color ease;
-}
-.link:hover{
-    color:red
-}
-.logo {
-    max-width: 80px; 
-    height: auto; 
-    width: 100%;
-}
-nav{
-    display:flex;
-    padding:15px 0;
-    .branding{
-        display: flex;
-        align-items: center;
-        .header{
-            font-weight: 600;
-            font-size: 20px;
-            text-decoration: none;
-            color: red
-        }
-    }
-    .nav-links{
-        position: relative;
-        display: flex;
-        flex: 1;
-        align-items:center;
-        justify-content: flex-end;
-        ul{
-            margin-right: 32px;
-            
-            .link{
-                margin-right: 32px;
-            }
-            .link:last-child{
-                margin-right: 0;
-            }
-        }
 
-        .profile{
-            position: relative;
-            cursor: pointer;
+header {
+  background-color: #fff;
+  padding: 5px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+  z-index: 500; // Adjust if necessary
+}
+
+.link {
+  font-weight: 300;
+  font-size: 16px;
+  padding: 0 8px;
+  transition: 0.3s color ease;
+}
+
+.link:hover {
+  color: red;
+}
+
+.logo {
+  max-width: 80px;
+  height: auto;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  padding: 15px 0;
+  .branding {
+    display: flex;
+    align-items: center;
+    .header {
+      font-weight: 600;
+      font-size: 20px;
+      text-decoration: none;
+      color: red;
+    }
+  }
+  .nav-links {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+    ul {
+      margin-right: 32px;
+
+      .link {
+        margin-right: 32px;
+      }
+      .link:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .profile {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: #fff;
+      background-color: #303030;
+
+      span {
+        pointer-events: none;
+      }
+      .profile-menu {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 250px;
+        background-color: #303030;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
+
+        .info {
+          display: flex;
+          align-items: center;
+          padding: 15px;
+          border-bottom: 1px solid #fff;
+
+          .initials {
+            position: initial;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            color: #303030;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
             border-radius: 50%;
-            color: #fff;
-            background-color: #303030;
+          }
 
-            span {
-                pointer-events: none;
+          .right {
+            flex: 1;
+            margin-left: 24px;
+
+            p:nth-child(1) {
+              font-size: 14px;
             }
-            .profile-menu{
-                position: absolute;
-                top: 60px;
-                right: 0;
-                width: 250px;
-                background-color: #303030;
-                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.6);
 
-                .info{
-                    display: flex;
-                    align-items: center;
-                    padding: 15px;
-                    border-bottom: 1px solid #fff;
-
-                    .initials{
-                        position: initial;
-                        width: 40px;
-                        height: 40px;
-                        background-color: #fff;
-                        color:#303030;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        border-radius: 50%;
-                    }
-
-                    .right{
-                        flex: 1;
-                        margin-left: 24px;
-
-                        p:nth-child(1) {
-                            font-size: 14px;
-                        }
-
-                        p:nth-child(2),
-                        p:nth-child(3) {
-                            font-size: 12px;
-                        }
-                    }
-                }
-
-                .options{
-                    padding: 15px;
-                    .option {
-                        text-decoration: none;
-                        color: #fff;
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 12px;
-
-                        .icon {
-                            width: 18px;
-                            height: auto;
-                        }
-                        p {
-                            font-size: 14px;
-                            margin-left: 12px;
-                        }
-
-                        &:last-child{
-                            margin-bottom: 0px;
-                        }
-                    }
-                }
+            p:nth-child(2),
+            p:nth-child(3) {
+              font-size: 12px;
             }
+          }
         }
-    }
-}
-.menu-icon{
-    cursor: pointer;
-    position: absolute;
-    top:32px;
-    right:30px;
-    height:25px;
-    width:auto;
-    }
-.mobile-nav{
-    padding: 20px;
-    width: 70%;
-    max-width: 250px;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    height: 100%;
-    background-color: #303030;
-    top:0;
-    left: 0;
 
-    .link{
+        .options {
+          padding: 15px;
+          .option {
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+
+            .icon {
+              width: 18px;
+              height: auto;
+            }
+            p {
+              font-size: 14px;
+              margin-left: 12px;
+            }
+
+            &:last-child {
+              margin-bottom: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 32px;
+  right: 30px;
+  height: 25px;
+  width: auto;
+}
+
+.mobile-nav {
+  padding: 20px;
+  width: 70%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100%;
+  background-color: #303030;
+  top: 0;
+  left: 0;
+  z-index: 1000;  // Ensure this is higher than the card component
+
+  .link {
     padding: 15px 0;
     color: #fff;
-    &:hover{
-        color: red;
+    &:hover {
+      color: red;
     }
+  }
 }
-}    
 
 .mobile-nav-enter-active,
-.mobile-nav-leave-active{
-    transition: all 2s ease;
+.mobile-nav-leave-active {
+  transition: all 2s ease;
 }
-.mobile-nav-enter{
-    transform: translateX(-250px);
+
+.mobile-nav-enter {
+  transform: translateX(-250px);
 }
-.mobile-nav-enter-to{
-    transform: translateX(0px);
-    
+
+.mobile-nav-enter-to {
+  transform: translateX(0px);
 }
-.mobile-nav-leave-to{
-    transform: translateX(-250px);
+
+.mobile-nav-leave-to {
+  transform: translateX(-250px);
 }
 
 @media (max-width: 770px) {
@@ -345,7 +355,4 @@ nav{
     display: none !important;
   }
 }
-
 </style>
-  
-  
