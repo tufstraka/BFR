@@ -43,6 +43,7 @@ export default {
 <style lang='scss' scoped>
 .blog-cards {
     position: relative;
+    z-index: 1;
 
     .toggle-edit {
         display: flex;
