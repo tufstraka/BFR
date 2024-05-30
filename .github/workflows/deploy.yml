@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - vercel-build
+      - vercel_build
 
 jobs:
   deploy:
