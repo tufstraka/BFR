@@ -27,8 +27,12 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$EC2_HOST << 'EOF'
             set -e
+            sudo apt update
+            sudo apt upgrade
+            git config --global --add safe.directory /var/www/bfr
             cd /var/www/bfr
             git pull origin vercel_build
+            npm run build
             sudo systemctl restart nginx
           EOF
 
