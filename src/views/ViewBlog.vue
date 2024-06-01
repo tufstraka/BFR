@@ -32,7 +32,7 @@ export default {
     const db = firebase.firestore();
     
     try {
-      const doc = await db.collection('blogs').doc(blogId).get();
+      const doc = await db.collection('blogPosts').doc(blogId).get();
       if (doc.exists) {
         this.currentBlog = doc.data();
       } else {
