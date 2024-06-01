@@ -1,16 +1,18 @@
 <template>
-  <div class="post-view" v-if="currentBlog">
-    <div class="container">
-      <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
-      <h4 class="blog-date">Posted on: {{ new Date(currentBlog.blogDate).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
-      <div class="pic-wrapper">
-        <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
+  <div>
+    <div class="post-view" v-if="currentBlog">
+      <div class="container">
+        <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
+        <h4 class="blog-date">Posted on: {{ new Date(currentBlog[0].blogDate).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
+        <div class="pic-wrapper">
+          <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
+        </div>
+        <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
       </div>
-      <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
     </div>
-  </div>
-  <div v-else>
-    <p>Loading...</p>
+    <div v-else class="spinner-container">
+      <div class="spinner"></div>
+    </div>
   </div>
 </template>
 
@@ -30,7 +32,7 @@ export default {
     const db = firebase.firestore();
     
     try {
-      const doc = await db.collection('blogPosts').doc(blogId).get();
+      const doc = await db.collection('blogs').doc(blogId).get();
       if (doc.exists) {
         this.currentBlog = doc.data();
       } else {
@@ -94,6 +96,27 @@ export default {
   line-height: 1.8;
   color: #333;
   word-break: break-word;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 768px) {
