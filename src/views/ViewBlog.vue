@@ -1,17 +1,23 @@
 <template>
   <div class="post-view" v-if="currentBlog">
     <div class="container">
-      <h1 class="blog-title">{{ currentBlog[0].blogTitle }}</h1>
-      <h4 class="blog-date">Posted on: {{ new Date(currentBlog[0].blogDate).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
+      <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
+      <h4 class="blog-date">Posted on: {{ new Date(currentBlog.blogDate).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
       <div class="pic-wrapper">
-        <img class="blog-pic" :src="currentBlog[0].blogCoverPhoto" alt="Blog Cover Photo" />
+        <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
       </div>
-      <div class="post-content ql-editor" v-html="currentBlog[0].blogHTML"></div>
+      <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
     </div>
+  </div>
+  <div v-else>
+    <p>Loading...</p>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
 export default {
   name: "ViewBlog",
   data() {
@@ -20,7 +26,19 @@ export default {
     };
   },
   async mounted() {
-    this.currentBlog = await this.$store.state.blogPosts.filter(post => post.blogID == this.$route.params.blogid);
+    const blogId = this.$route.params.blogid;
+    const db = firebase.firestore();
+    
+    try {
+      const doc = await db.collection('blogPosts').doc(blogId).get();
+      if (doc.exists) {
+        this.currentBlog = doc.data();
+      } else {
+        console.error('No such document!');
+      }
+    } catch (error) {
+      console.error('Error getting document:', error);
+    }
   },
 };
 </script>
@@ -96,3 +114,4 @@ export default {
   }
 }
 </style>
+
