@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div v-if="loading" class="loading">
+    <div v-if="loading" class="spinner-container">
       <div class="spinner"></div>
-      <p>Loading...</p>
     </div>
     <div v-else class="news-feed">
       <div v-for="(article, index) in filteredArticles" :key="index" class="article">
@@ -65,31 +64,25 @@ export default {
 </script>
 
 <style scoped>
-.loading {
+.spinner-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
-  height: 100%;
+  align-items: center;
+  height: 100vh;
 }
 
 .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #007BFF;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .news-feed {
