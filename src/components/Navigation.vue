@@ -14,7 +14,7 @@
                     <router-link class='link' to='#'>Books</router-link>
                     <router-link class='link' to='#'>Games</router-link>
                     <router-link class='link' :to="{name:'News'}">News</router-link>
-                    <router-link class='link' to='#'>Store</router-link>
+                    <router-link class='link' to='#'>Shop</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
                 </ul>
@@ -64,9 +64,9 @@
                 <router-link class='link' to='#'>Games</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                 <br/>
+                <br/>
                 <hr/>
-                <router-link class='link' to='#'>Store</router-link>
-                <hr/>
+                <router-link class='link' to='#'>Shop</router-link>
                 <br/>
                 <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
                 <router-link v-if="user" class='link' :to="{name:'Admin'}">Admin</router-link>
