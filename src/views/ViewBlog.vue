@@ -3,7 +3,7 @@
     <div class="post-view" v-if="currentBlog">
       <div class="container">
         <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
-        <h4 class="blog-date">Posted on: {{ new Date(currentBlog[0].date).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
+        <h4 class="blog-date">Posted on: {{ new Date(currentBlog.date).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
         <div class="pic-wrapper">
           <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
         </div>
