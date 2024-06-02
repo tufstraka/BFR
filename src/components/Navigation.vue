@@ -69,7 +69,7 @@
                 <router-link class='link' to='#'>Shop</router-link>
                 <br/>
                 <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
-                <router-link v-if="user" class='link' :to="{name:'Admin'}">Admin</router-link>
+                <router-link v-if="admin" class='link' :to="{name:'Admin'}">Admin</router-link>
                 <div @click="signOut" v-if="user" class='link' >Sign Out</div>
                 <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
             </ul>
