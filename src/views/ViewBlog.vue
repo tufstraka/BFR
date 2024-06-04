@@ -22,6 +22,22 @@ import 'firebase/firestore';
 
 export default {
   name: "ViewBlog",
+  metaInfo() {
+    return {
+      title: this.currentBlog.blogTitle,  
+      meta: [
+        { name: 'description', content: this.currentBlog.blogDescription },
+        { property: 'og:title', content: this.currentBlog.blogTitle },
+        { property: 'og:description', content: this.currentBlog.blogDescription },
+        { property: 'og:image', content: this.currentBlog.blogCoverPhoto },
+        { property: 'og:url', content: window.location.href },
+        { name: 'twitter:card', content: this.currentBlog.blogCoverPhoto },
+        { name: 'twitter:title', content: this.currentBlog.blogTitle },
+        { name: 'twitter:description', content: this.currentBlog.blogDescription },
+        { name: 'twitter:image', content: this.currentBlog.blogCoverPhoto }
+      ]
+    }
+  },
   data() {
     return {
       currentBlog: null,

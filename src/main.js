@@ -5,10 +5,13 @@ import store from "./store";
 import Vue2Editor from "vue2-editor";
 import VueParticles from 'vue-particles';
 import firebase from 'firebase/app';
+import VueMeta from 'vue-meta';
 import 'firebase/auth';
 
 Vue.use(Vue2Editor);
-Vue.use(VueParticles)
+Vue.use(VueParticles);
+Vue.use(VueMeta);
+
 
 Vue.config.productionTip = false;
 

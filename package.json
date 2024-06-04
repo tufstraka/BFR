@@ -19,6 +19,7 @@
         "quill-image-resize-module": "^3.0.0",
         "sass": "^1.77.2",
         "vue": "^2.6.11",
+        "vue-meta": "^2.4.0",
         "vue-particles": "^1.0.9",
         "vue-router": "^3.6.5",
         "vue-svg-loader": "^0.16.0",
