@@ -30,6 +30,7 @@ jobs:
             sudo git config --global --add safe.directory /var/www/bfr
             cd /var/www/bfr
             sudo git pull origin vercel_build
+            sudo npm install
             sudo npm run build
             sudo systemctl restart nginx
           EOF
