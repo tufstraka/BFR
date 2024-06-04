@@ -164,7 +164,6 @@
 .logo-text {
   font-family: "Rubik Doodle Shadow", sans-serif;
   font-weight: 400;
-  font-size: 8px;
   font-style: normal;
   color: black;
   margin-left: 2px;
