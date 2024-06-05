@@ -23,7 +23,7 @@ jobs:
 
       - name: Pull changes and restart Nginx
         env:
-          EC2_HOST: 18.212.227.113
+          EC2_HOST: 23.22.150.3
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$EC2_HOST << 'EOF'
             set -e
