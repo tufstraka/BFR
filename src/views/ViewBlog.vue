@@ -23,7 +23,10 @@
             <div class="comment" v-for="comment in comments" :key="comment.id">
               <div class="comment-author">{{ comment.authorName }}</div>
               <div class="comment-content">{{ comment.content }}</div>
-              <div class="comment-date">{{ new Date(comment.timestamp).toLocaleString() }}</div>
+              <div class="comment-date">{{
+              formatTimestamp(comment.timestamp.seconds) }}</div>
+              <i v-if="canDeleteComment(comment)" class="fas fa-trash-alt" @click="deleteComment(comment.id)"></i>
+
             </div>
           </div>
         </div>
@@ -88,7 +91,6 @@ export default {
       console.error('Error getting document:', error);
     }
 
-    // Fetch comments
     this.fetchComments();
 
     // Check if user has already liked the post
@@ -104,6 +106,7 @@ export default {
   methods: {
     async toggleLike() {
       const user = firebase.auth().currentUser;
+      console.log('like clicked');
       if (!user) {
         this.$router.push({ name: 'Register' });
         return;
@@ -150,11 +153,13 @@ export default {
       try {
         const commentsSnapshot = await db.collection('blogPosts').doc(blogId).collection('comments').orderBy('timestamp', 'desc').get();
         const comments = commentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log("comments:", comments)
 
         for (let comment of comments) {
           const userDoc = await db.collection('users').doc(comment.userId).get();
           if (userDoc.exists) {
             comment.authorName = userDoc.data().userName;
+
           } else {
             comment.authorName = 'Unknown';
           }
@@ -191,6 +196,31 @@ export default {
         this.newComment = ''; // Clear the textarea
       } catch (error) {
         console.error('Error submitting comment:', error);
+      }
+    },
+
+    formatTimestamp(seconds) {
+      const date = new Date(seconds * 1000);
+      return date.toLocaleString();
+    },
+
+    canDeleteComment(comment) {
+      const currentUser = firebase.auth().currentUser;
+      // Check if the current user is the author of the comment or an admin
+      return currentUser && (comment.userId === currentUser.uid || currentUser.isAdmin);
+    },
+
+    async deleteComment(commentId) {
+      const db = firebase.firestore();
+      const blogId = this.$route.params.blogid;
+      const commentRef = db.collection('blogPosts').doc(blogId).collection('comments').doc(commentId);
+
+      try {
+        await commentRef.delete();
+        // Remove the deleted comment from the local array
+        this.comments = this.comments.filter(comment => comment.id !== commentId);
+      } catch (error) {
+        console.error('Error deleting comment:', error);
       }
     },
   },
