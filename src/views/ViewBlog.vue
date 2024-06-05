@@ -8,6 +8,28 @@
           <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
         </div>
         <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
+        <div class="like-section">
+          <i
+            @click="toggleLike"
+            :class="{'fas fa-heart liked': liked, 'far fa-heart': !liked}"
+            class="like-icon"
+          ></i>
+          <span>{{ currentBlog.likes }} likes</span>
+        </div>
+        <div class="comments-section">
+          <h3>Comments</h3>
+          <div class="comment-form">
+            <textarea v-model="newComment" placeholder="Write a comment..." rows="3"></textarea>
+            <button @click="submitComment" class="submit-comment-button">Post Comment</button>
+          </div>
+          <div class="comments-list">
+            <div class="comment" v-for="comment in comments" :key="comment.id">
+              <div class="comment-author">{{ comment.authorName }}</div>
+              <div class="comment-content">{{ comment.content }}</div>
+              <div class="comment-date">{{ new Date(comment.timestamp).toLocaleString() }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else class="spinner-container">
@@ -16,12 +38,42 @@
   </div>
 </template>
 
+
+
+
 <script>
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
+import '@fortawesome/fontawesome-free/css/all.css';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 export default {
   name: "ViewBlog",
+  data() {
+    return {
+      currentBlog: null,
+      liked: false,
+      comments: [],
+      newComment: '',
+    };
+  },
+  metaInfo() {
+    return {
+      title: this.currentBlog ? this.currentBlog.blogTitle : 'Loading...',
+      meta: [
+        { name: 'description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
+        { property: 'og:title', content: this.currentBlog ? this.currentBlog.blogTitle : '' },
+        { property: 'og:description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
+        { property: 'og:image', content: this.currentBlog ? this.currentBlog.blogCoverPhoto : '' },
+        { property: 'og:url', content: window.location.href },
+        { name: 'twitter:card', content: this.currentBlog.blogCoverPhoto },
+        { name: 'twitter:title', content: this.currentBlog.blogTitle },
+        { name: 'twitter:description', content: this.currentBlog.blogDescription },
+        { name: 'twitter:image', content: this.currentBlog.blogCoverPhoto }
+      ]
+    }
+  },
   data() {
     return {
       currentBlog: null,
@@ -66,6 +118,9 @@ export default {
   }
 };
 </script>
+
+
+
 
 <style lang="scss" scoped>
 .post-view {
@@ -118,6 +173,99 @@ export default {
   line-height: 1.8;
   color: #333;
   word-break: break-word;
+}
+
+.like-section {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+
+  .like-icon {
+    cursor: pointer;
+    font-size: 24px;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &.liked {
+      color: #e74c3c;
+    }
+  }
+
+  span {
+    margin-left: 8px;
+    font-size: 1.125rem;
+    color: #555;
+  }
+}
+
+.comments-section {
+  margin-top: 40px;
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    textarea {
+      resize: none;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .submit-comment-button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      align-self: flex-end;
+
+      &:hover {
+        background-color: #2980b9;
+      }
+    }
+  }
+
+  .comments-list {
+    .comment {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      .comment-author {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .comment-content {
+        margin-bottom: 5px;
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .comment-date {
+        font-size: 0.875rem;
+        color: #888;
+      }
+    }
+  }
 }
 
 .spinner-container {

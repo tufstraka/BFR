@@ -13,7 +13,7 @@ Vue.use(VueParticles);
 Vue.use(VueMeta);
 
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 let app;
 firebase.auth().onAuthStateChanged(() =>{
