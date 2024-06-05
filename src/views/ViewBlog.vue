@@ -3,17 +3,14 @@
     <div class="post-view" v-if="currentBlog">
       <div class="container">
         <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
-        <h4 class="blog-date">Posted on: {{ new Date(currentBlog.date).toLocaleString('en-us', { dateStyle: 'long' }) }}</h4>
+        <h4 class="blog-date">Posted on: {{ new Date(currentBlog.date).toLocaleString('en-us', { dateStyle: 'long' }) }}
+        </h4>
         <div class="pic-wrapper">
           <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
         </div>
         <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
         <div class="like-section">
-          <i
-            @click="toggleLike"
-            :class="{'fas fa-heart liked': liked, 'far fa-heart': !liked}"
-            class="like-icon"
-          ></i>
+          <i @click="toggleLike" :class="{ 'fas fa-heart liked': liked, 'far fa-heart': !liked }" class="like-icon"></i>
           <span>{{ currentBlog.likes }} likes</span>
         </div>
         <div class="comments-section">
@@ -41,6 +38,7 @@
 
 
 
+
 <script>
 import firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -48,24 +46,17 @@ import 'firebase/auth';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 
+
 export default {
   name: "ViewBlog",
-  data() {
-    return {
-      currentBlog: null,
-      liked: false,
-      comments: [],
-      newComment: '',
-    };
-  },
   metaInfo() {
     return {
-      title: this.currentBlog ? this.currentBlog.blogTitle : 'Loading...',
+      title: this.currentBlog.blogTitle,
       meta: [
-        { name: 'description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
-        { property: 'og:title', content: this.currentBlog ? this.currentBlog.blogTitle : '' },
-        { property: 'og:description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
-        { property: 'og:image', content: this.currentBlog ? this.currentBlog.blogCoverPhoto : '' },
+        { name: 'description', content: this.currentBlog.blogDescription },
+        { property: 'og:title', content: this.currentBlog.blogTitle },
+        { property: 'og:description', content: this.currentBlog.blogDescription },
+        { property: 'og:image', content: this.currentBlog.blogCoverPhoto },
         { property: 'og:url', content: window.location.href },
         { name: 'twitter:card', content: this.currentBlog.blogCoverPhoto },
         { name: 'twitter:title', content: this.currentBlog.blogTitle },
@@ -77,29 +68,15 @@ export default {
   data() {
     return {
       currentBlog: null,
-    };
-  },
-  metaInfo() {
-    return {
-      title: this.currentBlog ? this.currentBlog.blogTitle : 'Loading...',
-      meta: [
-        { name: 'description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
-        { property: 'og:title', content: this.currentBlog ? this.currentBlog.blogTitle : '' },
-        { property: 'og:description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
-        { property: 'og:image', content: this.currentBlog ? this.currentBlog.blogCoverPhoto : '' },
-        { property: 'og:url', content: window.location.href },
-        { property: 'og:type', content: 'article' },
-        { name: 'twitter:card', content: 'Test' },
-        { name: 'twitter:title', content: this.currentBlog ? this.currentBlog.blogTitle : '' },
-        { name: 'twitter:description', content: this.currentBlog ? this.currentBlog.blogDescription : '' },
-        { name: 'twitter:image', content: this.currentBlog ? this.currentBlog.blogCoverPhoto : '' }
-      ]
+      liked: false,
+      comments: [],
+      newComment: '',
     };
   },
   async mounted() {
     const blogId = this.$route.params.blogid;
     const db = firebase.firestore();
-    
+
     try {
       const doc = await db.collection('blogPosts').doc(blogId).get();
       if (doc.exists) {
@@ -110,14 +87,116 @@ export default {
     } catch (error) {
       console.error('Error getting document:', error);
     }
+
+    // Fetch comments
+    this.fetchComments();
+
+    // Check if user has already liked the post
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        const userLikesDoc = await db.collection('userLikes').doc(user.uid).get();
+        if (userLikesDoc.exists && userLikesDoc.data().likedPosts.includes(blogId)) {
+          this.liked = true;
+        }
+      }
+    });
   },
-  watch: {
-    currentBlog() {
-      this.$meta().refresh();
-    }
-  }
+  methods: {
+    async toggleLike() {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        this.$router.push({ name: 'Register' });
+        return;
+      }
+
+      const blogId = this.$route.params.blogid;
+      const db = firebase.firestore();
+      const blogRef = db.collection('blogPosts').doc(blogId);
+      const userLikesRef = db.collection('userLikes').doc(user.uid);
+
+      try {
+        await db.runTransaction(async (transaction) => {
+          const blogDoc = await transaction.get(blogRef);
+          const userLikesDoc = await transaction.get(userLikesRef);
+
+          if (blogDoc.exists) {
+            let newLikes = blogDoc.data().likes;
+            const likedPosts = userLikesDoc.exists ? userLikesDoc.data().likedPosts || [] : [];
+
+            if (this.liked) {
+              newLikes -= 1;
+              const index = likedPosts.indexOf(blogId);
+              if (index > -1) likedPosts.splice(index, 1);
+              this.liked = false;
+            } else {
+              newLikes += 1;
+              likedPosts.push(blogId);
+              this.liked = true;
+            }
+
+            transaction.update(blogRef, { likes: newLikes });
+            transaction.set(userLikesRef, { likedPosts });
+
+            this.currentBlog.likes = newLikes;
+          }
+        });
+      } catch (error) {
+        console.error('Transaction failed: ', error);
+      }
+    },
+    async fetchComments() {
+      const blogId = this.$route.params.blogid;
+      const db = firebase.firestore();
+      try {
+        const commentsSnapshot = await db.collection('blogPosts').doc(blogId).collection('comments').orderBy('timestamp', 'desc').get();
+        const comments = commentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        for (let comment of comments) {
+          const userDoc = await db.collection('users').doc(comment.userId).get();
+          if (userDoc.exists) {
+            comment.authorName = userDoc.data().userName;
+          } else {
+            comment.authorName = 'Unknown';
+          }
+        }
+
+        this.comments = comments;
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    },
+    async submitComment() {
+      const user = firebase.auth().currentUser;
+      if (!user) {
+        this.$router.push({ name: 'Register' });
+        return;
+      }
+
+      const blogId = this.$route.params.blogid;
+      const db = firebase.firestore();
+      const commentRef = db.collection('blogPosts').doc(blogId).collection('comments').doc();
+
+      try {
+        const userDoc = await db.collection('users').doc(user.uid).get();
+        const userName = userDoc.exists ? userDoc.data().userName : 'Anonymous';
+
+        await commentRef.set({
+          authorName: userName,
+          content: this.newComment,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          userId: user.uid
+        });
+
+        this.fetchComments();
+        this.newComment = ''; // Clear the textarea
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+      }
+    },
+  },
 };
 </script>
+
 
 
 
@@ -285,8 +364,13 @@ export default {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 768px) {
@@ -307,5 +391,3 @@ export default {
   }
 }
 </style>
-
-
