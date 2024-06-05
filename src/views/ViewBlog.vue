@@ -3,14 +3,15 @@
     <div class="post-view" v-if="currentBlog">
       <div class="container">
         <h1 class="blog-title">{{ currentBlog.blogTitle }}</h1>
-        <h4 class="blog-date">Posted on: {{ new Date(currentBlog.date).toLocaleString('en-us', { dateStyle: 'long' }) }}
+        <h4 class="blog-date">
+          Posted on: {{ new Date(currentBlog.date).toLocaleString('en-us', { dateStyle: 'long' }) }}
         </h4>
         <div class="pic-wrapper">
           <img class="blog-pic" :src="currentBlog.blogCoverPhoto" alt="Blog Cover Photo" />
         </div>
         <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
         <div class="like-section">
-          <i @click="toggleLike" :class="{ 'fas fa-heart liked': liked, 'far fa-heart': !liked }" class="like-icon"></i>
+          <thumbs @click="toggleLike" class="like-icon"/>
           <span>{{ currentBlog.likes }} likes</span>
         </div>
         <div class="comments-section">
@@ -21,12 +22,12 @@
           </div>
           <div class="comments-list">
             <div class="comment" v-for="comment in comments" :key="comment.id">
-              <div class="comment-author">{{ comment.authorName }}</div>
+              <div class="comment-header">
+                <div class="comment-author">{{ comment.authorName }}</div>
+                <div class="comment-date">{{ formatTimestamp(comment.timestamp.seconds) }}</div>
+                <trash v-if="canDeleteComment(comment)" class="delete-icon" @click="deleteComment(comment.id)" />
+              </div>
               <div class="comment-content">{{ comment.content }}</div>
-              <div class="comment-date">{{
-              formatTimestamp(comment.timestamp.seconds) }}</div>
-              <i v-if="canDeleteComment(comment)" class="fas fa-trash-alt" @click="deleteComment(comment.id)"></i>
-
             </div>
           </div>
         </div>
@@ -40,18 +41,18 @@
 
 
 
-
-
 <script>
 import firebase from 'firebase/app';
+import thumbs from '../assets/Icons/thumbs.svg';
+import trash from '../assets/Icons/trash-can.svg';
 import 'firebase/firestore';
 import 'firebase/auth';
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
 
-
 export default {
   name: "ViewBlog",
+  components: { thumbs, trash },
   metaInfo() {
     return {
       title: this.currentBlog.blogTitle,
@@ -74,6 +75,7 @@ export default {
       liked: false,
       comments: [],
       newComment: '',
+      isLiking: false, // To prevent multiple like actions at the same time
     };
   },
   async mounted() {
@@ -106,11 +108,14 @@ export default {
   methods: {
     async toggleLike() {
       const user = firebase.auth().currentUser;
-      console.log('like clicked');
+      console.log('like')
       if (!user) {
         this.$router.push({ name: 'Register' });
         return;
       }
+
+      if (this.isLiking) return; // Prevent multiple like actions
+      this.isLiking = true;
 
       const blogId = this.$route.params.blogid;
       const db = firebase.firestore();
@@ -122,29 +127,33 @@ export default {
           const blogDoc = await transaction.get(blogRef);
           const userLikesDoc = await transaction.get(userLikesRef);
 
-          if (blogDoc.exists) {
-            let newLikes = blogDoc.data().likes;
-            const likedPosts = userLikesDoc.exists ? userLikesDoc.data().likedPosts || [] : [];
+          if (!blogDoc.exists) throw new Error('Blog post does not exist');
 
-            if (this.liked) {
-              newLikes -= 1;
-              const index = likedPosts.indexOf(blogId);
-              if (index > -1) likedPosts.splice(index, 1);
-              this.liked = false;
-            } else {
-              newLikes += 1;
-              likedPosts.push(blogId);
-              this.liked = true;
-            }
+          const currentLikes = blogDoc.data().likes;
+          const likedPosts = userLikesDoc.exists ? userLikesDoc.data().likedPosts || [] : [];
+          let newLikes;
 
-            transaction.update(blogRef, { likes: newLikes });
-            transaction.set(userLikesRef, { likedPosts });
-
-            this.currentBlog.likes = newLikes;
+          if (this.liked) {
+            newLikes = currentLikes - 1;
+            const index = likedPosts.indexOf(blogId);
+            if (index > -1) likedPosts.splice(index, 1);
+            this.liked = false;
+          } else {
+            newLikes = currentLikes + 1;
+            likedPosts.push(blogId);
+            this.liked = true;
           }
+
+          transaction.update(blogRef, { likes: newLikes });
+          transaction.set(userLikesRef, { likedPosts }, { merge: true });
+
+          this.currentBlog.likes = newLikes;
         });
       } catch (error) {
         console.error('Transaction failed: ', error);
+        alert('An error occurred while updating the like status. Please try again.');
+      } finally {
+        this.isLiking = false;
       }
     },
     async fetchComments() {
@@ -153,13 +162,11 @@ export default {
       try {
         const commentsSnapshot = await db.collection('blogPosts').doc(blogId).collection('comments').orderBy('timestamp', 'desc').get();
         const comments = commentsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log("comments:", comments)
 
         for (let comment of comments) {
           const userDoc = await db.collection('users').doc(comment.userId).get();
           if (userDoc.exists) {
             comment.authorName = userDoc.data().userName;
-
           } else {
             comment.authorName = 'Unknown';
           }
@@ -198,18 +205,15 @@ export default {
         console.error('Error submitting comment:', error);
       }
     },
-
     formatTimestamp(seconds) {
       const date = new Date(seconds * 1000);
       return date.toLocaleString();
     },
-
     canDeleteComment(comment) {
       const currentUser = firebase.auth().currentUser;
       // Check if the current user is the author of the comment or an admin
       return currentUser && (comment.userId === currentUser.uid || currentUser.isAdmin);
     },
-
     async deleteComment(commentId) {
       const db = firebase.firestore();
       const blogId = this.$route.params.blogid;
@@ -226,9 +230,6 @@ export default {
   },
 };
 </script>
-
-
-
 
 
 <style lang="scss" scoped>
@@ -291,11 +292,14 @@ export default {
 
   .like-icon {
     cursor: pointer;
-    font-size: 24px;
+    width: 38px;
+    fill: #8F80BF;
+    height: auto;
     transition: transform 0.3s ease, color 0.3s ease;
 
     &:hover {
       transform: scale(1.2);
+      fill: #1C1C20;
     }
 
     &.liked {
@@ -358,20 +362,39 @@ export default {
       margin-bottom: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-      .comment-author {
-        font-weight: bold;
-        margin-bottom: 5px;
+      .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .comment-author {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        .comment-date {
+          font-size: 0.875rem;
+          color: #888;
+        }
+
+        .delete-icon {
+          cursor: pointer;
+          width: 22px;
+          height: auto;
+          fill: #101110;
+
+          &:hover {
+            fill: #c0392b;
+            transform: scale(1.2);
+
+          }
+        }
       }
 
       .comment-content {
-        margin-bottom: 5px;
+        margin-top: 5px;
         font-size: 1rem;
         color: #555;
-      }
-
-      .comment-date {
-        font-size: 0.875rem;
-        color: #888;
       }
     }
   }

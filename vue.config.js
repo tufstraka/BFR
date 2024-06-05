@@ -18,5 +18,10 @@ module.exports = {
       },
     },
   },
+  devServer: {
+    allowedHosts: [
+      '8acf37da7fa549fc9a6fcbc39490ccae.vfs.cloud9.us-east-1.amazonaws.com'
+    ]
+  },
 };
 
