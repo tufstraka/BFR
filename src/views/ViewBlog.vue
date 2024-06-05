@@ -71,11 +71,12 @@ export default {
   },
   data() {
     return {
-      currentBlog: null,
+      currentBlog: {
+          likes: 27,
+      },
       liked: false,
       comments: [],
       newComment: '',
-      isLiking: false, // To prevent multiple like actions at the same time
     };
   },
   async mounted() {
@@ -95,7 +96,6 @@ export default {
 
     this.fetchComments();
 
-    // Check if user has already liked the post
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         const userLikesDoc = await db.collection('userLikes').doc(user.uid).get();
@@ -113,47 +113,49 @@ export default {
         this.$router.push({ name: 'Register' });
         return;
       }
-
-      if (this.isLiking) return; // Prevent multiple like actions
-      this.isLiking = true;
-
+      
       const blogId = this.$route.params.blogid;
       const db = firebase.firestore();
       const blogRef = db.collection('blogPosts').doc(blogId);
-      const userLikesRef = db.collection('userLikes').doc(user.uid);
 
       try {
+        const userLikesDoc = await db.collection('userLikes').doc(user.uid).get();
+        if (!userLikesDoc.exists) {
+          await db.collection('userLikes').doc(user.uid).set({ likedPosts: [] });
+        }
+
         await db.runTransaction(async (transaction) => {
-          const blogDoc = await transaction.get(blogRef);
-          const userLikesDoc = await transaction.get(userLikesRef);
-
-          if (!blogDoc.exists) throw new Error('Blog post does not exist');
-
-          const currentLikes = blogDoc.data().likes;
-          const likedPosts = userLikesDoc.exists ? userLikesDoc.data().likedPosts || [] : [];
-          let newLikes;
-
-          if (this.liked) {
-            newLikes = currentLikes - 1;
-            const index = likedPosts.indexOf(blogId);
-            if (index > -1) likedPosts.splice(index, 1);
-            this.liked = false;
-          } else {
-            newLikes = currentLikes + 1;
-            likedPosts.push(blogId);
-            this.liked = true;
+          const doc = await transaction.get(blogRef);
+          if (!doc.exists) {
+            throw "Blog post does not exist!";
           }
 
-          transaction.update(blogRef, { likes: newLikes });
-          transaction.set(userLikesRef, { likedPosts }, { merge: true });
+          let data = doc.data();
+          let likes = data.likes || 0;
 
-          this.currentBlog.likes = newLikes;
+          // Toggle like status
+          if (!this.liked) {
+            likes++;
+            data.likes = likes;
+            this.liked = true;
+          } else {
+            likes--;
+            data.likes = likes;
+            this.liked = false;
+          }
+
+          transaction.update(blogRef, { likes });
+          let userLikes = (await transaction.get(db.collection('userLikes').doc(user.uid))).data().likedPosts;
+          if (!userLikes.includes(blogId)) {
+            userLikes.push(blogId);
+          } else {
+            userLikes = userLikes.filter(id => id !== blogId);
+          }
+          transaction.update(db.collection('userLikes').doc(user.uid), { likedPosts: userLikes });
         });
       } catch (error) {
         console.error('Transaction failed: ', error);
         alert('An error occurred while updating the like status. Please try again.');
-      } finally {
-        this.isLiking = false;
       }
     },
     async fetchComments() {
