@@ -23,28 +23,40 @@ export default new Vuex.Store({
     profileLastName: null,
     profileUsername: null,
     profileId: null,
-    profileInitials: null
-
+    profileInitials: null,
+    cartItems: JSON.parse(localStorage.getItem('cartItems')) || []
   },
   getters: {
     blogPostsFeed(state) {
-      return state.blogPosts.slice(0,1);
+      return state.blogPosts.slice(0, 1);
     },
 
     blogPostsCards(state) {
-      return state.blogPosts.slice(0,4);
+      return state.blogPosts.slice(0, 4);
+    },
+
+    cartTotal(state) {
+      return state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    },
+
+    cartItemCount(state) {
+      return state.cartItems.reduce((count, item) => count + item.quantity, 0);
+    },
+
+    cartItems(state) {
+      return state.cartItems;
     }
   },
   mutations: {
     createFileURL(state, payload) {
-      state.blogPhotoFileURL = payload
+      state.blogPhotoFileURL = payload;
     },
 
     openPhotoPreview(state) {
       state.blogPhotoPreview = !state.blogPhotoPreview;
     },
     
-    fileNameChange(state, payload){
+    fileNameChange(state, payload) {
       state.blogPhotoName = payload;
     },
 
@@ -75,7 +87,7 @@ export default new Vuex.Store({
       state.blogPhotoName = payload.blogCoverPhotoName;
     },
     
-    updateUser(state, payload){
+    updateUser(state, payload) {
       state.user = payload; 
     },
     
@@ -94,33 +106,62 @@ export default new Vuex.Store({
     },
     
     changeFirstName(state, payload) {
-      state.profileFirstName = payload
+      state.profileFirstName = payload;
     },
 
     changeLastName(state, payload) {
-      state.profileLastName = payload
+      state.profileLastName = payload;
     },
 
     changeUsername(state, payload) {
-      state.profileUsername = payload
+      state.profileUsername = payload;
     },
-    
+
+    // Cart mutations
+addToCart(state, product) {
+      const existingProduct = state.cartItems.find(item => item.id === product.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        state.cartItems.push({ ...product, quantity: 1 });
+      }
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
+
+    removeFromCart(state, product) {
+      state.cartItems = state.cartItems.filter(item => item.id !== product.id);
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    },
+
+    updateCartQuantity(state, { product, quantity }) {
+      const cartItem = state.cartItems.find(item => item.id === product.id);
+      if (cartItem) {
+        if (quantity < 1) {
+          state.cartItems = state.cartItems.filter(item => item.id !== product.id);
+        } else {
+          cartItem.quantity = quantity;
+        }
+      }
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
+    }
   },
+
   actions: {
-    async getCurrentUser({ commit }, user){
+    async getCurrentUser({ commit }, user) {
       const dataBase = await db.collection("users").doc(firebase.auth().currentUser.uid);
       const dbResults = await dataBase.get();
       commit("setProfileInfo", dbResults);
       commit("setProfileInitials");
       const token = await user.getIdTokenResult();
       const admin = await token.claims.admin;
-      commit('setProfileAdmin', admin); },
-    
+      commit('setProfileAdmin', admin);
+    },
+
     async getPost({ state }) {
       const dataBase = await db.collection('blogPosts').orderBy('date', 'desc');
       const dbResults = await dataBase.get();
-      dbResults.forEach ((doc) => {
-        if(!state.blogPosts.some(post => post.blogID == doc.id)) {
+      dbResults.forEach((doc) => {
+        if (!state.blogPosts.some(post => post.blogID == doc.id)) {
           const data = {
             blogID: doc.data().blogID,
             blogHTML: doc.data().blogHTML,
@@ -135,18 +176,18 @@ export default new Vuex.Store({
       state.postLoaded = true;
     },
 
-    async deletePost({commit}, payload) {
-      const getPost = await db.collection ("blogPosts").doc(payload);
+    async deletePost({ commit }, payload) {
+      const getPost = await db.collection("blogPosts").doc(payload);
       await getPost.delete();
       commit("filterBlogPost", payload);
     },
 
-    async updatePost({commit, dispatch}, payload) {
+    async updatePost({ commit, dispatch }, payload) {
       commit("filterBlogPost", payload);
-      await dispatch("getPost")
+      await dispatch("getPost");
     },
 
-    async updateUserSettings({ commit, state}) {
+    async updateUserSettings({ commit, state }) {
       const dataBase = await db.collection('users').doc(state.profileId);
       await dataBase.update({
         firstName: state.profileFirstName,
@@ -155,8 +196,21 @@ export default new Vuex.Store({
       });
       commit("setProfileInitials");
     },
-  },  
+
+    // Cart actions
+    addToCart({ commit }, product) {
+      commit('addToCart', product);
+    },
+
+    removeFromCart({ commit }, product) {
+      commit('removeFromCart', product);
+    },
+
+    updateCartQuantity({ commit }, payload) {
+      commit('updateCartQuantity', payload);
+    }
+  },
   modules: {
-    
+    // if needed
   }
 })

@@ -157,6 +157,13 @@
   justify-content: center;
 }
 
+.carticon{
+  margin-top: 10px;
+  max-width: 30px;
+  height: auto;
+  width: 100%;
+}
+
 .branding {
   height: 50px;
 }

@@ -13,6 +13,7 @@ import ViewBlog from "../views/ViewBlog.vue";
 import EditPost from "../views/EditPost.vue"
 import News from "../views/News.vue";
 import Shop from "../views/Shop.vue";
+import Cart from "../views/Cart.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -109,6 +110,14 @@ const routes = [
     component: Shop,
     meta: {
       title: 'Shop',
+    }
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart,
+    meta: {
+      title: 'Cart',
     }
   },
   

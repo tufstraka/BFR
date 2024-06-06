@@ -3,20 +3,28 @@
     <div v-if="loading" class="spinner-container">
       <div class="spinner"></div>
     </div>
-    <div v-else class="product-grid">
-      <div v-for="product in products" :key="product.id" class="product-card">
-        <img :src="product.image" :alt="product.title" />
-        <div class="product-info">
-          <h2>{{ product.title }}</h2>
-          <p class="description">{{ product.description }}</p>
-          <div class="rating">
-            <span v-for="n in 5" :key="n" class="star">
-              <i :class="n <= product.rating.rate ? 'fas fa-star' : 'far fa-star'"></i>
-            </span>
-            <span class="rating-count">({{ product.rating.count }})</span>
+    <div v-else>
+      <router-link class='link' :to="{name:'Cart'}">
+        <div class="cart-icon-wrapper">
+          <img src="@/assets/Icons/cart.png" alt="Cart Icon" class="carticon" />
+          <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+        </div>
+      </router-link>
+      <div class="product-grid">
+        <div v-for="product in products" :key="product.id" class="product-card">
+          <img :src="product.image" :alt="product.title" />
+          <div class="product-info">
+            <h2>{{ product.title }}</h2>
+            <p class="description">{{ product.description }}</p>
+            <div class="rating">
+              <span v-for="n in 5" :key="n" class="star">
+                <i :class="n <= product.rating.rate ? 'fas fa-star' : 'far fa-star'"></i>
+              </span>
+              <span class="rating-count">({{ product.rating.count }})</span>
+            </div>
+            <p class="price">{{ product.price | currency }} USD</p>
+            <button @click="addToCart(product)">Add to Cart</button>
           </div>
-          <p class="price">{{ product.price | currency }}</p>
-          <button @click="addToCart(product)">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -24,6 +32,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -31,10 +41,15 @@ export default {
       loading: true
     };
   },
+  computed: {
+    ...mapGetters(['cartItemCount']),
+  },
   created() {
     this.fetchProducts();
   },
   methods: {
+    ...mapActions(['addToCart']),
+
     async fetchProducts() {
       try {
         const response = await fetch('https://fakestoreapi.com/products');
@@ -44,15 +59,12 @@ export default {
       } catch (error) {
         console.error('Error fetching products:', error);
       }
-    },
-    addToCart(product) {
-      console.log(`${product.title} added to cart!`);
     }
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
@@ -81,6 +93,35 @@ export default {
   100% { transform: rotate(360deg); }
 }
 
+.cart-icon-wrapper {
+  position: fixed;
+  top: 50%;
+  right: 20px; 
+  transform: translateY(-50%);
+  z-index: 5999999;
+  
+  &:hover 
+  {
+    transform: scale(1.12);
+    }
+}
+
+.carticon {
+  width: 40px;
+  height: auto;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #e91e63;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
 
 .product-grid {
   display: grid;
@@ -170,4 +211,5 @@ export default {
   background-color: #d81b60;
 }
 </style>
+
 
