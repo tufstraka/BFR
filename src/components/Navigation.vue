@@ -3,7 +3,7 @@
         <nav class="container">
             <div class="branding">
                 <router-link class='header' :to="{name:'Home'}">
-                    <img src="@/assets/BiasedFilmReviewLogo.png" alt="BFR Logo" class="logo" />
+                    <img src="@/assets/BFRBGLogo.png" alt="BFR Logo" class="logo" />
                     <p class="logo-text">Biased Film Review</p>
                 </router-link>                
             </div>
@@ -14,7 +14,7 @@
                     <router-link class='link' to='#'>Books</router-link>
                     <router-link class='link' to='#'>Games</router-link>
                     <router-link class='link' :to="{name:'News'}">News</router-link>
-                    <router-link class='link' to='#'>Shop</router-link>
+                    <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
                 </ul>
@@ -66,7 +66,7 @@
                 <br/>
                 <br/>
                 <hr/>
-                <router-link class='link' to='#'>Shop</router-link>
+                <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
                 <br/>
                 <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'Admin'}">Admin</router-link>
@@ -327,7 +327,7 @@ nav {
   background-color: #303030;
   top: 0;
   left: 0;
-  z-index: 1000;  // Ensure this is higher than the card component
+  z-index: 1000;  
 
   .link {
     padding: 15px 0;
@@ -340,7 +340,7 @@ nav {
 
 .mobile-nav-enter-active,
 .mobile-nav-leave-active {
-  transition: all 2s ease;
+  transition: all 0.7s ease;
 }
 
 .mobile-nav-enter {

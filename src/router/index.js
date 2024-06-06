@@ -12,6 +12,7 @@ import BlogPreview from "../views/BlogPreview.vue";
 import ViewBlog from "../views/ViewBlog.vue";
 import EditPost from "../views/EditPost.vue"
 import News from "../views/News.vue";
+import Shop from "../views/Shop.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -98,10 +99,19 @@ const routes = [
     path: "/view-post/:blogid",
     name: "ViewBlog",
     component: ViewBlog,
-    meta: {
-      title: 'View Blog Post'
+     meta: {
+      title: 'Chronicles',
     }
   },
+  {
+    path: "/shop",
+    name: "Shop",
+    component: Shop,
+    meta: {
+      title: 'Shop',
+    }
+  },
+  
   {
     path: "/edit-post/:blogid",
     name: "EditPost",

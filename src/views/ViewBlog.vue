@@ -71,9 +71,7 @@ export default {
   },
   data() {
     return {
-      currentBlog: {
-          likes: 27,
-      },
+      currentBlog: null,
       liked: false,
       comments: [],
       newComment: '',
