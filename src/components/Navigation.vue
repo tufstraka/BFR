@@ -16,7 +16,10 @@
                     <router-link class='link' :to="{name:'News'}">News</router-link>
                     <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
-                    <router-link v-if="!user" class='link' :to="{name:'Login'}">Sign in</router-link>
+                    <router-link v-if="!user" class='link linkt' :to="{name:'Login'}">
+                      <p class="signintxt">Sign in</p>
+                      <img src="@/assets/Icons/sign-in.png" alt="Sign in Icon" class="signin" />
+                    </router-link>
                 </ul>
                 <div v-if="user" @click="toggleProfileMenu" class="profile" ref="profile">
                     <span>{{ this.$store.state.profileInitials }}</span>
@@ -156,12 +159,26 @@
   align-items: center;
   justify-content: center;
 }
+.sign{
+display:flex;
+align-items: center;
+}
+
+.signin{
+width: 20px;
+height: 20px;
+}
 
 .carticon{
   margin-top: 10px;
   max-width: 30px;
   height: auto;
   width: 100%;
+}
+
+.linkt {
+display: flex;
+align-items: center;
 }
 
 .branding {
@@ -221,6 +238,7 @@ nav {
     justify-content: flex-end;
     ul {
       margin-right: 32px;
+      display: flex;
 
       .link {
         margin-right: 32px;

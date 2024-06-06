@@ -118,7 +118,7 @@ export default new Vuex.Store({
     },
 
     // Cart mutations
-addToCart(state, product) {
+    addToCart(state, product) {
       const existingProduct = state.cartItems.find(item => item.id === product.id);
       if (existingProduct) {
         existingProduct.quantity += 1;

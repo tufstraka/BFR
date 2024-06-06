@@ -140,9 +140,12 @@ h1 {
 }
 
 .empty-cart {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   font-size: 1.5rem;
   color: #555;
-  padding: 50px 0;
+  justify-content: center;
+  height: 100vh;
 }
 </style>
