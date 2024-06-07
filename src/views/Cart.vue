@@ -6,7 +6,7 @@
         <img :src="item.image" :alt="item.title" class="cart-item-image" />
         <div class="cart-item-details">
           <h2>{{ item.title }}</h2>
-          <p class="price">{{ item.price | currency }}</p>
+          <p class="price">Price: {{ item.price | currency }} USD</p>
           <div class="quantity-controls">
             <button @click="updateCartQuantity({ product: item, quantity: item.quantity - 1 })">-</button>
             <span>{{ item.quantity }}</span>
@@ -59,14 +59,12 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: 'Courier New', Courier, monospace;
   background-color: beige;
-
 }
 
 h1 {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .cart-content {
@@ -77,6 +75,7 @@ h1 {
 
 .cart-item {
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 10px;
   border-bottom: 1px dashed #ddd;
@@ -143,11 +142,6 @@ h1 {
 }
 
 .cart-summary h2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
@@ -184,5 +178,55 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-</style>
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cart {
+    padding: 20px;
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-item-image {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  .quantity-controls {
+    margin-top: 10px;
+  }
+
+  .checkout-button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .cart-item-details h2 {
+    font-size: 1rem;
+  }
+
+  .cart-summary h2 {
+    font-size: 1.2rem;
+  }
+
+  .checkout-button {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+</style>
