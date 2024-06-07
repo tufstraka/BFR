@@ -74,7 +74,6 @@ export default {
           paragraphs: [
             "If you have any questions about this Privacy Policy, please contact us at:",
             "Email: privacy@biasedfilmreview.com",
-            "Address: 123 Movie Lane, Nairobi, Kenya"
           ]
         }
       ]

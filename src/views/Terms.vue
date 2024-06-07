@@ -83,7 +83,6 @@ export default {
           paragraphs: [
             "If you have any questions about these Terms, please contact us at:",
             "Email: support@biasedfilmreview.com",
-            "Address: 123 Movie Lane, Nairobi, Kenya"
           ]
         }
       ]
