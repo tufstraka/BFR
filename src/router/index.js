@@ -14,6 +14,7 @@ import EditPost from "../views/EditPost.vue"
 import News from "../views/News.vue";
 import Shop from "../views/Shop.vue";
 import Cart from "../views/Cart.vue";
+import ResetPassword from "../views/ResetPassword.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -44,6 +45,14 @@ const routes = [
     component: Login,
     meta: {
       title: 'Login'
+    }
+  },
+    {
+    path: "/auth/reset-password",
+    name: "ResetPassword",
+    component: ResetPassword,
+    meta: {
+      title: 'Reset Password'
     }
   },
   {
