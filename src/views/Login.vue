@@ -18,11 +18,17 @@
         <div v-show='error' class="error">{{ this.errorMsg }}</div>
       </div>
       <router-link class='forgot-password' :to='{ name: "ForgotPassword" }'>Forgot your password?</router-link>
-      <button @click.prevent='signin'>Sign in</button>
+      <button @click.prevent='signin' :disabled="loading">
+        <span v-if="!loading">Sign in</span>
+        <span v-else class="spinner"></span>
+      </button>
+      <button @click.prevent='googleSignIn' :disabled="loading" class="google-button">
+        <span v-if="!loading">Sign in with Google</span>
+        <span v-else class="spinner"></span>
+      </button>
     </form>
   </div>
 </template>
-
 
 <script>
 import firebase from 'firebase/app';
@@ -32,31 +38,50 @@ import 'firebase/auth';
 
 export default {
   name: "Login",
-  components: { email , password},
+  components: { email, password },
   data() {
     return {
       email: '',
       password: '',
       error: false,
-      errorMsg: ''
+      errorMsg: '',
+      loading: false,
     }
   },
   methods: {
-    signin() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$router.push({ name: 'Home' });
-          this.error = false;
-          this.errorMsg = '';
-        })
-        .catch((err) => {
-          this.error = true;
-          this.errorMsg = err.message;
-        });
+    async signin() {
+      this.loading = true;
+      this.error = false;
+      this.errorMsg = '';
+      try {
+        await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        this.error = true;
+        this.errorMsg = err.message;
+      } finally {
+        this.loading = false;
+      }
+    },
+    async googleSignIn() {
+      this.loading = true;
+      this.error = false;
+      this.errorMsg = '';
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        await firebase.auth().signInWithPopup(provider);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        this.error = true;
+        this.errorMsg = err.message;
+      } finally {
+        this.loading = false;
+      }
     }
   }
 }
 </script>
+
 <style lang='scss'>
 .form-wrap {
   display: flex;
@@ -152,11 +177,43 @@ form {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-top: 14px;
-  
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+
     &:hover {
       background-color: #2980b9;
     }
+
+    &:disabled {
+      background-color: #b0c4de;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .google-button {
+    background-color: #db4437;
+
+    &:hover {
+      background-color: #c33d2e;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
+
 

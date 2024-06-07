@@ -204,11 +204,12 @@ header {
   font-weight: 300;
   font-size: 16px;
   padding: 0 8px;
-  transition: 0.3s color ease;
+  border-radius: 30px;
+  transition: 0.3s background-color ease;
 }
 
 .link:hover {
-  color: red;
+  background-color: #eb9d63;
 }
 
 .logo {
