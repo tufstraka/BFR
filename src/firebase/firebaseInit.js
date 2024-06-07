@@ -3,7 +3,7 @@ import 'firebase/firestore';
 
 var firebaseConfig = {
     apiKey: `${process.env.VUE_APP_FIREBASE_API_KEY}`,
-    authDomain: "biasedfilmreview.com",
+    authDomain: "biasedfilmreviews-c40dd.firebaseapp.com",
     projectId: "biasedfilmreviews-c40dd",
     storageBucket: "biasedfilmreviews-c40dd.appspot.com",
     messagingSenderId: "613927693608",
