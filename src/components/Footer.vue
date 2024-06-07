@@ -33,6 +33,12 @@
           <p>&copy; {{ currentYear }} | All Rights Reserved</p>
         </div>
       </div>
+      <nav class="footer__nav">
+            <ul>
+              <li><router-link :to="{ name: 'Terms' }">Terms of Service</router-link></li>
+              <li><router-link :to="{ name: 'Privacy' }">Privacy Policy</router-link></li>
+            </ul>
+      </nav>      
     </footer>
   </template>
   

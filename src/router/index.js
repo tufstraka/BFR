@@ -15,6 +15,8 @@ import News from "../views/News.vue";
 import Shop from "../views/Shop.vue";
 import Cart from "../views/Cart.vue";
 import ResetPassword from "../views/ResetPassword.vue";
+import TermsOfService from "../views/Terms.vue";
+import PrivacyPolicy from "../views/PrivacyPolicy.vue";
 import firebase from "firebase/app";
 import "firebase/auth";
 
@@ -37,6 +39,22 @@ const routes = [
     component: Blog,
     meta: {
       title: 'Reviews'
+    }
+  },
+    {
+    path: "/terms-of-service",
+    name: "Terms",
+    component: TermsOfService,
+    meta: {
+      title: 'Terms of Service'
+    }
+  },
+    {
+    path: "/privacy-policy",
+    name: "Privacy",
+    component: PrivacyPolicy,
+    meta: {
+      title: 'Privacy Policy'
     }
   },
   {
