@@ -29,20 +29,32 @@
         </div>
         <div v-if='error' class="error">{{ this.errorMsg }}</div>
       </div>
-      <button @click.prevent='register' :disabled="loading">
-        <span v-if="!loading">Sign Up</span>
+      <button @click.prevent='register' :disabled="loadingRegister">
+        <span v-if="!loadingRegister">Sign Up</span>
         <span v-else class="spinner"></span>
       </button>
-      <button @click.prevent='googleSignIn' :disabled="loading" class="google-button">
-        <span v-if="!loading">Sign Up with Google</span>
-        <span v-else class="spinner"></span>
-      </button>
+      <div class="oauth">
+        <button @click.prevent='googleSignIn' :disabled="loadingGoogle" class="google-button">
+          <span v-if="!loadingGoogle">
+            <google class="logo" />
+          </span>
+          <span v-else class="spinner"></span>
+        </button>
+        <button @click.prevent='microsoftSignIn' :disabled="loadingMicrosoft" class="microsoft-button">
+          <span v-if="!loadingMicrosoft">
+            <microsoft class="logomi" />
+          </span>
+          <span v-else class="spinner"></span>
+        </button>
+      </div>
     </form>
   </div>
 </template>
 
 <script>
 import email from '../assets/Icons/envelope-regular.svg';
+import google from '../assets/googlelogo.svg';
+import microsoft from '../assets/microsoft.svg';
 import password from '../assets/Icons/lock-alt-solid.svg';
 import user from '../assets/Icons/user-alt-light.svg';
 import firebase from 'firebase/app';
@@ -51,7 +63,7 @@ import db from '../firebase/firebaseInit';
 
 export default {
   name: 'Register',
-  components: { email, password, user },
+  components: { email, password, user, google, microsoft },
   data() {
     return {
       firstName: "",
@@ -61,7 +73,9 @@ export default {
       password: "",
       error: false,
       errorMsg: "",
-      loading: false,
+      loadingRegister: false,
+      loadingGoogle: false,
+      loadingMicrosoft: false,
     };
   },
   methods: {
@@ -69,7 +83,7 @@ export default {
       if (this.firstName && this.lastName && this.userName && this.email && this.password) {
         this.error = false;
         this.errorMsg = '';
-        this.loading = true;
+        this.loadingRegister = true;
         try {
           const firebaseAuth = await firebase.auth();
           const createUser = await firebaseAuth.createUserWithEmailAndPassword(this.email, this.password);
@@ -87,7 +101,7 @@ export default {
           this.error = true;
           this.errorMsg = error.message;
         } finally {
-          this.loading = false;
+          this.loadingRegister = false;
         }
       } else {
         this.error = true;
@@ -95,7 +109,9 @@ export default {
       }
     },
     async googleSignIn() {
-      this.loading = true;
+      this.loadingGoogle = true;
+      this.error = false;
+      this.errorMsg = '';
       try {
         const provider = new firebase.auth.GoogleAuthProvider();
         const result = await firebase.auth().signInWithPopup(provider);
@@ -112,7 +128,22 @@ export default {
         this.error = true;
         this.errorMsg = error.message;
       } finally {
-        this.loading = false;
+        this.loadingGoogle = false;
+      }
+    },
+    async microsoftSignIn() {
+      this.loadingMicrosoft = true;
+      this.error = false;
+      this.errorMsg = '';
+      try {
+        const provider = new firebase.auth.OAuthProvider('microsoft.com');
+        await firebase.auth().signInWithPopup(provider);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        this.error = true;
+        this.errorMsg = err.message;
+      } finally {
+        this.loadingMicrosoft = false;
       }
     }
   }
@@ -188,6 +219,9 @@ form {
     }
   }
 
+ h2 {
+ font-size: 20px;
+ }
   .error {
     color: red;
     font-size: 14px;
@@ -196,6 +230,8 @@ form {
   }
 
   button {
+    display: flex;
+    justify-content: center;
     background-color: #3498db;
     color: #fff;
     border: none;
@@ -217,6 +253,7 @@ form {
     }
 
     .spinner {
+      display: flex;
       width: 20px;
       height: 20px;
       border: 2px solid #fff;
@@ -226,13 +263,49 @@ form {
     }
   }
 
-  .google-button {
-    background-color: #db4437;
+ .google-button {
+    background-color: white;
+    border: 1px solid #ccc;
+
 
     &:hover {
-      background-color: #c33d2e;
+      background-color: #f2f7f6;
+    }
+    
+    &:disabled {
+      background-color: #b0c4de; 
+      cursor: not-allowed;
     }
   }
+
+  .microsoft-button {
+    background-color: white; 
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 14px;
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+
+
+    &:hover {
+      background-color: #f2f7f6; 
+    }
+
+    &:disabled {
+      background-color: #b0c4de; 
+      cursor: not-allowed;
+    }
+  }
+  
+  
+.google-button .spinner,
+.microsoft-button .spinner {
+  width: 20px; 
+  height: 20px; 
+}
 }
 
 @keyframes spin {

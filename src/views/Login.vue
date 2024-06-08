@@ -1,56 +1,71 @@
 <template>
   <div class='form-wrap'>
-    <form action=" " class="login">
+    <form @submit.prevent='signin' class="login">
       <p class="login-register">
-        Don't have an account? 
-        <router-link class="router-link" :to="{ name:'Register'}">Register</router-link>
+        Don't have an account?
+        <router-link class="router-link" :to="{ name:'Register' }">Register</router-link>
       </p>
       <h2>Login to BFR</h2>
       <div class="inputs">
         <div class="input">
-          <input type="text" placeholder='Email' v-model='email' />
+          <input type="email" placeholder='Email' v-model='email' required />
           <email class='icon'/>
         </div>
         <div class="input">
-          <input type="password" placeholder='Password' v-model='password' />
-          <password class='icon'/>          
+          <input type="password" placeholder='Password' v-model='password' required />
+          <password class='icon'/>
         </div>
-        <div v-show='error' class="error">{{ this.errorMsg }}</div>
+        <div v-if='error' class="error">{{ errorMsg }}</div>
       </div>
       <router-link class='forgot-password' :to='{ name: "ForgotPassword" }'>Forgot your password?</router-link>
-      <button @click.prevent='signin' :disabled="loading">
-        <span v-if="!loading">Sign in</span>
+      <button type="submit" :disabled="signinLoading">
+        <span v-if="!signinLoading">Sign in</span>
         <span v-else class="spinner"></span>
       </button>
-      <button @click.prevent='googleSignIn' :disabled="loading" class="google-button">
-        <span v-if="!loading">Sign in with Google</span>
-        <span v-else class="spinner"></span>
-      </button>
+      <div class="oauth">
+        <button @click.prevent='googleSignIn' :disabled="googleLoading" class="google-button">
+          <span v-if="!googleLoading">
+            <google class="logo" />
+          </span>
+          <span v-else class="spinner"></span>
+        </button>
+        <button @click.prevent='microsoftSignIn' :disabled="microsoftLoading" class="microsoft-button">
+          <span v-if="!microsoftLoading">
+            <microsoft class="logomi" />
+          </span>
+          <span v-else class="spinner"></span>
+        </button>
+      </div>
     </form>
   </div>
 </template>
 
+
 <script>
 import firebase from 'firebase/app';
+import google from '../assets/googlelogo.svg';
+import microsoft from '../assets/microsoft.svg';
 import email from '../assets/Icons/envelope-regular.svg';
 import password from '../assets/Icons/lock-alt-solid.svg';
 import 'firebase/auth';
 
 export default {
   name: "Login",
-  components: { email, password },
+  components: { email, password, google, microsoft },
   data() {
     return {
       email: '',
       password: '',
       error: false,
       errorMsg: '',
-      loading: false,
+      signinLoading: false,
+      googleLoading: false,
+      microsoftLoading: false,
     }
   },
   methods: {
     async signin() {
-      this.loading = true;
+      this.signinLoading = true;
       this.error = false;
       this.errorMsg = '';
       try {
@@ -60,11 +75,11 @@ export default {
         this.error = true;
         this.errorMsg = err.message;
       } finally {
-        this.loading = false;
+        this.signinLoading = false;
       }
     },
     async googleSignIn() {
-      this.loading = true;
+      this.googleLoading = true;
       this.error = false;
       this.errorMsg = '';
       try {
@@ -75,20 +90,37 @@ export default {
         this.error = true;
         this.errorMsg = err.message;
       } finally {
-        this.loading = false;
+        this.googleLoading = false;
+      }
+    },
+     async microsoftSignIn() {
+      this.microsoftLoading = true;
+      this.error = false;
+      this.errorMsg = '';
+      try {
+        const provider = new firebase.auth.OAuthProvider('microsoft.com');
+        await firebase.auth().signInWithPopup(provider);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        this.error = true;
+        this.errorMsg = err.message;
+      } finally {
+        this.microsoftLoading = false;
       }
     }
   }
 }
 </script>
 
+
+
 <style lang='scss'>
 .form-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
   background-color: #f9f9f9;
 }
 
@@ -113,6 +145,7 @@ form {
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
+    text-align: center;
 
     .router-link {
       color: #3498db;
@@ -133,9 +166,9 @@ form {
         border: 1px solid #ccc;
         border-radius: 20px;
         background-color: #f2f7f6;
+        border-color: #3498db; /* Added border-color on focus */
 
         &:focus {
-          outline: none;
           border-color: #3498db;
         }
       }
@@ -150,7 +183,7 @@ form {
       }
     }
   }
-
+  
   .error {
     color: red;
     font-size: 14px;
@@ -170,14 +203,16 @@ form {
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #3498db;
+    padding: 10px;
     color: #fff;
     border: none;
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
     margin-top: 14px;
-    padding: 10px 20px;
     width: 100%;
     font-size: 1rem;
 
@@ -191,20 +226,55 @@ form {
     }
 
     .spinner {
+      display: flex;
       width: 20px;
       height: 20px;
-      border: 2px solid #fff;
-      border-top: 2px solid transparent;
+      border: 2px solid transparent; 
+      border-top: 2px solid #fff; 
       border-radius: 50%;
       animation: spin 1s linear infinite;
     }
   }
 
-  .google-button {
-    background-color: #db4437;
+  .oauth {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
 
-    &:hover {
-      background-color: #c33d2e;
+    .google-button, .microsoft-button {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 10px;
+      width: 48%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f2f7f6;
+      }
+
+      &:disabled {
+        background-color: #b0c4de;
+        cursor: not-allowed;
+      }
+
+      .logo {
+        width: 30px;
+        height: 30px;
+      }
+      
+      .logomi {
+      width: 20px;
+      height: 20px;}
+
+      .spinner {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
@@ -215,5 +285,6 @@ form {
   }
 }
 </style>
+
 
 
