@@ -13,7 +13,7 @@
                     <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
                     <router-link class='link' to='#'>Books</router-link>
                     <router-link class='link' to='#'>Games</router-link>
-                    <router-link class='link' :to="{name:'News'}">News</router-link>
+                    <router-link class='link' :to="{name:'News'}">Features</router-link>
                     <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link linkt' :to="{name:'Login'}">
@@ -62,7 +62,7 @@
                 <!--<router-link class='link' to='#'>Film Reviews</router-link>-->
                 <router-link class='link' :to="{name:'Blogs'}">Movies</router-link>
                 <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
-                <router-link class='link' :to="{name:'News'}">News</router-link>
+                <router-link class='link' :to="{name:'News'}">Features</router-link>
                 <router-link class='link' to='#'>Books</router-link>
                 <router-link class='link' to='#'>Games</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
@@ -197,13 +197,16 @@ header {
   background-color: #fff;
   padding: 5px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
-  z-index: 500; // Adjust if necessary
+  z-index: 500; 
 }
+
+
 
 .link {
   font-weight: 300;
+  text-transform: initial;
   font-size: 16px;
-  padding: 0 8px;
+  padding: 10px;
   border-radius: 30px;
   transition: 0.3s background-color ease;
 }
@@ -384,6 +387,10 @@ nav {
 @media (max-width: 770px) {
   .profile {
     display: none !important;
+  }
+  
+  .link:hover {
+    background-color: transparent; 
   }
 }
 </style>

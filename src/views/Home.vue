@@ -21,6 +21,7 @@ import BlogPost from '../components/BlogPost.vue';
 import BlogCards from '../components/BlogCard.vue';
 import TrendingMovies from '../components/TrendingMovies.vue';
 
+
 export default {
   name: "Home",
   components: { BlogPost, BlogCards, TrendingMovies },

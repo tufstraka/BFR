@@ -58,7 +58,6 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: 'Courier New', Courier, monospace;
-  background-color: beige;
 }
 
 h1 {

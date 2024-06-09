@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 625 510" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <filter id="h">
+   <feGaussianBlur stdDeviation="11.1688"/>
+  </filter>
+  <linearGradient id="b">
+   <stop stop-color="#fff" offset="0"/>
+   <stop stop-opacity="0" offset="1"/>
+  </linearGradient>
+  <linearGradient id="e" x1="172.19" x2="732.34" y1="296.65" y2="241.79" gradientTransform="matrix(.7491 -.03682 .03682 .7491 -42.649 -88.053)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#130505" offset="0"/>
+   <stop stop-color="#999" stop-opacity="0" offset="1"/>
+  </linearGradient>
+  <linearGradient id="g" x1="52.962" x2="22.86" y1="118.22" y2="125.16" gradientUnits="userSpaceOnUse" xlink:href="#b"/>
+  <linearGradient id="f" x1="116.89" x2="60.248" y1="282.87" y2="295.6" gradientUnits="userSpaceOnUse" xlink:href="#b"/>
+ </defs>
+ <g transform="translate(66.494 5.4904)">
+  <path d="m-41.681 312.44 167.88 180.62 350.81-150.51-182.93-125.04-335.76 94.939z" fill-rule="evenodd" filter="url(#h)" opacity=".73333" stroke="#000"/>
+  <path d="m392.46 55.418-22.383 12.039-323.07 73.449" fill="url(#e)" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path d="m47.778 141.76 85.218 342.17 345.58-163.97-77.731-234.17-353.06 55.967z" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path d="m47.616 141.61-11.307 5.8823 84.937 336.83 12.637-0.45264" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path d="m46.426 140.83 345.4-85.599-9.9222-25.516-348.13 74.176 12.651 36.939z" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path d="m33.661 103.95-10.427 7.1603 12.308 35.256 10.877-5.6553-12.759-36.761z" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path id="d" d="m68.86 224.26 349.73-84.048 0.12455-0.89874" fill="#fff" fill-rule="evenodd" stroke="#fff" stroke-width="1.125"/>
+  <path id="c" d="m80.808 273.54 350.49-97.054 0.15246-0.3308" fill="#fff" fill-rule="evenodd" stroke="#fff" stroke-width="1.125"/>
+  <path id="a" d="m96.672 336.4 350.48-115.53-0.05929-1.023" fill="#fff" fill-rule="evenodd" stroke="#fff" stroke-width="1.2689"/>
+  <path d="m224.98 294.44 36.242 128.58-0.03998-0.81338" fill="none" stroke="#fff" stroke-width="1.5"/>
+  <path d="m348.38 253.39 32.267 112.79 0.20545-0.82544 0.25749 0.23337" fill="none" stroke="#fff" stroke-width="1.5"/>
+  <g transform="matrix(.7491 -.03682 .03682 .7491 -43.559 -88.053)" fill="#fff" fill-rule="evenodd">
+   <path d="m89.414 260.45 72.27 38.771 35.834-6.8682-71.194-37.958-36.909 6.0549z"/>
+   <path d="m166.19 247.83 70.365 36.289 38.691-7.1706-72.078-34.969-36.978 5.8512z"/>
+   <path d="m245.78 234.8 71.493 34.082 37.468-6.8635-74.462-32.86-34.499 5.6412z"/>
+   <path d="m322.94 222.35 71.339 31.424 39.958-6.8598-76.249-29.793-35.048 5.2297z"/>
+   <path d="m407.16 209.29 65.527 29.363 34.442-6.3558-67.36-28.846-32.609 5.8387z"/>
+   <path d="m480.64 197.1 59.628 28.586 30.203-5.5509-60.282-28.072-29.549 5.0375z"/>
+  </g>
+  <path d="m58.025 180.03 34.23-45.587 24.212-3.5544-33.201 43.798-25.24 5.3435z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m111.49 168.44 35.444-42.188 26.533-4.153-37.24 41.841-24.738 4.5003z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m166.95 156.3 44.015-40.868 28.518-4.7317-43.303 39.673-29.231 5.9275z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m224.98 143.83 42.933-37.662 29.895-5.1428-44.627 37.074-28.201 5.7306z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m291.71 130.06 38.35-33.573 25.862-4.2864-39.774 33.692-24.439 4.1679z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m339.09 120.51 38.739-31.509 22.604-3.7437-35.271 30.236-26.072 5.0163z" fill="#fff" fill-rule="evenodd"/>
+  <path d="m47.616 141.61-11.307 5.8823 84.937 336.83 12.637-0.45264" fill="url(#f)" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <path d="m33.661 103.95-10.427 7.1603 12.308 35.256 10.877-5.6553-12.759-36.761z" fill="url(#g)" fill-rule="evenodd" stroke="#000" stroke-width=".75"/>
+  <text transform="translate(41.893 6.375)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#a">
+    <tspan>SCENE</tspan>
+   </textPath>
+  </text>
+  <text transform="translate(176.68 -38.25)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#a">
+    <tspan>TAKE</tspan>
+   </textPath>
+  </text>
+  <text transform="translate(295.07 -78.321)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#a">
+    <tspan>ROLL</tspan>
+   </textPath>
+  </text>
+  <text transform="translate(4,-4)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#d">
+    <tspan>TITLE</tspan>
+   </textPath>
+  </text>
+  <text transform="translate(4,-4)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#c">
+    <tspan>PRODUCER</tspan>
+   </textPath>
+  </text>
+  <text transform="translate(4,-4)" fill="#fff" font-family="Arial Black" font-size="12">
+   <textPath xlink:href="#a">
+    <tspan>DIRECTOR</tspan>
+   </textPath>
+  </text>
+ </g>
+</svg>

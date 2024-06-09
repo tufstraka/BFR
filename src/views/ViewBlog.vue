@@ -11,7 +11,7 @@
         </div>
         <div class="post-content ql-editor" v-html="currentBlog.blogHTML"></div>
         <div class="like-section">
-          <thumbs @click="toggleLike" class="like-icon"/>
+          <thumbs @click="toggleLike" :class="{ liked: liked }" class="like-icon" />
           <span>{{ currentBlog.likes }} likes</span>
         </div>
         <div class="comments-section">
@@ -32,13 +32,28 @@
           </div>
         </div>
       </div>
+      <!--<div class="suggested-section">
+        <h2>Reviews You Might Like</h2>
+        <div class="reviews-grid">
+          <div class="review-card" v-for="review in suggestedReviews" :key="review.id">
+            <h4 class="review-title">{{ review.title }}</h4>
+            <p class="review-content">{{ review.content }}</p>
+          </div>
+        </div>
+        <h2>Reviews you might like</h2>
+        <div class="blogs-grid">
+          <div class="blog-card" v-for="blog in recentBlogs" :key="blog.id">
+            <h4 class="blog-title">{{ blog.title }}</h4>
+            <p class="blog-excerpt">{{ blog.excerpt }}</p>
+          </div>
+        </div>
+      </div>-->
     </div>
     <div v-else class="spinner-container">
       <div class="spinner"></div>
     </div>
   </div>
 </template>
-
 
 
 <script>
@@ -55,8 +70,8 @@ export default {
   components: { thumbs, trash },
   metaInfo() {
     return {
-      title: this.currentBlog.blogTitle,
-      meta: [
+      title: this.currentBlog ? this.currentBlog.blogTitle : 'Loading...',
+      meta: this.currentBlog ? [
         { name: 'description', content: this.currentBlog.blogDescription },
         { property: 'og:title', content: this.currentBlog.blogTitle },
         { property: 'og:description', content: this.currentBlog.blogDescription },
@@ -66,7 +81,7 @@ export default {
         { name: 'twitter:title', content: this.currentBlog.blogTitle },
         { name: 'twitter:description', content: this.currentBlog.blogDescription },
         { name: 'twitter:image', content: this.currentBlog.blogCoverPhoto }
-      ]
+      ] : []
     }
   },
   data() {
@@ -75,6 +90,8 @@ export default {
       liked: false,
       comments: [],
       newComment: '',
+      suggestedReviews: [],
+      recentBlogs: []
     };
   },
   async mounted() {
@@ -93,6 +110,8 @@ export default {
     }
 
     this.fetchComments();
+    //this.fetchSuggestedReviews();
+    //this.fetchRecentBlogs();
 
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
@@ -106,12 +125,11 @@ export default {
   methods: {
     async toggleLike() {
       const user = firebase.auth().currentUser;
-      console.log('like')
       if (!user) {
         this.$router.push({ name: 'Register' });
         return;
       }
-      
+
       const blogId = this.$route.params.blogid;
       const db = firebase.firestore();
       const blogRef = db.collection('blogPosts').doc(blogId);
@@ -134,17 +152,15 @@ export default {
           // Toggle like status
           if (!this.liked) {
             likes++;
-            data.likes = likes;
             this.liked = true;
           } else {
             likes--;
-            data.likes = likes;
             this.liked = false;
           }
 
           transaction.update(blogRef, { likes });
           let userLikes = (await transaction.get(db.collection('userLikes').doc(user.uid))).data().likedPosts;
-          if (!userLikes.includes(blogId)) {
+          if (this.liked) {
             userLikes.push(blogId);
           } else {
             userLikes = userLikes.filter(id => id !== blogId);
@@ -205,6 +221,24 @@ export default {
         console.error('Error submitting comment:', error);
       }
     },
+    async fetchSuggestedReviews() {
+      const db = firebase.firestore();
+      try {
+        const reviewsSnapshot = await db.collection('reviews').orderBy('rating', 'desc').limit(3).get();
+        this.suggestedReviews = reviewsSnapshot.docs.map(doc => doc.data());
+      } catch (error) {
+        console.error('Error fetching reviews:', error);
+      }
+    },
+    async fetchRecentBlogs() {
+      const db = firebase.firestore();
+      try {
+        const blogsSnapshot = await db.collection('blogPosts').orderBy('date', 'desc').limit(3).get();
+        this.recentBlogs = blogsSnapshot.docs.map(doc => doc.data());
+      } catch (error) {
+        console.error('Error fetching recent blogs:', error);
+      }
+    },
     formatTimestamp(seconds) {
       const date = new Date(seconds * 1000);
       return date.toLocaleString();
@@ -231,7 +265,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 .post-view {
   font-family: 'Georgia', 'Times New Roman', Times, serif;
@@ -244,7 +277,6 @@ export default {
   margin: 0 auto;
   padding: 32px;
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
@@ -274,7 +306,7 @@ export default {
   width: 100%;
   height: auto;
   max-height: 450px;
-  object-fit: cover;
+  object-fit: contain; /* Changed from cover to contain */
   border-radius: 10px;
 }
 
@@ -303,7 +335,7 @@ export default {
     }
 
     &.liked {
-      color: #e74c3c;
+      fill: #e74c3c; /* Changed color on liked state */
     }
   }
 
@@ -386,7 +418,6 @@ export default {
           &:hover {
             fill: #c0392b;
             transform: scale(1.2);
-
           }
         }
       }
@@ -426,6 +457,57 @@ export default {
   }
 }
 
+.suggested-section {
+  padding: 32px;
+  background-color: #f4f4f4;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.review-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.review-content {
+  font-size: 1rem;
+  color: #555;
+}
+
+.blog-title {
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.blog-excerpt {
+  font-size: 1rem;
+  color: #555;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 16px;
@@ -441,6 +523,15 @@ export default {
 
   .blog-pic {
     max-height: 300px;
+  }
+
+  .suggested-section {
+    padding: 16px;
+  }
+
+  .review-card,
+  .blog-card {
+    padding: 16px;
   }
 }
 </style>

@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import Arrow from '../assets/Icons/arrow-right-light.svg'
+import Arrow from '../assets/Icons/arrow-right-light.svg';
 import HomeSvg from './HomeSvg.vue';
+//import cinema from '../assets/cinema.svg';
 
 export default {
     name: "blogPost",
