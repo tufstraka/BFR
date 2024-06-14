@@ -187,7 +187,7 @@ export default {
   data() {
     return {
       welcomeScreen: {
-        title: "Welcome to Biased Reviews Hub",
+        title: "Welcome to Biased Film Review",
         blogPost:
           "Passionate about movies, games, TV shows, and books? Dive into our community of enthusiasts. Explore the latest trends, indulge in insightful reviews, and share your own opinions!",
         welcomeScreen: true,
