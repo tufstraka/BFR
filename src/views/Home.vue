@@ -157,15 +157,19 @@ export default {
 <template>
   <div class="home">
     <BlogPost v-if="!user" :post="welcomeScreen" />
-    
+
     <div>
       <TrendingMovies />
       <!--<BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index" />-->
-      
+
       <div class="blog-card-wrap">
-        <h1 style="text-align:center;">Recent Reviews</h1>
+        <h1 style="text-align: center">Recent Reviews</h1>
         <div class="blog-cards">
-          <BlogCards :post="post" v-for="(post, index) in blogPostsCards" :key="index" />
+          <BlogCards
+            :post="post"
+            v-for="(post, index) in blogPostsCards"
+            :key="index"
+          />
         </div>
       </div>
     </div>
@@ -173,10 +177,9 @@ export default {
 </template>
 
 <script>
-import BlogPost from '../components/BlogPost.vue';
-import BlogCards from '../components/BlogCard.vue';
-import TrendingMovies from '../components/TrendingMovies.vue';
-
+import BlogPost from "../components/BlogPost.vue";
+import BlogCards from "../components/BlogCard.vue";
+import TrendingMovies from "../components/TrendingMovies.vue";
 
 export default {
   name: "Home",
@@ -184,11 +187,12 @@ export default {
   data() {
     return {
       welcomeScreen: {
-        title: "Niaje",
-        blogPost: "Do you like watching movies and TV shows? Do you always feel like you want to rant or just express your opinions? Welcome to BFR.",
+        title: "Welcome to Biased Reviews Hub",
+        blogPost:
+          "Passionate about movies, games, TV shows, and books? Dive into our community of enthusiasts. Explore the latest trends, indulge in insightful reviews, and share your own opinions!",
         welcomeScreen: true,
-        photo: "movie1"
-      }
+        photo: "movie1",
+      },
     };
   },
   computed: {
@@ -200,8 +204,8 @@ export default {
     },
     user() {
       return this.$store.state.user;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -220,7 +224,7 @@ export default {
 
 .blog-card-wrap {
   //background: linear-gradient(to bottom left, #625643, #eae3b8);
-  
+
   h1 {
     font-weight: 800;
     font-size: 21px;
