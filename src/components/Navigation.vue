@@ -10,11 +10,11 @@
             <div class="nav-links">
                 <ul v-show='!mobile'>
                     <router-link class='link' :to="{name:'Blogs'}">Movies</router-link>
-                    <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
+                    <!--<router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
                     <router-link class='link' to='#'>Books</router-link>
                     <router-link class='link' to='#'>Games</router-link>
                     <router-link class='link' :to="{name:'News'}">Features</router-link>
-                    <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
+                    <router-link class='link' :to="{name:'Shop'}">Shop</router-link>-->
                     <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                     <router-link v-if="!user" class='link linkt' :to="{name:'Login'}">
                       <p class="signintxt">Sign in</p>
@@ -61,15 +61,15 @@
             <ul class='mobile-nav' v-show='mobileNav'>
                 <!--<router-link class='link' to='#'>Film Reviews</router-link>-->
                 <router-link class='link' :to="{name:'Blogs'}">Movies</router-link>
-                <router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>
+                 <!--<router-link class='link' :to="{name:'Blogs'}">TV Shows</router-link>-->
                 <router-link class='link' :to="{name:'News'}">Features</router-link>
-                <router-link class='link' to='#'>Books</router-link>
-                <router-link class='link' to='#'>Games</router-link>
+                 <!--<router-link class='link' to='#'>Books</router-link>
+                <router-link class='link' to='#'>Games</router-link>-->
                 <router-link v-if="admin" class='link' :to="{name:'CreatePost'}">Create Review</router-link>
                 <br/>
                 <br/>
                 <hr/>
-                <router-link class='link' :to="{name:'Shop'}">Shop</router-link>
+                 <!--<router-link class='link' :to="{name:'Shop'}">Shop</router-link>-->
                 <br/>
                 <router-link v-if="user" class='link' :to="{name:'Profile'}">Profile</router-link>
                 <router-link v-if="admin" class='link' :to="{name:'Admin'}">Admin</router-link>
