@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - vercel_build
+      - main
 
 jobs:
   deploy:
@@ -25,6 +25,6 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$EC2_HOST << 'EOF'
             cd /var/www/bfr
-            git pull origin vercel-build
+            git pull origin main
             sudo systemctl restart nginx
           EOF
