@@ -1,8 +1,12 @@
 <template>
   <div class="app-wrapper">
-    <div class="app" >
+    <div class="app">
       <Navigation v-if='!navigation'/>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="page" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
       <Footer v-if='!navigation'/>
     </div>
   </div>
@@ -18,9 +22,8 @@ import Footer from "./components/Footer.vue";
 dotenv.config()
 
 export default {
-
   name: "app",
-  components: {Navigation , Footer},
+  components: {Navigation, Footer},
   
   data() {
     return {
@@ -28,36 +31,32 @@ export default {
     };
   },
   
-created() {
-  
+  created() {
     firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
-      
       if(user) {
         this.$store.dispatch("getCurrentUser", user);
-               }
-     })
+      }
+    })
     this.checkRoute();
     this.$store.dispatch("getPost")
   },
   
-mounted() {},
-  
-methods: {
+  methods: {
     checkRoute(){
       if (
         this.$route.name === "Login" || 
         this.$route.name === "Register" || 
         this.$route.name === "ForgotPassword"
-     ) {
+      ) {
         this.navigation = true;
         return;
-       } else
-      {
+      } else {
         this.navigation = false;
       }
     },
   },
+  
   watch: {
     $route(){
       this.checkRoute();
@@ -67,32 +66,51 @@ methods: {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #2a41e8;
+  --primary-light: #e9efff;
+  --secondary-color: #e74c3c;
+  --text-dark: #303030;
+  --text-light: #696969;
+  --background-light: #f5f7fa;
+  --background-primary: #ffffff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Rubik", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-
-*::-webkit-scrollbar{
-    width: 1.26rem;
+body {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  font-size: 16px;
+  line-height: 1.6;
 }
-*::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
-    border-radius: 20px;
-    border: 6px solid transparent;
-    background-clip: content-box;
-  }
 
-*::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  
-*::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(233, 48, 48);
-  }  
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
 
 .app {
   display: flex;
@@ -101,106 +119,146 @@ methods: {
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .link {
   cursor: pointer;
   text-decoration: none;
-  text-transform: uppercase;
-  color: black;
+  color: var(--primary-color);
+  font-weight: 500;
+  transition: var(--transition-fast);
+  
+  &:hover {
+    color: var(--secondary-color);
+  }
 }
 
-.link-light {
-  color: #fff;
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
 }
-.arrow{
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.arrow {
   margin-left: 8px;
   width: 12px;
-  path{
-    fill: #000;
-  }
-}
-.arrow-light{
-  path{
-    fill: #fff;
-  }
-}
-
-.blog-card-wrap{
-  position: relative;  
-  padding: 80px 16px;
+  transition: var(--transition-fast);
   
-  @media(min-width: 500px){
-    padding: 100px 16px;
-  }
-  .blog-cards{
-  display: grid;
-  gap: 32px;
-  grid-template-columns: 1fr;
-  z-index: 99999;
-
-  @media(min-width: 500px){
-    grid-template-columns: repeat(2 , 1fr) 
-  }
-  @media(min-width: 900px){
-    grid-template-columns: repeat(3 , 1fr) 
-  }
-  @media(min-width: 1200px){
-    grid-template-columns: repeat(4 , 1fr) 
+  path {
+    fill: var(--primary-color);
   }
 }
 
+.blog-card-wrap {
+  position: relative;  
+  padding: 40px 16px;
+  
+  h1 {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+  }
+  
+  .blog-cards {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    
+    @media(min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media(min-width: 900px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media(min-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 }
 
 button,
-.router-button{
-  transition: 500ms ease all;
+.router-button {
+  transition: var(--transition-fast);
   cursor: pointer;
   margin-top: 16px;
-  margin-left: 25px;
   padding: 12px 24px;
-  background-color: #303030;
+  background-color: var(--primary-color);
   color: #fff;
-  border-radius: 20px;
+  border-radius: 8px;
   border: none;
-  text-transform: uppercase;
-  &:focus{
-    outline:none;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(42, 65, 232, 0.3);
   }
-  &:hover{
-    background-color: rgba(48, 48, 48, 0.7)
+  
+  &:hover {
+    background-color: darken(#2a41e8, 10%);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
 }
+
 .button-light {
   background-color: transparent;
   border: 2px solid #fff;
   color: #fff;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 }
-.button-inactive{
-  pointer-events: none !important;
-  cursor: none !important;
-  background-color: rgba(128, 128,128,0.5)
-}
-.button-ghost{
-  color: #000;
-  padding: 0;
-  border-radius: 0;
-  margin-top: 50px;
-  font-size: 15px;
-  font-weight: 500;
+
+.button-ghost {
   background-color: transparent;
-  @media(min-width: 700px){
-    margin-top: 0;
-    margin-left: auto;
-  } 
+  color: var(--primary-color);
+  padding: 10px 16px;
+  
+  &:hover {
+    background-color: var(--primary-light);
+  }
 }
-.error{
+
+.button-inactive {
+  pointer-events: none !important;
+  cursor: default !important;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.error {
   text-align: center;
-  font-size: 12px;
-  color: red;
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin-top: 8px;
 }
-
-
 </style>

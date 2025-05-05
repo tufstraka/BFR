@@ -1,15 +1,22 @@
 <template>
   <div class="home">
-    <BlogPost v-if="!user" :post="welcomeScreen" />
+    <section class="hero" v-if="!user">
+      <BlogPost :post="welcomeScreen" />
+    </section>
     
-    <div>
+    <div class="content-container">
       <TrendingMovies />
-      <!--<BlogPost :post="post" v-for="(post, index) in blogPostsFeed" :key="index" />-->
       
-      <div class="blog-card-wrap">
-        <h1 style="text-align:center;">Recent Reviews</h1>
+      <div class="blog-card-wrap container">
+        <h1>Recent Reviews</h1>
         <div class="blog-cards">
-          <BlogCards :post="post" v-for="(post, index) in blogPostsCards" :key="index" />
+          <BlogCards 
+            v-for="(post, index) in blogPostsCards" 
+            :post="post" 
+            :key="index" 
+            :data-aos="'fade-up'" 
+            :data-aos-delay="index * 100"
+          />
         </div>
       </div>
     </div>
@@ -50,60 +57,53 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  background: #d4dfc9;
+  background-color: var(--background-light);
 }
 
-.vue {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.hero {
+  margin-bottom: 40px;
+}
+
+.content-container {
+  padding: 24px 0 60px;
 }
 
 .blog-card-wrap {
-  //background: linear-gradient(to bottom left, #625643, #eae3b8);
+  margin-top: 60px;
   
   h1 {
-    font-weight: 800;
-    font-size: 21px;
-    margin-bottom: 12px;
-    color: black;
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
   }
-}
-
-.updates {
-  .container {
-    padding: 100px 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    @media (min-width: 800px) {
-      padding: 125px 25px;
-      flex-direction: row;
+  
+  .blog-cards {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    
+    @media(min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .router-button {
-      display: flex;
-      font-size: 14px;
-      text-decoration: none;
-
-      @media (min-width: 800px) {
-        margin-left: auto;
-      }
+    @media(min-width: 900px) {
+      grid-template-columns: repeat(3, 1fr);
     }
-
-    h2 {
-      font-weight: 300;
-      font-size: 32px;
-      max-width: 725px;
-      width: 100%;
-      text-align: center;
-      text-transform: uppercase;
-
-      @media (min-width: 800px) {
-        font-size: 40px;
-      }
+    @media(min-width: 1200px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }

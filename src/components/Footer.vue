@@ -1,36 +1,53 @@
 <template>
   <footer class="footer">
-    <div class="footer__container">
-      <div class="footer__content">
-        <div class="footer__left">
-          <!--<router-link class="footer__logo" :to="{ name: 'home' }">Biased Film Review</router-link>-->
-          <ul class="footer__social-links">
-            <li>
-              <a href="#"><youTube class="svg-icon" /></a>
-            </li>
-            <li>
-              <a href="#"><twitter class="svg-icon" /></a>
-            </li>
-            <li>
-              <a href="#"><instagram class="svg-icon" /></a>
-            </li>
-            <li>
-              <a href="#"><linkedin class="svg-icon" /></a>
-            </li>
-          </ul>
+    <div class="container footer-container">
+      <div class="footer-main">
+        <div class="footer-branding">
+          <router-link :to="{ name: 'Home' }" class="footer-logo">
+            <img src="@/assets/BiasedFilmReviewLogo.png" alt="BFR Logo" class="logo" />
+            <span>Biased Film Review</span>
+          </router-link>
+          <p class="footer-tagline">Your source for honest opinions on entertainment</p>
         </div>
-        <nav class="footer__nav">
-          <ul>
-            <li><router-link :to="{ name: 'reviews' }">Movies</router-link></li>
-            <li><router-link :to="{ name: 'reviews' }">Books</router-link></li>
-            <li><router-link :to="{ name: 'home' }">News</router-link></li>
-            <li><router-link :to="{ name: 'home' }">Games</router-link></li>
-            <li><router-link :to="{ name: 'reviews' }">TV Shows</router-link></li>
-          </ul>
-        </nav>
+        
+        <div class="footer-nav-wrap">
+          <nav class="footer-nav">
+            <h4>Explore</h4>
+            <ul>
+              <li><router-link :to="{ name: 'Blogs' }">Movies</router-link></li>
+              <li><router-link :to="{ name: 'Blogs' }">TV Shows</router-link></li>
+              <li><router-link :to="{ name: 'News' }">News</router-link></li>
+            </ul>
+          </nav>
+          
+          <nav class="footer-nav">
+            <h4>More</h4>
+            <ul>
+              <li><router-link to="#">Books</router-link></li>
+              <li><router-link to="#">Games</router-link></li>
+              <li><router-link :to="{ name: 'CreatePost' }">Write a Review</router-link></li>
+            </ul>
+          </nav>
+          
+          <div class="footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="#" aria-label="YouTube"><youTube /></a>
+              <a href="#" aria-label="Twitter"><twitter /></a>
+              <a href="#" aria-label="Instagram"><instagram /></a>
+              <a href="#" aria-label="LinkedIn"><linkedin /></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="footer__right">
-        <p>&copy; {{ currentYear }} | All Rights Reserved</p>
+      
+      <div class="footer-bottom">
+        <p>&copy; {{ currentYear }} Biased Film Review | All Rights Reserved</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact Us</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -60,79 +77,193 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-  background-color: #303030;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.6);
-  padding: 40px 0;
+  background-color: #212428;
+  padding: 60px 0 30px;
+  color: #fff;
+  margin-top: auto;
+}
+
+.footer-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  gap: 40px;
+}
 
- 
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
 
-
-
-  &__logo {
-    font-size: 24px;
-    font-weight: 600;
+.footer-branding {
+  flex-basis: 320px;
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
     color: #fff;
     text-decoration: none;
-
-    &:hover {
-      color: red;
-      transition: color 0.2s ease;
-    }
-  }
-
-  &__social-links {
-    display: flex;
-    gap: 16px;
-    list-style: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-
-    .svg-icon {
-      width: 20px;
+    margin-bottom: 16px;
+    
+    img {
+      width: 40px;
       height: auto;
-      color: #fff;
+      margin-right: 12px;
+    }
+    
+    span {
+      font-weight: 700;
+      font-size: 18px;
     }
   }
+  
+  .footer-tagline {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+  }
+}
 
-  &__nav {
-    ul {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      list-style: none;
-      margin-bottom: 10px;
+.footer-nav-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 40px;
+  
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
+}
 
-      @media (max-width: 768px) {
-          flex-wrap: nowrap;
-        }
-
-
-
+.footer-nav {
+  min-width: 120px;
+  
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      margin-bottom: 12px;
+      
       a {
-        font-size: 16px;
-        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
-        color: #fff;
-
+        font-size: 15px;
+        transition: color var(--transition-fast);
+        
         &:hover {
-          color: #64b4c5;
-          transition: color 0.2s ease;
+          color: var(--primary-color);
         }
       }
     }
   }
+}
 
-  &__right {
-    text-align: center;
+.footer-social {
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 2px;
+      background-color: var(--primary-color);
+    }
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 16px;
+    
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: var(--transition-fast);
+      
+      svg {
+        width: 18px;
+        height: 18px;
+        
+        path {
+          fill: white;
+        }
+      }
+      
+      &:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+    }
+  }
+}
 
-    p {
-      color: #fff;
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    
+    a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      
+      &:hover {
+        color: var(--primary-color);
+      }
     }
   }
 }
