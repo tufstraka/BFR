@@ -1,4 +1,4 @@
-# Biased Film Review - Next.js 15
+# Biased Film Review 
 
 A modern film review platform built with Next.js 15, React 19, TypeScript, and Tailwind CSS.
 
